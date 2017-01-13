@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import shop.beam.ProductType;
 import shop.dao.DaoFactory;
@@ -17,6 +18,13 @@ import shop.dao.DaoFactory;
  */
 public class ProductTypeProvider {
 
+	private static  Vector<String> columnNameV = new Vector<String>();
+	static{
+		columnNameV.add("编号");
+		columnNameV.add("名称");
+		columnNameV.add("状态");
+	}
+	
 	private static ProductTypeProvider instance = new ProductTypeProvider();
 	
 	public static ProductTypeProvider getInst() {
@@ -75,4 +83,35 @@ public class ProductTypeProvider {
 		}
 		return ret;
 	}
+	
+	public static Vector<String> getTitle() {
+		return columnNameV;
+	}
+	
+	public static Vector getListValue(List<ProductType> list) {
+		Vector vv = new Vector();
+		if(list != null) {
+			for(ProductType type : list) {
+				Vector rv = getValue(type);
+				if(rv != null) {
+					vv.add(rv);
+				}
+			}
+		}
+		return vv;
+	}
+	
+	public static Vector getValue(ProductType productType) {
+		if(productType == null) {
+			return null;
+		}
+		Vector rowV = new Vector();
+		rowV.add(productType.getId());
+		rowV.add(productType.getName());
+		rowV.add(productType.getState());
+		return rowV;
+	}
+	
+	
+	
 }

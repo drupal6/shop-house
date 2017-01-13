@@ -76,6 +76,7 @@ public class DBPoolMgr {
 			IDBPool pool = new BoneCPDBPool(dbName, getDBUrl(), user, password, DBMaxConn, DBFllow);
 			return pool;
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 	}

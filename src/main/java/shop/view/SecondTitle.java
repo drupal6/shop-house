@@ -16,7 +16,7 @@ public class SecondTitle extends JPanel {
 	public SecondTitle(String title) {
 		this.setBorder(BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 		
-		titleLanbel = new JLabel(title + " w=" + this.getWidth() + " h=" + this.getHeight());
+		titleLanbel = new JLabel(title);
 		Font font=new Font("宋体", Font.BOLD, 24);
 		titleLanbel.setFont(font);
 		

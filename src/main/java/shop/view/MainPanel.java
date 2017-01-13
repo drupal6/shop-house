@@ -12,7 +12,8 @@ public class MainPanel extends JPanel {
 		this.setBackground(Color.WHITE);
 		this.setVisible(true);
 		SecondTitle title = new SecondTitle("商品类别");
-		OptionMenu optionMenu = new OptionMenu();
+		OptionMenu optionMenu = new OptionMenu("物品类别名称");
+		
 		ViewTable viewTable = new ViewTable();
 		
 		GroupLayout layout = new GroupLayout(this);

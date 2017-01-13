@@ -4,37 +4,33 @@ import java.awt.Color;
 
 import javax.swing.GroupLayout;
 import javax.swing.JPanel;
-import javax.swing.JTable;
+import javax.swing.JScrollPane;
+
+import shop.provider.ProductTypeProvider;
 
 public class ViewTable extends JPanel {
+
+	private static final long serialVersionUID = 1L;
 
 	public ViewTable() {
 		this.setBackground(new Color(120, 120, 120));
 		
-		javax.swing.JScrollPane jScrollPane1 = new javax.swing.JScrollPane();
-		JTable jTable1 = new javax.swing.JTable();
-	    jTable1.setModel(new javax.swing.table.DefaultTableModel(
-	            new Object [][] {
-	                {null, null, null, null},
-	                {null, null, null, null},
-	                {null, null, null, null},
-	                {null, null, null, null}
-	            },
-	            new String [] {
-	                "Title 1", "Title 2", "Title 3", "Title 4"
-	            }
-        ));
-	    jScrollPane1.setViewportView(jTable1);
+		MyTable jtable1 = new MyTable(ProductTypeProvider.getTitle(), ProductTypeProvider.getListValue(null));
+		
+		JScrollPane jScrollPane1 = new JScrollPane();
+	    jScrollPane1.setViewportView(jtable1);
 		
 		GroupLayout jPanel3Layout = new GroupLayout(this);
+		
         this.setLayout(jPanel3Layout);
+        
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 302, GroupLayout.PREFERRED_SIZE)
             .addGap(0, 58, Short.MAX_VALUE)
         );
 	}

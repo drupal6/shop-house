@@ -21,6 +21,8 @@ public class ProductInInfo {
 	private String remark;  //备注
 	
 	private int state;
+	
+	private int inId;
 
 	public int getId() {
 		return id;
@@ -93,5 +95,12 @@ public class ProductInInfo {
 	public void setState(int state) {
 		this.state = state;
 	}
-	
+
+	public int getInId() {
+		return inId;
+	}
+
+	public void setInId(int inId) {
+		this.inId = inId;
+	}
 }

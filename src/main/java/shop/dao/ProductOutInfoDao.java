@@ -19,7 +19,7 @@ public class ProductOutInfoDao extends BaseDao {
 
 	public boolean createProductOutInfo(ProductOutInfo productOption) {
 		boolean result = false;
-		String sql = "insert into t_product_out_info (productId,userId,num,price,price1,opTime,state,returnNum,returnTime,returnMark) values (?,?,?,?,?,?,?,?,?);";
+		String sql = "insert into t_product_out_info (productId,userId,num,price,price1,opTime,state,returnNum,returnTime,returnMark,outId) values (?,?,?,?,?,?,?,?,?,?);";
 		Map<Integer, DbParameter> param = new HashMap<Integer, DbParameter>();
 		param.put(1, new DbParameter(Types.INTEGER, productOption.getProductId()));
 		param.put(2, new DbParameter(Types.INTEGER, productOption.getUserId()));
@@ -31,6 +31,7 @@ public class ProductOutInfoDao extends BaseDao {
 		param.put(8, new DbParameter(Types.FLOAT, productOption.getReturnNum()));
 		param.put(9, new DbParameter(Types.TIMESTAMP, productOption.getReturnTime()));
 		param.put(10, new DbParameter(Types.VARCHAR, productOption.getReturnMark()));
+		param.put(11, new DbParameter(Types.INTEGER, productOption.getOutId()));
 		int id = execLastId(sql, param);
 		if(id > 0) {
 			result = true;
@@ -40,7 +41,7 @@ public class ProductOutInfoDao extends BaseDao {
 	}
 	
 	public boolean updateProductOutInfo(ProductOutInfo productOption) {
-		String sql = "update t_product_out_info set productId=?,userId=?,num=?,price=?,price1=?,opTime=?,state=?,returnNum=?,returnTime=?,returnMark=? where id=?;";
+		String sql = "update t_product_out_info set productId=?,userId=?,num=?,price=?,price1=?,opTime=?,state=?,returnNum=?,returnTime=?,returnMark=?,outId=? where id=?;";
 		Map<Integer, DbParameter> param = new HashMap<Integer, DbParameter>();
 		param.put(1, new DbParameter(Types.INTEGER, productOption.getProductId()));
 		param.put(2, new DbParameter(Types.INTEGER, productOption.getUserId()));
@@ -52,7 +53,8 @@ public class ProductOutInfoDao extends BaseDao {
 		param.put(8, new DbParameter(Types.FLOAT, productOption.getReturnNum()));
 		param.put(9, new DbParameter(Types.TIMESTAMP, productOption.getReturnTime()));
 		param.put(10, new DbParameter(Types.VARCHAR, productOption.getReturnMark()));
-		param.put(11, new DbParameter(Types.INTEGER, productOption.getId()));
+		param.put(11, new DbParameter(Types.INTEGER, productOption.getOutId()));
+		param.put(12, new DbParameter(Types.INTEGER, productOption.getId()));
 		boolean result = execNoneQuery(sql, param) > -1;
 		return result;
 	}
@@ -99,6 +101,7 @@ public class ProductOutInfoDao extends BaseDao {
 		productOption.setReturnNum(rs.getFloat("returnNum"));
 		productOption.setReturnTime(rs.getDate("returnTime"));
 		productOption.setReturnMark(rs.getString("returnMark"));
+		productOption.setOutId(rs.getInt("outId"));
 		return productOption;
 	}
 	

@@ -25,6 +25,8 @@ public class ProductOutInfo {
 	private Date returnTime;	//退货时间
 	
 	private String returnMark;	//退货备注
+	
+	private int outId;
 
 	public int getId() {
 		return id;
@@ -112,5 +114,13 @@ public class ProductOutInfo {
 
 	public void setReturnMark(String returnMark) {
 		this.returnMark = returnMark;
+	}
+
+	public int getOutId() {
+		return outId;
+	}
+
+	public void setOutId(int outId) {
+		this.outId = outId;
 	}
 }
