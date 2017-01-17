@@ -8,6 +8,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 
 import shop.provider.DataInit;
+import shop.view.model.ProductTypeModel;
 
 public class MainFrame extends JFrame {
 	
@@ -17,6 +18,7 @@ public class MainFrame extends JFrame {
 
 	public MainFrame(String title) {
 		super(title);
+		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		//适应屏幕大小
 		setSize(new Dimension((int)(screenSize.width * 0.8),(int)(screenSize.height*0.8)));
@@ -61,7 +63,8 @@ public class MainFrame extends JFrame {
 		
 		MainFrame mainFrame = new MainFrame("title");
 		mainFrame.addMenuBar(new ManageMenuBar());
-		MainPanel panel = new MainPanel();
-		mainFrame.addPanel(panel);
+		ProductTypeModel model = new ProductTypeModel();
+		model.init(mainFrame);
+		mainFrame.addPanel(model.getProductTypePanel());
 	}
 }

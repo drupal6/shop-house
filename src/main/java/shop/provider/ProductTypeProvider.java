@@ -57,6 +57,16 @@ public class ProductTypeProvider {
 		return map.get(id);
 	}
 	
+	public ProductType getByName(String name) {
+		 List<ProductType> list  = list();
+		 for(ProductType type : list) {
+			 if(type.getName().equals(name)) {
+				 return type;
+			 }
+		 }
+		return null;
+	}
+	
 	public ProductType add(ProductType productType) {
 		boolean ret = DaoFactory.getInst().getProductTypeDao().createProductType(productType);
 		if(ret) {
