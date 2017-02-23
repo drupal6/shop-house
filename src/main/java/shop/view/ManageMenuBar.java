@@ -1,10 +1,10 @@
 package shop.view;
 
-import java.awt.Font;
-
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+
+import shop.Constance;
 
 public class ManageMenuBar extends JMenuBar {
 	
@@ -15,30 +15,39 @@ public class ManageMenuBar extends JMenuBar {
 	private JMenuItem productUnitMenuItem;
 	private JMenuItem productInfoMenuItem;
 	
+	
 	public ManageMenuBar() {
-		Font font=new Font("宋体", 100, 24);
-		Font font1=new Font("宋体", 100, 21);
-		
+		this.add(createBaseMenu());
+	}
+	
+	public String getDefaMenuText() {
+		return productUnitMenuItem.getText();
+	}
+	
+	/**
+	 * 创建基础数据菜单
+	 * @return
+	 */
+	private JMenu createBaseMenu() {
 		baseDataMenu = new JMenu();
 		baseDataMenu.setText("基础数据");
-		baseDataMenu.setFont(font);
+		baseDataMenu.setFont(Constance.mainMenuFont);
 		
 		productTypeMenuItem = new JMenuItem();
 		productTypeMenuItem.setText("商品类别");
-		productTypeMenuItem.setFont(font1);
+		productTypeMenuItem.setFont(Constance.menuFont);
 		baseDataMenu.add(productTypeMenuItem);
 		
 		productUnitMenuItem = new JMenuItem();
 		productUnitMenuItem.setText("商品单位");
-		productUnitMenuItem.setFont(font1);
+		productUnitMenuItem.setFont(Constance.menuFont);
 		baseDataMenu.add(productUnitMenuItem);
 		
 		productInfoMenuItem = new JMenuItem();
 		productInfoMenuItem.setText("商品信息");
-		productInfoMenuItem.setFont(font1);
+		productInfoMenuItem.setFont(Constance.menuFont);
 		baseDataMenu.add(productInfoMenuItem);
-		
-		this.add(baseDataMenu);
+		return baseDataMenu;
 	}
 	
 }

@@ -24,12 +24,6 @@ public class MainFrame extends JFrame {
 		setSize(new Dimension((int)(screenSize.width * 0.8),(int)(screenSize.height*0.8)));
 		//不能改变大小
 		setResizable(false);
-		//不要标题栏
-//		setUndecorated(true);
-		//全屏
-//		getGraphicsConfiguration().getDevice().setFullScreenWindow(this);
-		
-		//设置菜单
 		
 		this.setVisible(true);
 	}
@@ -57,7 +51,7 @@ public class MainFrame extends JFrame {
 	}
 	
 	public static void main(String[] args) throws InterruptedException {
-		
+		//初始数据
 		DataInit.getInst().initConnect();
 		DataInit.getInst().initData();
 		

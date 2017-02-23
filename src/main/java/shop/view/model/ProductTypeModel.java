@@ -18,7 +18,7 @@ import shop.view.MainPanel;
 import shop.view.MyDialog;
 import shop.view.OptionMenu;
 import shop.view.SecondTitle;
-import shop.view.ViewTable;
+import shop.view.MyTable;
 
 public class ProductTypeModel {
 
@@ -38,7 +38,7 @@ public class ProductTypeModel {
 	private JButton queryButton;          //查询按钮
 	private String queryString = "商品类别名称";
 	
-	private ViewTable viewTable;
+	private MyTable viewTable;
 	
 	private MyDialog dialog;
 	
@@ -123,7 +123,7 @@ public class ProductTypeModel {
 	}
 	
 	private void initTableView() {
-		viewTable = new ViewTable(ProductTypeProvider.getTitle(), ProductTypeProvider.getListValue(ProductTypeProvider.getInst().list()), 400, 300);
+		viewTable = new MyTable(ProductTypeProvider.getTitle(), ProductTypeProvider.getListValue(ProductTypeProvider.getInst().list()), 400, 300);
 	}
 	
 	private GroupLayout crateOptionMenuLayOut() {
@@ -158,7 +158,6 @@ public class ProductTypeModel {
         );
         return layout;
 	}
-	
 	
 	private MyDialog crateDialog(String title) {
 		dialog = new MyDialog(mainFrame, false, title, 300, 190);
