@@ -6,8 +6,11 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import shop.beam.Product;
+import shop.beam.ProductType;
+import shop.beam.ProductUnit;
 import shop.dao.DaoFactory;
 
 /**
@@ -17,6 +20,7 @@ import shop.dao.DaoFactory;
  */
 public class ProductProvider {
 
+	
 	private static ProductProvider instance = new ProductProvider();
 	
 	public static ProductProvider getInst() {
@@ -45,6 +49,9 @@ public class ProductProvider {
 		return ret;
 	}
 	public List<Product> list(int productType) {
+		if(productType == 0) {
+			return list();
+		}
 		List<Product> ret = new ArrayList<Product>();
 		for(Product product : map.values()) {
 			if(product.getProductType() == productType) {
@@ -88,5 +95,54 @@ public class ProductProvider {
 			map.remove(id);
 		}
 		return ret;
+	}
+	
+	public Product getByName(String name) {
+		 List<Product> list  = list();
+		 for(Product product : list) {
+			 if(product.getName().equals(name)) {
+				 return product;
+			 }
+		 }
+		return null;
+	}
+	
+	private static  Vector<String> columnNameV = new Vector<String>();
+	static{
+		columnNameV.add("编号");
+		columnNameV.add("名称");
+		columnNameV.add("单位");
+		columnNameV.add("出售价");
+		columnNameV.add("库存");
+	}
+	
+	public static Vector<String> getTitle() {
+		return columnNameV;
+	}
+	
+	public static Vector getListValue(List<Product> list) {
+		Vector vv = new Vector();
+		if(list != null) {
+			for(Product product : list) {
+				Vector rv = getValue(product);
+				if(rv != null) {
+					vv.add(rv);
+				}
+			}
+		}
+		return vv;
+	}
+	
+	public static Vector getValue(Product product) {
+		if(product == null) {
+			return null;
+		}
+		Vector rowV = new Vector();
+		rowV.add(product.getId());
+		rowV.add(product.getName());
+		rowV.add(product.getProductUnit());
+		rowV.add(product.getOutPrice());
+		rowV.add(product.getStock());
+		return rowV;
 	}
 }

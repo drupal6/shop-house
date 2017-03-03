@@ -12,7 +12,8 @@ public class Constance {
 	
 	public static Font mainMenuFont = new Font("宋体", 100, 24);
 	public static Font menuFont =new Font("宋体", 100, 21);
-	public static Font secondTitleFont = new Font("宋体", Font.BOLD, 24);;
+	public static Font secondTitleFont = new Font("宋体", Font.BOLD, 24);
+	public static Font dialogLableFont =new Font("宋体", 100, 22);
 	
 	
 	public static Border border = BorderFactory.createLineBorder(new Color(153, 153, 153));

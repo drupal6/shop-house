@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Vector;
 
 import shop.beam.ProductType;
+import shop.beam.TreeNode;
 import shop.dao.DaoFactory;
 
 /**
@@ -79,6 +80,22 @@ public class ProductTypeProvider {
 	public boolean update(ProductType productType) {
 		boolean ret = DaoFactory.getInst().getProductTypeDao().updateProductType(productType);
 		return ret;
+	}
+	
+	public List<TreeNode> toTreeNodeList() {
+		List<TreeNode> ret = new ArrayList<TreeNode>();
+		List<ProductType> typeList = list();
+		for(ProductType type : typeList) {
+			TreeNode node = new TreeNode(type.getId(), 1, type.getName());
+			ret.add(node);
+		}
+		return ret;
+	}
+	
+	public TreeNode toTreeNode(int id) {
+		ProductType type = get(id);
+		TreeNode node = new TreeNode(type.getId(), 1, type.getName());
+		return node;
 	}
 	
 	public boolean del(int id) {

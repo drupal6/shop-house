@@ -12,9 +12,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import shop.Constance;
-import shop.provider.ProductTypeProvider;
+import shop.provider.ProductUnitProvider;
 
-public class ProductTypePanel extends JPanel{
+public class ProductUnitPanel extends JPanel{
 
 	/**
 	 * 
@@ -32,7 +32,7 @@ public class ProductTypePanel extends JPanel{
 	
 	private MyTable table;
 	
-	public ProductTypePanel(String title) {
+	public ProductUnitPanel(String title) {
 		this.title = title;
 		
 		bttonPanel = new JPanel();
@@ -107,7 +107,7 @@ public class ProductTypePanel extends JPanel{
 		secondPanel = new JPanel();
 		secondPanel.setBackground(Color.red);
 		
-		table = new MyTable(ProductTypeProvider.getTitle(), ProductTypeProvider.getListValue(ProductTypeProvider.getInst().list()), 400, 300);
+		table = new MyTable(ProductUnitProvider.getTitle(), ProductUnitProvider.getListValue(ProductUnitProvider.getInst().list()), 400, 300);
 		table.getTable().addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -142,7 +142,7 @@ public class ProductTypePanel extends JPanel{
 	}
 	
 	private void addButtonListener() {
-		ProductTypeDialog dialog = new ProductTypeDialog(table, 1, title + "-" + addButton.getText());
+		ProductUnitDialog dialog = new ProductUnitDialog(table, 1, title + "-" + addButton.getText());
 		dialog.setVisible(true);
 	}
 	private void alertButtonListener() {
@@ -150,7 +150,7 @@ public class ProductTypePanel extends JPanel{
 		if(selectRow == -1) {
 			return;
 		}
-		ProductTypeDialog dialog = new ProductTypeDialog(table, 2, title + "-" + alertButton.getText());
+		ProductUnitDialog dialog = new ProductUnitDialog(table, 2, title + "-" + alertButton.getText());
 		dialog.setVisible(true);
 	}
 	private void delButtonListener() {

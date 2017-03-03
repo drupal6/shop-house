@@ -1,7 +1,6 @@
 package shop.beam;
 
 public class Product {
-
 	
 	private int id;
 	

@@ -1,5 +1,10 @@
 package shop.view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -36,16 +41,31 @@ public class ManageMenuBar extends JMenuBar {
 		productTypeMenuItem = new JMenuItem();
 		productTypeMenuItem.setText("商品类别");
 		productTypeMenuItem.setFont(Constance.menuFont);
+		productTypeMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ShopFrame.getInst().refreshPanel(productTypeMenuItem.getText(),  new ProductTypePanel(productTypeMenuItem.getText()));
+			}
+		});
 		baseDataMenu.add(productTypeMenuItem);
 		
 		productUnitMenuItem = new JMenuItem();
 		productUnitMenuItem.setText("商品单位");
 		productUnitMenuItem.setFont(Constance.menuFont);
+		productUnitMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ShopFrame.getInst().refreshPanel(productUnitMenuItem.getText(),  new ProductUnitPanel(productUnitMenuItem.getText()));
+			}
+		});
 		baseDataMenu.add(productUnitMenuItem);
 		
 		productInfoMenuItem = new JMenuItem();
 		productInfoMenuItem.setText("商品信息");
 		productInfoMenuItem.setFont(Constance.menuFont);
+		productInfoMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ShopFrame.getInst().refreshPanel(productInfoMenuItem.getText(),  new ProductPanel(productInfoMenuItem.getText()));
+			}
+		});
 		baseDataMenu.add(productInfoMenuItem);
 		return baseDataMenu;
 	}
