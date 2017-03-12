@@ -1,4 +1,4 @@
-package shop.view;
+package shop.view.manage;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -69,8 +69,8 @@ public class ProductDialog extends JDialog{
 		this.setSize(330, 270);
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		this.setResizable(false);
-		Point topLeft = ShopFrame.getInst().getLocationOnScreen();
-		Dimension parentSize = ShopFrame.getInst().getSize();
+		Point topLeft = ManageFrame.getInst().getLocationOnScreen();
+		Dimension parentSize = ManageFrame.getInst().getSize();
 		Dimension mySize = this.getSize();
 		int x, y;
 		if (parentSize.width > mySize.width) {

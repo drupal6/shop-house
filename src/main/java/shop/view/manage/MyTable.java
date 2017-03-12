@@ -1,4 +1,4 @@
-package shop.view;
+package shop.view.manage;
 
 import java.awt.Color;
 import java.util.Vector;

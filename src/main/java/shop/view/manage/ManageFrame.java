@@ -1,4 +1,4 @@
-package shop.view;
+package shop.view.manage;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -10,11 +10,11 @@ import javax.swing.JPanel;
 
 import shop.provider.DataInit;
 
-public class ShopFrame extends JFrame {
+public class ManageFrame extends JFrame {
 	
-	private static ShopFrame instance = new ShopFrame();
+	private static ManageFrame instance = new ManageFrame();
 	
-	public static ShopFrame getInst() {
+	public static ManageFrame getInst() {
 		return instance;
 	}
 	
@@ -83,6 +83,6 @@ public class ShopFrame extends JFrame {
 		//初始数据
 		DataInit.getInst().initConnect();
 		DataInit.getInst().initData();
-		ShopFrame.getInst().init();
+		ManageFrame.getInst().init();
 	}
 }

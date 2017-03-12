@@ -1,4 +1,4 @@
-package shop.view;
+package shop.view.manage;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -43,7 +43,7 @@ public class ManageMenuBar extends JMenuBar {
 		productTypeMenuItem.setFont(Constance.menuFont);
 		productTypeMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ShopFrame.getInst().refreshPanel(productTypeMenuItem.getText(),  new ProductTypePanel(productTypeMenuItem.getText()));
+				ManageFrame.getInst().refreshPanel(productTypeMenuItem.getText(),  new ProductTypePanel(productTypeMenuItem.getText()));
 			}
 		});
 		baseDataMenu.add(productTypeMenuItem);
@@ -53,7 +53,7 @@ public class ManageMenuBar extends JMenuBar {
 		productUnitMenuItem.setFont(Constance.menuFont);
 		productUnitMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ShopFrame.getInst().refreshPanel(productUnitMenuItem.getText(),  new ProductUnitPanel(productUnitMenuItem.getText()));
+				ManageFrame.getInst().refreshPanel(productUnitMenuItem.getText(),  new ProductUnitPanel(productUnitMenuItem.getText()));
 			}
 		});
 		baseDataMenu.add(productUnitMenuItem);
@@ -63,7 +63,7 @@ public class ManageMenuBar extends JMenuBar {
 		productInfoMenuItem.setFont(Constance.menuFont);
 		productInfoMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ShopFrame.getInst().refreshPanel(productInfoMenuItem.getText(),  new ProductPanel(productInfoMenuItem.getText()));
+				ManageFrame.getInst().refreshPanel(productInfoMenuItem.getText(),  new ProductPanel(productInfoMenuItem.getText()));
 			}
 		});
 		baseDataMenu.add(productInfoMenuItem);

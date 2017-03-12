@@ -1,4 +1,4 @@
-package shop.view;
+package shop.view.manage;
 
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;

@@ -1,4 +1,4 @@
-package shop.view;
+package shop.view.manage;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -16,11 +16,9 @@ import javax.swing.WindowConstants;
 
 import shop.Constance;
 import shop.beam.ProductType;
-import shop.beam.ProductUnit;
 import shop.provider.ProductTypeProvider;
-import shop.provider.ProductUnitProvider;
 
-public class ProductUnitDialog extends JDialog{
+public class ProductTypeDialog extends JDialog{
 	
 	/**
 	 * 
@@ -40,15 +38,15 @@ public class ProductUnitDialog extends JDialog{
 	private JButton cannelButton;
 	private MyTable table;
 	
-	public ProductUnitDialog(MyTable table, int op, String title) { 
+	public ProductTypeDialog(MyTable table, int op, String title) { 
 		this.table = table;
 		this.op = op;
 		this.setTitle(title);
 		this.setSize(300, 190);
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		this.setResizable(false);
-		Point topLeft = ShopFrame.getInst().getLocationOnScreen();
-		Dimension parentSize = ShopFrame.getInst().getSize();
+		Point topLeft = ManageFrame.getInst().getLocationOnScreen();
+		Dimension parentSize = ManageFrame.getInst().getSize();
 		Dimension mySize = this.getSize();
 		int x, y;
 		if (parentSize.width > mySize.width) {
@@ -145,9 +143,9 @@ public class ProductUnitDialog extends JDialog{
 			saveAndAddButton.setEnabled(false);
 			selectIndex = table.getTable().getSelectedRow();
 			id = (Integer) table.getTable().getValueAt(selectIndex, 0);
-			ProductUnit productUnit = ProductUnitProvider.getInst().get(id);
-			if(productUnit != null) {
-				nameTextField.setText(productUnit.getName());
+			ProductType productType = ProductTypeProvider.getInst().get(id);
+			if(productType != null) {
+				nameTextField.setText(productType.getName());
 			}
 		}
 	}
@@ -158,32 +156,32 @@ public class ProductUnitDialog extends JDialog{
 			return false;
 		}
 		if(op == 1) {
-			ProductUnit productType = ProductUnitProvider.getInst().getByName(name);
+			ProductType productType = ProductTypeProvider.getInst().getByName(name);
 			if(productType != null) {
 				return false;
 			}
-			productType = new ProductUnit();
+			productType = new ProductType();
 			productType.setName(name);
-			productType = ProductUnitProvider.getInst().add(productType);
+			productType = ProductTypeProvider.getInst().add(productType);
 			if(productType == null) {
 				return false;
 			}
-			table.getTableModel().addRow(ProductUnitProvider.getValue(productType));
+			table.getTableModel().addRow(ProductTypeProvider.getValue(productType));
 			return true;
 		}else {
-			ProductUnit productType = ProductUnitProvider.getInst().get(id);
+			ProductType productType = ProductTypeProvider.getInst().get(id);
 			if(productType == null) {
 				return false;
 			}
 			if(productType.getName().equals(name)) {
 				return false;
 			}
-			ProductUnit productType1 = ProductUnitProvider.getInst().getByName(name);
+			ProductType productType1 = ProductTypeProvider.getInst().getByName(name);
 			if(productType1 != null) {
 				return false;
 			}
 			productType.setName(name);
-			if(false == ProductUnitProvider.getInst().update(productType)) {
+			if(false == ProductTypeProvider.getInst().update(productType)) {
 				return false;
 			}
 			table.getTable().setValueAt(name, selectIndex, 1);
