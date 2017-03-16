@@ -36,11 +36,11 @@ public class ManageMenuBar extends JMenuBar {
 	private JMenu createBaseMenu() {
 		baseDataMenu = new JMenu();
 		baseDataMenu.setText("基础数据");
-		baseDataMenu.setFont(Constance.mainMenuFont);
+		baseDataMenu.setFont(Constance.font24);
 		
 		productTypeMenuItem = new JMenuItem();
 		productTypeMenuItem.setText("商品类别");
-		productTypeMenuItem.setFont(Constance.menuFont);
+		productTypeMenuItem.setFont(Constance.font21);
 		productTypeMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ManageFrame.getInst().refreshPanel(productTypeMenuItem.getText(),  new ProductTypePanel(productTypeMenuItem.getText()));
@@ -50,7 +50,7 @@ public class ManageMenuBar extends JMenuBar {
 		
 		productUnitMenuItem = new JMenuItem();
 		productUnitMenuItem.setText("商品单位");
-		productUnitMenuItem.setFont(Constance.menuFont);
+		productUnitMenuItem.setFont(Constance.font21);
 		productUnitMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ManageFrame.getInst().refreshPanel(productUnitMenuItem.getText(),  new ProductUnitPanel(productUnitMenuItem.getText()));
@@ -60,7 +60,7 @@ public class ManageMenuBar extends JMenuBar {
 		
 		productInfoMenuItem = new JMenuItem();
 		productInfoMenuItem.setText("商品信息");
-		productInfoMenuItem.setFont(Constance.menuFont);
+		productInfoMenuItem.setFont(Constance.font21);
 		productInfoMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ManageFrame.getInst().refreshPanel(productInfoMenuItem.getText(),  new ProductPanel(productInfoMenuItem.getText()));

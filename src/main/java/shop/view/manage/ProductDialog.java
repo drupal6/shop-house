@@ -89,14 +89,14 @@ public class ProductDialog extends JDialog{
 		conentPanel.setBackground(Color.WHITE);
 		
 		nameLabel = new JLabel("名称");
-		nameLabel.setFont(Constance.dialogLableFont);
+		nameLabel.setFont(Constance.font22);
 		nameTextField = new JTextField();
-		nameTextField.setFont(Constance.dialogLableFont);
+		nameTextField.setFont(Constance.font22);
 		
 		unitLabel = new JLabel("单位");
-		unitLabel.setFont(Constance.dialogLableFont);
+		unitLabel.setFont(Constance.font22);
 		unitComboBox = new JComboBox();
-		unitComboBox.setFont(Constance.dialogLableFont);
+		unitComboBox.setFont(Constance.font22);
 		unitNodes  = ProductUnitProvider.getInst().toTreeNodeList();
 		for(TreeNode unitNode : unitNodes) {
 			unitComboBox.addItem(unitNode);
@@ -104,9 +104,9 @@ public class ProductDialog extends JDialog{
 		unitComboBox.setSelectedItem(null);
 		
 		typeLabel = new JLabel("类别");
-		typeLabel.setFont(Constance.dialogLableFont);
+		typeLabel.setFont(Constance.font22);
 		typeComboBox = new JComboBox();
-		typeComboBox.setFont(Constance.dialogLableFont);
+		typeComboBox.setFont(Constance.font22);
 		typeNodes  = ProductTypeProvider.getInst().toTreeNodeList();
 		TreeNode selectNode = null;
 		for(TreeNode typeNode : typeNodes) {
@@ -120,14 +120,14 @@ public class ProductDialog extends JDialog{
 		}
 		
 		outPriceLabel = new JLabel("出售价格");
-		outPriceLabel.setFont(Constance.dialogLableFont);
+		outPriceLabel.setFont(Constance.font22);
 		outPriceTextField = new JTextField();
-		outPriceTextField.setFont(Constance.dialogLableFont);
+		outPriceTextField.setFont(Constance.font22);
 		
 		stockLabel = new JLabel("库存");
-		stockLabel.setFont(Constance.dialogLableFont);
+		stockLabel.setFont(Constance.font22);
 		stockTextField = new JTextField();
-		stockTextField.setFont(Constance.dialogLableFont);
+		stockTextField.setFont(Constance.font22);
 		
 		GroupLayout conentLayout = new GroupLayout(conentPanel);
 		conentPanel.setLayout(conentLayout);

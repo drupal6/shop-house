@@ -66,9 +66,9 @@ public class ProductUnitDialog extends JDialog{
 		conentPanel = new JPanel();
 		conentPanel.setBackground(Color.WHITE);
 		nameLabel = new JLabel("名称");
-		nameLabel.setFont(Constance.dialogLableFont);
+		nameLabel.setFont(Constance.font22);
 		nameTextField = new JTextField();
-		nameTextField.setFont(Constance.dialogLableFont);
+		nameTextField.setFont(Constance.font22);
 		
 		GroupLayout conentLayout = new GroupLayout(conentPanel);
 		conentPanel.setLayout(conentLayout);

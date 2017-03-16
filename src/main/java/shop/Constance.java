@@ -2,6 +2,7 @@ package shop;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,11 +11,16 @@ import javax.swing.border.Border;
 
 public class Constance {
 	
-	public static Font mainMenuFont = new Font("宋体", 100, 24);
-	public static Font menuFont =new Font("宋体", 100, 21);
-	public static Font secondTitleFont = new Font("宋体", Font.BOLD, 24);
-	public static Font dialogLableFont =new Font("宋体", 100, 22);
+	public static Font fontB35 = new Font("宋体", Font.BOLD, 35);
+	public static Font fontB30 = new Font("宋体", Font.BOLD, 30);
+	public static Font fontB24 = new Font("宋体", Font.BOLD, 24);
+	public static Font font24 = new Font("宋体", 100, 24);
+	public static Font font22 =new Font("宋体", 100, 22);
+	public static Font font21 =new Font("宋体", 100, 21);
+	public static Font font15 =new Font("宋体", 100, 15);
+	public static Font fontB10 =new Font("宋体", Font.BOLD, 10);
 	
+	public static SimpleDateFormat dateFormt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
 	public static Border border = BorderFactory.createLineBorder(new Color(153, 153, 153));
 	

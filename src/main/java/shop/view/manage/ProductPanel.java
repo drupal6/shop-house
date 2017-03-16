@@ -160,7 +160,7 @@ public class ProductPanel extends JPanel{
 			treeModel.add(new DefaultMutableTreeNode(node));
 		}
 		JTree tree = new JTree(treeModel);
-		tree.setFont(Constance.dialogLableFont);
+		tree.setFont(Constance.font22);
 		tree.addTreeSelectionListener(new TreeSelectionListener() {
 			public void valueChanged(TreeSelectionEvent e) {
 				DefaultMutableTreeNode obj = (DefaultMutableTreeNode) ((JTree)e.getSource()).getLastSelectedPathComponent();
