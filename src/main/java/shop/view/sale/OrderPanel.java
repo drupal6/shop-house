@@ -2,7 +2,6 @@ package shop.view.sale;
 
 import java.awt.Color;
 
-import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
@@ -49,5 +48,13 @@ public class OrderPanel extends JPanel {
 	public ProductOrderListPanel getProductOrderListPanel() {
 		return productOrderListPanel;
 	}
+
+	public TotalPanel getTotalPanel() {
+		return totalPanel;
+	}
 	
+	public void clean() {
+		totalPanel.setTotal(0.0f);
+		productOrderListPanel.clean();
+	}
 }

@@ -13,7 +13,7 @@ public class OutOrder {
 	private float cash;   //金额
 	
 	private String mark;  //订单备注
-	
+	//1结算
 	private int state;    //订单状体
 	
 	public int getId() {

@@ -1,8 +1,6 @@
 package shop.view.sale;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -106,7 +104,19 @@ public class SaleFrame extends JFrame {
 	
 	public void dialogPanelAddPanel(JPanel panel) {
 		dialogPanel.removeAll();
-		dialogPanel.add(panel, FlowLayout.CENTER);
+		GroupLayout layout = new GroupLayout(dialogPanel);
+		dialogPanel.setLayout(layout);
+		GroupLayout.SequentialGroup hGroup = layout.createSequentialGroup();
+		hGroup.addGap((int) ((dialogPanel.getWidth() - panel.getPreferredSize().getWidth())/2));
+		hGroup.addGroup(layout.createParallelGroup()
+				.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE));
+		layout.setHorizontalGroup(hGroup);
+		
+		GroupLayout.SequentialGroup vGroup = layout.createSequentialGroup();
+		vGroup.addGap((int) ((dialogPanel.getHeight() - panel.getPreferredSize().getHeight())/2));
+		vGroup.addGroup(layout.createParallelGroup()
+				.addComponent(panel, GroupLayout.PREFERRED_SIZE,  GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE));
+		layout.setVerticalGroup(vGroup);
 		dialogPanel.updateUI();
 	}
 	

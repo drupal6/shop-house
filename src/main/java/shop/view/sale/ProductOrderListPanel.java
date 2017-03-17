@@ -20,7 +20,7 @@ public class ProductOrderListPanel extends JPanel {
 	
 	private TotalPanel totalPanel;
 	
-	private AtomicInteger indexAtom = new AtomicInteger(1);
+	private AtomicInteger indexAtom = new AtomicInteger(0);
 	
 	private Map<Integer, ProductOrderPanel> map = new HashMap<Integer, ProductOrderPanel>();
 
@@ -64,8 +64,65 @@ public class ProductOrderListPanel extends JPanel {
 		vGroup.addGap(5);
 		vGroup.addGroup(layout.createParallelGroup().addComponent(productPanel));
 		updateTotal();
-		updateUI();
 		select(index);
+	}
+	
+	public void add() {
+		ProductOrderPanel productOrderPanel = getProductPanel(select);
+		if(productOrderPanel == null) {
+			return;
+		}
+		productOrderPanel.updateNum(1);
+		updateTotal();
+		updateUI();
+	}
+	
+	public void del() {
+		ProductOrderPanel productOrderPanel = getProductPanel(select);
+		if(productOrderPanel == null) {
+			return;
+		}
+		productOrderPanel.updateNum(-1);
+		if(productOrderPanel.getNum() <= 0) {
+			remove();
+		}else {
+			updateTotal();
+		}
+	}
+	public void alertNum(float num) {
+		ProductOrderPanel productOrderPanel = getProductPanel(select);
+		if(productOrderPanel == null) {
+			return;
+		}
+		productOrderPanel.updateNum(num);
+		if(productOrderPanel.getNum() <= 0) {
+			remove();
+		}else {
+			updateTotal();
+		}
+	}
+	
+	public void alertPrice(float price) {
+		ProductOrderPanel productOrderPanel = getProductPanel(select);
+		if(productOrderPanel == null) {
+			return;
+		}
+		productOrderPanel.updatePrice(price);
+		updateTotal();
+	}
+	
+	public void remove() {
+		ProductOrderPanel productOrderPanel = getProductPanel(select);
+		if(productOrderPanel == null) {
+			return;
+		}
+		map.remove(productOrderPanel.getIndex());
+		if(productOrderPanel.getIndex() == select) {
+			select = 0;
+		}
+		remove(productOrderPanel);
+		updateTotal();
+		updateUI();
 	}
 	
 	public ProductOrderPanel getProductPanel(int index) {
@@ -96,6 +153,18 @@ public class ProductOrderListPanel extends JPanel {
 		for(ProductOrderPanel productOrderPanel : map.values()) {
 			text += productOrderPanel.getNum() * productOrderPanel.getOutPrice();
 		}
-		totalPanel.getTotalLabel2().setText("￥" +text);
+		totalPanel.setTotal(text);
+	}
+	
+	public void clean() {
+		select = 0;
+		map.clear();
+		indexAtom.set(0);
+		removeAll();
+		updateUI();
+	}
+	
+	public Map<Integer, ProductOrderPanel> map() {
+		return map;
 	}
 }

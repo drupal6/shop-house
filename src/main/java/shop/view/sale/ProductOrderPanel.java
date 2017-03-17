@@ -13,6 +13,8 @@ import shop.beam.Product;
 
 public class ProductOrderPanel extends JPanel{
 
+	private static final long serialVersionUID = 1L;
+	
 	private Product product;
 	private float num;
 	private float outPrice;
@@ -81,6 +83,19 @@ public class ProductOrderPanel extends JPanel{
 		}
 	}
 
+	public void updateNum(float channelNum) {
+		num += channelNum;
+		numLable.setText("数量:"+num);
+		totalLable.setText("￥"+num * outPrice);
+		updateUI();
+	}
+	
+	public void updatePrice(float price) {
+		this.outPrice = price;
+		totalLable = new JLabel("￥"+num * outPrice);
+		updateUI();
+	}
+	
 	public float getNum() {
 		return num;
 	}
@@ -92,4 +107,9 @@ public class ProductOrderPanel extends JPanel{
 	public int getIndex() {
 		return index;
 	}
+
+	public Product getProduct() {
+		return product;
+	}
+	
 }

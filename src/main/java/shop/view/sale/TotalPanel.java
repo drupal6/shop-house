@@ -20,6 +20,8 @@ public class TotalPanel extends JPanel{
 	private JLabel totalLabel1;
 	private JLabel totalLabel2;
 	
+	private float total = 0.0f;
+	
 	public TotalPanel(String userName) {
 		setBackground(new Color(240, 240, 240));
 		salorLabel1 = new JLabel("操作员:" + userName);
@@ -51,7 +53,12 @@ public class TotalPanel extends JPanel{
 		layout.setVerticalGroup(vGroup);
 	}
 
-	public JLabel getTotalLabel2() {
-		return totalLabel2;
+	
+	public void setTotal(float total) {
+		this.total = Float.parseFloat(Constance.df.format(total));
+		totalLabel2.setText(this.total +"");
+	}
+	public float getTotal() {
+		return total;
 	}
 }

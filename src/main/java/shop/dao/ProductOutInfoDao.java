@@ -19,7 +19,7 @@ public class ProductOutInfoDao extends BaseDao {
 
 	public boolean createProductOutInfo(ProductOutInfo productOption) {
 		boolean result = false;
-		String sql = "insert into t_product_out_info (productId,userId,num,price,price1,opTime,state,returnNum,returnTime,returnMark,outId) values (?,?,?,?,?,?,?,?,?,?);";
+		String sql = "insert into t_product_out_info (productId,userId,num,price,price1,opTime,state,returnNum,returnTime,returnMark,outId) values (?,?,?,?,?,?,?,?,?,?,?);";
 		Map<Integer, DbParameter> param = new HashMap<Integer, DbParameter>();
 		param.put(1, new DbParameter(Types.INTEGER, productOption.getProductId()));
 		param.put(2, new DbParameter(Types.INTEGER, productOption.getUserId()));

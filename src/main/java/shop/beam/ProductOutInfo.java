@@ -18,8 +18,6 @@ public class ProductOutInfo {
 	
 	private Date opTime;    //销售时间
 	
-	private int state;
-	
 	private float returnNum;	//退货数量
 	
 	private Date returnTime;	//退货时间
@@ -27,6 +25,8 @@ public class ProductOutInfo {
 	private String returnMark;	//退货备注
 	
 	private int outId;
+	//1结算
+	private int state;
 
 	public int getId() {
 		return id;

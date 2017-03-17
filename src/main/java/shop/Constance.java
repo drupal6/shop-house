@@ -2,6 +2,7 @@ package shop;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,6 +20,8 @@ public class Constance {
 	public static Font font21 =new Font("宋体", 100, 21);
 	public static Font font15 =new Font("宋体", 100, 15);
 	public static Font fontB10 =new Font("宋体", Font.BOLD, 10);
+	
+	public static DecimalFormat df = new DecimalFormat("0.0");
 	
 	public static SimpleDateFormat dateFormt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
