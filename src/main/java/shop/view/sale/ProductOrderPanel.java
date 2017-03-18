@@ -36,11 +36,11 @@ public class ProductOrderPanel extends JPanel{
 		
 		nameLable = new JLabel(product.getName());
 		nameLable.setFont(Constance.font15);
-		outPriceLable = new JLabel("￥"+outPrice);
+		outPriceLable = new JLabel("单价:"+outPrice);
 		outPriceLable.setFont(Constance.fontB10);
 		numLable = new JLabel("数量:"+num);
 		numLable.setFont(Constance.fontB10);
-		totalLable = new JLabel("￥"+num * outPrice);
+		totalLable = new JLabel(""+num * outPrice);
 		totalLable.setHorizontalAlignment(SwingConstants.TRAILING);
 		totalLable.setFont(Constance.font24);
 		
@@ -89,9 +89,16 @@ public class ProductOrderPanel extends JPanel{
 		totalLable.setText("￥"+num * outPrice);
 		updateUI();
 	}
+	public void setNum(float channelNum) {
+		num = channelNum;
+		numLable.setText("数量:"+num);
+		totalLable.setText("￥"+num * outPrice);
+		updateUI();
+	}
 	
 	public void updatePrice(float price) {
 		this.outPrice = price;
+		outPriceLable.setText("单价:"+outPrice);
 		totalLable = new JLabel("￥"+num * outPrice);
 		updateUI();
 	}

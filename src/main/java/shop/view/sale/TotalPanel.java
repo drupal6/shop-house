@@ -30,7 +30,7 @@ public class TotalPanel extends JPanel{
 		salorLabel2.setFont(Constance.font15);
 		totalLabel1 = new JLabel("合计:");
 		totalLabel1.setFont(Constance.fontB30);
-		totalLabel2 = new JLabel("￥0.0");
+		totalLabel2 = new JLabel("0.0");
 		totalLabel2.setFont(Constance.fontB30);
 		totalLabel2.setForeground(new Color(255, 69, 0));
 		

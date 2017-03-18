@@ -94,7 +94,7 @@ public class ProductOrderListPanel extends JPanel {
 		if(productOrderPanel == null) {
 			return;
 		}
-		productOrderPanel.updateNum(num);
+		productOrderPanel.setNum(num);
 		if(productOrderPanel.getNum() <= 0) {
 			remove();
 		}else {
@@ -102,6 +102,14 @@ public class ProductOrderListPanel extends JPanel {
 		}
 	}
 	
+	public void resetPrice() {
+		ProductOrderPanel productOrderPanel = getProductPanel(select);
+		if(productOrderPanel == null) {
+			return;
+		}
+		productOrderPanel.updatePrice(productOrderPanel.getProduct().getOutPrice());
+		updateTotal();
+	}
 	public void alertPrice(float price) {
 		ProductOrderPanel productOrderPanel = getProductPanel(select);
 		if(productOrderPanel == null) {
@@ -166,5 +174,9 @@ public class ProductOrderListPanel extends JPanel {
 	
 	public Map<Integer, ProductOrderPanel> map() {
 		return map;
+	}
+	
+	public ProductOrderPanel getSelectProductOrderPanel() {
+		return map.get(select);
 	}
 }

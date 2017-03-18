@@ -46,7 +46,7 @@ public class SettlePanel extends JPanel{
 	private JLabel backTotalLable;
 	private JButton backBt;
 	private JButton okBt;
-	private JButton cannelBt;
+	private JButton delBt;
 	
 	private float souldTotal = 0.0f;
 	private float haveTotal = 0.0f;
@@ -180,9 +180,9 @@ public class SettlePanel extends JPanel{
 		backTotalLable.setForeground(new Color(255, 140, 0));
 		backTotalLable.setFont(Constance.fontB30);
 		backTotalLable.setHorizontalAlignment(SwingConstants.TRAILING);
-		cannelBt = new JButton("费单");
-		cannelBt.setFont(Constance.fontB30);
-		cannelBt.addActionListener(new ActionListener() {
+		delBt = new JButton("费单");
+		delBt.setFont(Constance.fontB30);
+		delBt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cannel();
 			}
@@ -213,7 +213,7 @@ public class SettlePanel extends JPanel{
 	            .addGroup(backLayout.createSequentialGroup().addGap(10)
 	                .addGroup(backLayout.createParallelGroup()
 	                    .addGroup(backLayout.createSequentialGroup()
-	                        .addComponent(cannelBt)
+	                        .addComponent(delBt)
 	                        .addComponent(backBt)
 	                        .addComponent(okBt)
                         )
@@ -231,7 +231,7 @@ public class SettlePanel extends JPanel{
                     .addComponent(backTipLable)
                     .addComponent(backTotalLable))
                 .addGroup(backLayout.createParallelGroup()
-                    .addComponent(cannelBt)
+                    .addComponent(delBt)
                     .addComponent(backBt)
                     .addComponent(okBt)).addGap(10)
             )

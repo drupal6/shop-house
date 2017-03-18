@@ -27,14 +27,34 @@ public enum SaleOptionEnum {
 			SaleFrame.getInst().getOrderPanel().getProductOrderListPanel().del();
 		}
 	},    	//-
-	NUM("数量", Color.WHITE, Color.BLACK),   	//数量
+	NUM("数量", Color.WHITE, Color.BLACK){
+		@Override
+		public void clickHandle() {
+			ProductOrderPanel productOrderPanel = SaleFrame.getInst().getOrderPanel().getProductOrderListPanel().getSelectProductOrderPanel();
+			if(productOrderPanel == null) {
+				return;
+			}
+			SaleFrame.getInst().setLayerPanel(200, 300);
+			SaleFrame.getInst().dialogPanelAddPanel(new ChannePanel(productOrderPanel.getNum(), 1));
+		}
+	},   	//数量
 	DEL("删除", Color.WHITE, Color.BLACK){
 		@Override
 		public void clickHandle() {
 			SaleFrame.getInst().getOrderPanel().getProductOrderListPanel().remove();
 		}
 	},   	//数量
-	ALERT("改价", Color.WHITE, Color.BLACK), 	//改价
+	ALERT("改价", Color.WHITE, Color.BLACK){
+		@Override
+		public void clickHandle() {
+			ProductOrderPanel productOrderPanel = SaleFrame.getInst().getOrderPanel().getProductOrderListPanel().getSelectProductOrderPanel();
+			if(productOrderPanel == null) {
+				return;
+			}
+			SaleFrame.getInst().setLayerPanel(200, 300);
+			SaleFrame.getInst().dialogPanelAddPanel(new ChannePanel(productOrderPanel.getOutPrice(), 2));
+		}
+	}, 	//改价
 	;
 	
 	private String name;
