@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import shop.Constance;
+import shop.Constance.ORDERSTATE;
 import shop.beam.OutOrder;
 import shop.beam.Product;
 import shop.beam.ProductOutInfo;
@@ -294,7 +295,7 @@ public class SettlePanel extends JPanel{
 			Date now = new Date();
 			order.setOpTime(now);
 			order.setCash(souldTotal);
-			order.setState(1);
+			order.setState(ORDERSTATE.PAY.ordinal());
 			if(null == ProductOutOrderProvider.getInst().add(order)) {
 				return;
 			}
@@ -311,7 +312,7 @@ public class SettlePanel extends JPanel{
 				outInfo.setPrice1(orderPanel.getOutPrice());
 				outInfo.setOpTime(now);
 				outInfo.setOutId(order.getId());
-				outInfo.setState(1);
+				outInfo.setState(ORDERSTATE.PAY.ordinal());
 				ProductOutInfoProvider.getInst().add(outInfo);
 			}
 		}

@@ -59,9 +59,11 @@ public class ProductOutInfoDao extends BaseDao {
 		return result;
 	}
 	
-	public List<ProductOutInfo> getProductOutInfoList() {
-		String sql = "select * from t_product_out_info where state=0;";
-		PreparedStatement pstmt = execQuery(sql, null);
+	public List<ProductOutInfo> getProductOutInfoList(int orderId) {
+		String sql = "select * from t_product_out_info where outId=?;";
+		Map<Integer, DbParameter> param = new HashMap<Integer, DbParameter>();
+		param.put(1, new DbParameter(Types.INTEGER, orderId));
+		PreparedStatement pstmt = execQuery(sql, param);
 		ResultSet rs = null;
 		List<ProductOutInfo> infos = null;
 		if (pstmt != null) {

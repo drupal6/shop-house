@@ -1,5 +1,8 @@
 package shop.provider;
 
+import java.util.List;
+import java.util.Vector;
+
 import shop.beam.ProductOutInfo;
 import shop.dao.DaoFactory;
 
@@ -11,6 +14,20 @@ import shop.dao.DaoFactory;
 public class ProductOutInfoProvider {
 
 	private static ProductOutInfoProvider instance = new ProductOutInfoProvider();
+	
+	private static  Vector<String> columnNameV = new Vector<String>();
+	static{
+		columnNameV.add("编号");
+		columnNameV.add("产品");
+		columnNameV.add("数量");
+		columnNameV.add("原价");
+		columnNameV.add("实价");
+		columnNameV.add("总额");
+		columnNameV.add("退货操作员");
+		columnNameV.add("退货数量");
+		columnNameV.add("退货时间");
+		columnNameV.add("备注");
+	}
 	
 	public static ProductOutInfoProvider getInst() {
 		return instance;
@@ -37,4 +54,44 @@ public class ProductOutInfoProvider {
 		return null;
 	}
 	
+	public List<ProductOutInfo> queryByOrderId(int orderId) {
+		return DaoFactory.getInst().getProductOutInfoDao().getProductOutInfoList(orderId);
+	}
+	
+	public static Vector<String> getTitle() {
+		return columnNameV;
+	}
+	
+	public static Vector getListValue(List<ProductOutInfo> list) {
+		Vector vv = new Vector();
+		if(list != null) {
+			for(ProductOutInfo type : list) {
+				Vector rv = getValue(type);
+				if(rv != null) {
+					vv.add(rv);
+				}
+			}
+		}
+		return vv;
+	}
+	
+	public static Vector getValue(ProductOutInfo outInfo) {
+		if(outInfo == null) {
+			return null;
+		}
+		Vector rowV = new Vector();
+		rowV.add(outInfo.getId());
+		rowV.add(outInfo.getProductId());
+		rowV.add(outInfo.getNum());
+		rowV.add(outInfo.getPrice());
+		rowV.add(outInfo.getPrice1());
+		rowV.add(outInfo.getNum() * outInfo.getPrice1());
+		if(outInfo.getUserId() > 0) {
+			rowV.add(outInfo.getUserId());
+			rowV.add(outInfo.getReturnNum());
+			rowV.add(outInfo.getReturnTime());
+			rowV.add(outInfo.getReturnMark());
+		}
+		return rowV;
+	}
 }

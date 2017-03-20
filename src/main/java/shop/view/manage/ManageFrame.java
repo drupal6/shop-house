@@ -57,7 +57,6 @@ public class ManageFrame extends JFrame {
 		mainPanel.setLayout(layout);
 		
 		secondPanel = addPanel;
-		secondPanel.setBackground(Color.RED);
 		
 		GroupLayout.SequentialGroup hGroup = layout.createSequentialGroup();
 		hGroup.addGroup(layout.createParallelGroup()

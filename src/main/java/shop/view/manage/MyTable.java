@@ -23,7 +23,7 @@ public class MyTable extends JPanel {
 		
 		tableModel = new DefaultTableModel(tableValueV, title);
 		table = new DefaultTable(tableModel);
-		table.getTableHeader().setReorderingAllowed(false);//设置表格列不可重排
+		table.getTableHeader().setReorderingAllowed(true);//设置表格列不可重排
 		DefaultTableCellRenderer hr =(DefaultTableCellRenderer)table.getTableHeader().getDefaultRenderer();  //获得表格头的单元格对象
         hr.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
         DefaultTableCellRenderer cr =(DefaultTableCellRenderer)table.getDefaultRenderer(String.class);  //获得表格头的单元格对象
@@ -42,7 +42,7 @@ public class MyTable extends JPanel {
         this.setLayout(layout);
         
         GroupLayout.SequentialGroup hGroup = layout.createSequentialGroup();
-        hGroup.addGroup(layout.createParallelGroup().addComponent(tableScorllPanel, GroupLayout.DEFAULT_SIZE, weight, Short.MAX_VALUE));
+        hGroup.addGroup(layout.createParallelGroup().addComponent(tableScorllPanel, GroupLayout.PREFERRED_SIZE, weight, Short.MAX_VALUE));
         layout.setHorizontalGroup(hGroup);
         
         GroupLayout.SequentialGroup vGroup = layout.createSequentialGroup();
@@ -50,7 +50,6 @@ public class MyTable extends JPanel {
         layout.setVerticalGroup(vGroup);
 	}
 
-	
 	public void replace(Vector<String> title, Vector tableValueV) {
 		tableModel = new DefaultTableModel(tableValueV, title);
 		table.setModel(tableModel);

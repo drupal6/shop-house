@@ -20,9 +20,12 @@ public class ManageMenuBar extends JMenuBar {
 	private JMenuItem productUnitMenuItem;
 	private JMenuItem productInfoMenuItem;
 	
+	private JMenu saleMenu;
+	private JMenuItem querySaleOrderMenuItem;
 	
 	public ManageMenuBar() {
 		this.add(createBaseMenu());
+		this.add(createSaleMenu());
 	}
 	
 	public String getDefaMenuText() {
@@ -67,7 +70,31 @@ public class ManageMenuBar extends JMenuBar {
 			}
 		});
 		baseDataMenu.add(productInfoMenuItem);
+		
 		return baseDataMenu;
 	}
+	
+	/**
+	 * 创建销售菜单
+	 * @return
+	 */
+	private JMenu createSaleMenu() {
+		saleMenu = new JMenu();
+		saleMenu.setText("销售");
+		saleMenu.setFont(Constance.font24);
+		
+		querySaleOrderMenuItem = new JMenuItem();
+		querySaleOrderMenuItem.setText("销售查询");
+		querySaleOrderMenuItem.setFont(Constance.font21);
+		querySaleOrderMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ManageFrame.getInst().refreshPanel(querySaleOrderMenuItem.getText(),  new ProductSaleOrderPanel(querySaleOrderMenuItem.getText()));
+			}
+		});
+		saleMenu.add(querySaleOrderMenuItem);
+		
+		return saleMenu;
+	}
+	
 	
 }

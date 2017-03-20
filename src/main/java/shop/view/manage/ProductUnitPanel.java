@@ -105,7 +105,6 @@ public class ProductUnitPanel extends JPanel{
 		buttonLayout.setVerticalGroup(buttonVGroup);
 		
 		secondPanel = new JPanel();
-		secondPanel.setBackground(Color.red);
 		
 		table = new MyTable(ProductUnitProvider.getTitle(), ProductUnitProvider.getListValue(ProductUnitProvider.getInst().list()), 400, 300);
 		table.getTable().addMouseListener(new MouseAdapter() {

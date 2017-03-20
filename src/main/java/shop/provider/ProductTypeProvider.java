@@ -138,7 +138,4 @@ public class ProductTypeProvider {
 		rowV.add(productType.getState());
 		return rowV;
 	}
-	
-	
-	
 }

@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,9 +48,13 @@ public class OutOrderDao extends BaseDao {
 		return result;
 	}
 	
-	public List<OutOrder> getoutOrderList() {
-		String sql = "select * from t_out_order;";
-		PreparedStatement pstmt = execQuery(sql, null);
+	public List<OutOrder> getoutOrderList(Date startTime, Date endTime, int uid) {
+		String sql = "select * from t_out_order where opTime > ? and opTime < ? and userId=?;";
+		Map<Integer, DbParameter> param = new HashMap<Integer, DbParameter>();
+		param.put(1, new DbParameter(Types.TIMESTAMP,startTime));
+		param.put(2, new DbParameter(Types.TIMESTAMP,endTime));
+		param.put(3, new DbParameter(Types.INTEGER, uid));
+		PreparedStatement pstmt = execQuery(sql, param);
 		ResultSet rs = null;
 		List<OutOrder> infos = null;
 		if (pstmt != null) {
@@ -66,6 +71,27 @@ public class OutOrderDao extends BaseDao {
 			}
 		}
 		return infos;
+	}
+	public OutOrder getoutOrdert(int orderId) {
+		String sql = "select * from t_out_order where id=?;";
+		Map<Integer, DbParameter> param = new HashMap<Integer, DbParameter>();
+		param.put(1, new DbParameter(Types.INTEGER, orderId));
+		PreparedStatement pstmt = execQuery(sql, param);
+		ResultSet rs = null;
+		OutOrder info = null;
+		if (pstmt != null) {
+			try {
+				rs = pstmt.executeQuery();
+				while (rs.next()) {
+					return resultToBean(rs);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				closeConn(pstmt, rs);
+			}
+		}
+		return info;
 	}
 	
 	public OutOrder resultToBean(ResultSet rs) throws SQLException {

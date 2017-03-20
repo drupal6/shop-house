@@ -24,10 +24,11 @@ public class Constance {
 	public static DecimalFormat df = new DecimalFormat("0.0");
 	
 	public static SimpleDateFormat dateFormt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	public static SimpleDateFormat dateFormt1 = new SimpleDateFormat("yyyy-MM-dd");
 	
 	public static Border border = BorderFactory.createLineBorder(new Color(153, 153, 153));
 	
-	enum ORDERSTATE {
+	public static enum ORDERSTATE {
 		NORMAL("正常"),  
 		PAY("付款"),
 		RETURN("退货"),
