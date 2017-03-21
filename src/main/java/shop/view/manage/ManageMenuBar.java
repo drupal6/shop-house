@@ -2,8 +2,6 @@ package shop.view.manage;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -22,6 +20,7 @@ public class ManageMenuBar extends JMenuBar {
 	
 	private JMenu saleMenu;
 	private JMenuItem querySaleOrderMenuItem;
+	private JMenuItem queryPorductSaleMenuItem;
 	
 	public ManageMenuBar() {
 		this.add(createBaseMenu());
@@ -92,6 +91,16 @@ public class ManageMenuBar extends JMenuBar {
 			}
 		});
 		saleMenu.add(querySaleOrderMenuItem);
+		
+		queryPorductSaleMenuItem = new JMenuItem();
+		queryPorductSaleMenuItem.setText("商品销售");
+		queryPorductSaleMenuItem.setFont(Constance.font21);
+		queryPorductSaleMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ManageFrame.getInst().refreshPanel(queryPorductSaleMenuItem.getText(),  new ProductSalePanel(queryPorductSaleMenuItem.getText()));
+			}
+		});
+		saleMenu.add(queryPorductSaleMenuItem);
 		
 		return saleMenu;
 	}

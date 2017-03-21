@@ -13,6 +13,7 @@ import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -22,9 +23,11 @@ import javax.swing.SwingConstants;
 import shop.Constance;
 import shop.DateChooser;
 import shop.beam.OutOrder;
+import shop.beam.TreeNode;
 import shop.provider.ProductOutOrderProvider;
+import shop.provider.ProductTypeProvider;
 
-public class ProductSaleOrderPanel extends JPanel{
+public class ProductSalePanel extends JPanel{
 
 	/**
 	 * 
@@ -35,8 +38,10 @@ public class ProductSaleOrderPanel extends JPanel{
 	private JTextField startTimeField;
 	private JLabel splitLable;
 	private JTextField endTimeField;
-	private JLabel userLabel;
-	private JTextField userField;
+	private JLabel typeLabel;
+	private JComboBox<TreeNode> typeNode;
+	private JLabel productLabel;
+	private JComboBox<TreeNode> productNode;
 	private JButton queryButton;
 	private JButton resetButton;
     private JRadioButton yesterdayRadioButton;
@@ -53,7 +58,7 @@ public class ProductSaleOrderPanel extends JPanel{
 	
 	private MyTable table;
 	
-	public ProductSaleOrderPanel(String title) {
+	public ProductSalePanel(String title) {
 		
 		queryPanel = new JPanel();
 		queryPanel.setBackground(Color.WHITE);
@@ -72,10 +77,19 @@ public class ProductSaleOrderPanel extends JPanel{
 		DateChooser.getInstance(startTimeField, "yyyy-MM-dd");
 		DateChooser.getInstance(endTimeField, "yyyy-MM-dd");
 		
-		userLabel = new JLabel("操作员:");
-		userLabel.setFont(Constance.font21);
-		userField = new JTextField();
-		userField.setFont(Constance.font21);
+		typeLabel = new JLabel("类别:");
+		typeLabel.setFont(Constance.font21);
+		typeNode = new JComboBox<TreeNode>();
+		typeNode.setFont(Constance.font21);
+		List<TreeNode> typeList = ProductTypeProvider.getInst().toTreeNodeList();
+		typeNode.addItem(new TreeNode(0, 1, ""));
+		for(TreeNode tn : typeList) {
+			typeNode.addItem(tn);
+		}
+		productLabel = new JLabel("商品:");
+		productLabel.setFont(Constance.font21);
+		productNode = new JComboBox();
+		productNode.setFont(Constance.font21);
 		
 		queryButton = new JButton("查询");
 		queryButton.setFont(Constance.font21);
@@ -152,85 +166,86 @@ public class ProductSaleOrderPanel extends JPanel{
 		
 		GroupLayout buttonLayout = new GroupLayout(queryPanel);
 		queryPanel.setLayout(buttonLayout);
-		 buttonLayout.setHorizontalGroup(
-		            buttonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-		            .addGroup(buttonLayout.createSequentialGroup()
-		                .addContainerGap()
-		                .addGroup(buttonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-		                    .addComponent(userLabel)
-		                    .addComponent(dayLabel))
-		                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-		                .addGroup(buttonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-		                    .addGroup(buttonLayout.createSequentialGroup()
-		                        .addGroup(buttonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-		                            .addGroup(buttonLayout.createSequentialGroup()
-		                                .addComponent(startTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-		                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-		                                .addComponent(splitLable)
-		                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-		                                .addComponent(endTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-		                            .addGroup(buttonLayout.createSequentialGroup()
-		                                .addComponent(userField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-		                                .addGap(35, 35, 35)
-		                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-		                                .addComponent(orderNumNameLabel)
-		                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-		                                .addComponent(orderNumLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-		                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-		                        .addGroup(buttonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-		                            .addGroup(buttonLayout.createSequentialGroup()
-		                                .addComponent(yesterdayRadioButton)
-		                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-		                                .addComponent(todayRadioButton)
-		                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-		                                .addComponent(toweekRadioButton))
-		                            .addGroup(buttonLayout.createSequentialGroup()
-		                                .addGap(24, 24, 24)
-		                                .addComponent(cashNumNameLabel)
-		                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-		                                .addComponent(cashNumLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
-		                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-		                        .addComponent(tomonthRadioButton)
-		                        .addGap(2, 2, 2)
-		                        .addComponent(toyearRadioButton))
-		                    .addGroup(buttonLayout.createSequentialGroup()
-		                        .addComponent(queryButton)
-		                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-		                        .addComponent(resetButton)))
-		                )
-		        );
-		        buttonLayout.setVerticalGroup(
-		            buttonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-		            .addGroup(buttonLayout.createSequentialGroup()
-		                .addContainerGap()
-		                .addGroup(buttonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-		                    .addComponent(dayLabel)
-		                    .addComponent(startTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-		                    .addComponent(splitLable)
-		                    .addComponent(endTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-		                    .addComponent(yesterdayRadioButton)
-		                    .addComponent(todayRadioButton)
-		                    .addComponent(toweekRadioButton)
-		                    .addComponent(tomonthRadioButton)
-		                    .addComponent(toyearRadioButton))
-		                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-		                .addGroup(buttonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-		                    .addComponent(userLabel)
-		                    .addComponent(userField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-		                    .addComponent(orderNumNameLabel)
-		                    .addComponent(orderNumLabel)
-		                    .addComponent(cashNumNameLabel)
-		                    .addComponent(cashNumLabel))
-		                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-		                .addGroup(buttonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-		                    .addComponent(queryButton)
-		                    .addComponent(resetButton))
-		                .addGap(10))
-		        );
-		
-		secondPanel = new JPanel();
-		
-		table = new MyTable(ProductOutOrderProvider.getTitle(), ProductOutOrderProvider.getListValue(null), 500, 300);
+		buttonLayout.setHorizontalGroup(
+	            buttonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	            .addGroup(buttonLayout.createSequentialGroup()
+	                .addContainerGap()
+	                .addGroup(buttonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	                    .addComponent(typeLabel)
+	                    .addComponent(dayLabel))
+	                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                .addGroup(buttonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	                    .addGroup(buttonLayout.createSequentialGroup()
+	                        .addComponent(typeNode, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+	                        .addComponent(productLabel)
+	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                        .addComponent(productNode, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                        .addGap(14, 14, 14)
+	                        .addComponent(orderNumNameLabel)
+	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                        .addComponent(orderNumLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+	                        .addComponent(cashNumNameLabel)
+	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                        .addComponent(cashNumLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                        )
+	                    .addGroup(buttonLayout.createSequentialGroup()
+	                        .addComponent(queryButton)
+	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                        .addComponent(resetButton)
+	                        )
+	                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, buttonLayout.createSequentialGroup()
+	                        .addComponent(startTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                        .addComponent(splitLable)
+	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                        .addComponent(endTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                        .addComponent(yesterdayRadioButton)
+	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                        .addComponent(todayRadioButton)
+	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                        .addComponent(toweekRadioButton)
+	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                        .addComponent(tomonthRadioButton)
+	                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                        .addComponent(toyearRadioButton)
+	                        )))
+	        );
+	        buttonLayout.setVerticalGroup(
+	            buttonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+	            .addGroup(buttonLayout.createSequentialGroup()
+	                .addContainerGap()
+	                .addGroup(buttonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+	                    .addComponent(dayLabel)
+	                    .addComponent(startTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                    .addComponent(splitLable)
+	                    .addComponent(endTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                    .addComponent(yesterdayRadioButton)
+	                    .addComponent(todayRadioButton)
+	                    .addComponent(toweekRadioButton)
+	                    .addComponent(tomonthRadioButton)
+	                    .addComponent(toyearRadioButton))
+	                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                .addGroup(buttonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+	                    .addComponent(typeLabel)
+	                    .addComponent(orderNumNameLabel)
+	                    .addComponent(orderNumLabel)
+	                    .addComponent(cashNumNameLabel)
+	                    .addComponent(cashNumLabel)
+	                    .addComponent(typeNode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+	                    .addComponent(productLabel)
+	                    .addComponent(productNode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+	                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+	                .addGroup(buttonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+	                    .addComponent(queryButton)
+	                    .addComponent(resetButton))
+	                .addGap(10)
+	                )
+	        );
+	        
+        secondPanel = new JPanel();
+    	table = new MyTable(ProductOutOrderProvider.getTitle(), ProductOutOrderProvider.getListValue(null), 500, 300);
 		table.getTable().setFont(Constance.font21);
 		table.getTable().addMouseListener(new MouseAdapter() {
 			@Override
@@ -268,7 +283,6 @@ public class ProductSaleOrderPanel extends JPanel{
 	public void reset() {
 		todayRadioButton.setSelected(true);
 		radioButtonSelect();
-		userField.setText("");
 	}
 	
 	public void radioButtonSelect() {
@@ -318,7 +332,8 @@ public class ProductSaleOrderPanel extends JPanel{
 	}
 	
 	private void queryButton() {
-		String ustr = userField.getText().trim();
+		String ustr = "";
+//		String ustr = typeNode.getText().trim();
 		int uid = 0;
 		if(ustr != null && false == ustr.isEmpty()) {
 			uid = Integer.parseInt(ustr);

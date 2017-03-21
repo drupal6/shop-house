@@ -124,7 +124,7 @@ public class ProductDialog extends JDialog{
 		outPriceTextField = new JTextField();
 		outPriceTextField.setFont(Constance.font22);
 		
-		stockLabel = new JLabel("库存");
+		stockLabel = new JLabel("初始库存");
 		stockLabel.setFont(Constance.font22);
 		stockTextField = new JTextField();
 		stockTextField.setFont(Constance.font22);
