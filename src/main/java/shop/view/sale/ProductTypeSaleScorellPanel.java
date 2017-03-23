@@ -53,6 +53,7 @@ public class ProductTypeSaleScorellPanel extends JPanel {
 		for(int i = 0; i < typePanel.size(); i++) {
 			ProductTypeShowPanel type  = typePanel.get(i);
 			if(type.getIndex() == selectIndex) {
+				
 				type.setSelect(true);
 				List<Product> list = ProductProvider.getInst().list(type.getType().getId());
 				for(Product product : list) {

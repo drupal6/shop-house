@@ -63,6 +63,7 @@ public class ProductOrderPanel extends JPanel{
         layout.setVerticalGroup(
             layout.createParallelGroup()
             .addGroup(layout.createSequentialGroup()
+        		.addGap(5)
                 .addComponent(nameLable)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
@@ -71,6 +72,7 @@ public class ProductOrderPanel extends JPanel{
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(numLable))
                     .addComponent(totalLable, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(5)
                 )
         );
 	}

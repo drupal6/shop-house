@@ -29,8 +29,14 @@ public class OptionPanel extends JPanel {
 		for(SaleOptionEnum oe : SaleOptionEnum.values()) {
 			SaleButtonPanel sbp = new SaleButtonPanel(oe);
 			sbp.addMouseListener(new MouseListener() {
-				public void mouseReleased(MouseEvent e) { }
-				public void mousePressed(MouseEvent e) { }
+				public void mouseReleased(MouseEvent e) {
+					SaleButtonPanel sbp1 = (SaleButtonPanel) e.getSource();
+					sbp1.setBackground(sbp1.getSaleEnum().getColor());
+				}
+				public void mousePressed(MouseEvent e) { 
+					SaleButtonPanel sbp1 = (SaleButtonPanel) e.getSource();
+					sbp1.setBackground(new Color(107, 137, 213));
+				}
 				public void mouseExited(MouseEvent e) { }
 				public void mouseEntered(MouseEvent e) { }
 				public void mouseClicked(MouseEvent e) {

@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import javax.swing.GroupLayout;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 
 public class OrderPanel extends JPanel {
@@ -19,13 +20,18 @@ public class OrderPanel extends JPanel {
 	
 	private ProductOrderListPanel productOrderListPanel;
 
+	private JScrollPane scrollPane;
+	
 	public OrderPanel() {
 		
 		searchPanel = new JPanel();
 		searchPanel.setBackground(new Color(47, 47, 47));
 		totalPanel = new TotalPanel("asdfa");
 		JSeparator s2 = new JSeparator();
-		productOrderListPanel = new ProductOrderListPanel(totalPanel);
+		productOrderListPanel = new ProductOrderListPanel();
+		
+		scrollPane = new JScrollPane(productOrderListPanel);
+		scrollPane.getVerticalScrollBar().setUnitIncrement(20);
 		
 		GroupLayout layout = new GroupLayout(this);
 		this.setLayout(layout);
@@ -34,14 +40,14 @@ public class OrderPanel extends JPanel {
 		hGroup.addGroup(layout.createParallelGroup().addComponent(searchPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
 				.addComponent(totalPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
 				.addComponent(s2, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
-				.addComponent(productOrderListPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE));
+				.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE));
 		layout.setHorizontalGroup(hGroup);
 		
 		GroupLayout.SequentialGroup vGroup = layout.createSequentialGroup();
 		vGroup.addGroup(layout.createParallelGroup().addComponent(searchPanel, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE));
 		vGroup.addGroup(layout.createParallelGroup().addComponent(totalPanel, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE));
 		vGroup.addGroup(layout.createParallelGroup().addComponent(s2, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE));
-		vGroup.addGroup(layout.createParallelGroup().addComponent(productOrderListPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE));
+		vGroup.addGroup(layout.createParallelGroup().addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 660, GroupLayout.PREFERRED_SIZE));
 		layout.setVerticalGroup(vGroup);
 	}
 
@@ -53,6 +59,10 @@ public class OrderPanel extends JPanel {
 		return totalPanel;
 	}
 	
+	public JScrollPane getScrollPane() {
+		return scrollPane;
+	}
+
 	public void clean() {
 		totalPanel.setTotal(0.0f);
 		productOrderListPanel.clean();

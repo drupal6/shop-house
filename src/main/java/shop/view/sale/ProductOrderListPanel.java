@@ -1,9 +1,13 @@
 package shop.view.sale;
 
 import java.awt.Color;
+import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -18,8 +22,6 @@ public class ProductOrderListPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	
-	private TotalPanel totalPanel;
-	
 	private AtomicInteger indexAtom = new AtomicInteger(0);
 	
 	private Map<Integer, ProductOrderPanel> map = new HashMap<Integer, ProductOrderPanel>();
@@ -30,12 +32,10 @@ public class ProductOrderListPanel extends JPanel {
 	
 	private int select = 0;
 	
-	public ProductOrderListPanel(TotalPanel totalPanel) {
+	public ProductOrderListPanel() {
 		setBackground(new Color(240, 240, 240));
 		layout = new GroupLayout(this);
 		this.setLayout(layout);
-		
-		this.totalPanel = totalPanel;
 		
 		GroupLayout.SequentialGroup hGroup = layout.createSequentialGroup();
 		hpGroup = layout.createParallelGroup();
@@ -61,10 +61,14 @@ public class ProductOrderListPanel extends JPanel {
 		});
 		map.put(index, productPanel);
 		hpGroup.addComponent(productPanel);
-		vGroup.addGap(5);
 		vGroup.addGroup(layout.createParallelGroup().addComponent(productPanel));
 		updateTotal();
 		select(index);
+//		JScrollBar jScrollBar = SaleFrame.getInst().getOrderPanel().getScrollPane().getVerticalScrollBar();//获得垂直滚动条  
+//        jScrollBar.setValue(jScrollBar.getMaximum());//设置垂直滚动条位置  
+		Point p = new Point();
+		p.setLocation(0, SaleFrame.getInst().getOrderPanel().getProductOrderListPanel().getPreferredSize().getHeight());
+		SaleFrame.getInst().getOrderPanel().getScrollPane().getViewport().setViewPosition(p);
 	}
 	
 	public void add() {
@@ -125,10 +129,26 @@ public class ProductOrderListPanel extends JPanel {
 			return;
 		}
 		map.remove(productOrderPanel.getIndex());
-		if(productOrderPanel.getIndex() == select) {
-			select = 0;
-		}
 		remove(productOrderPanel);
+		if(productOrderPanel.getIndex() == select) {
+			List<Integer> indexList = new ArrayList<Integer>(map.keySet());
+			Collections.sort(indexList);
+			int preIndex = 0;
+			int nextIndex = 0;
+			for(Integer i : indexList) {
+				if(i >  select) {
+					nextIndex = i;
+					break;
+				}else if(i < select) {
+					preIndex = Math.max(preIndex, i);
+				}
+			}
+			if(nextIndex > 0) {
+				select(nextIndex);
+			}else {
+				select(preIndex);
+			}
+		}
 		updateTotal();
 		updateUI();
 	}
@@ -161,7 +181,7 @@ public class ProductOrderListPanel extends JPanel {
 		for(ProductOrderPanel productOrderPanel : map.values()) {
 			text += productOrderPanel.getNum() * productOrderPanel.getOutPrice();
 		}
-		totalPanel.setTotal(text);
+		SaleFrame.getInst().getOrderPanel().getTotalPanel().setTotal(text);
 	}
 	
 	public void clean() {
