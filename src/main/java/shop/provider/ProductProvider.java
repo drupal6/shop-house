@@ -9,8 +9,7 @@ import java.util.Map;
 import java.util.Vector;
 
 import shop.beam.Product;
-import shop.beam.ProductType;
-import shop.beam.ProductUnit;
+import shop.beam.TreeNode;
 import shop.dao.DaoFactory;
 
 /**
@@ -105,6 +104,15 @@ public class ProductProvider {
 			 }
 		 }
 		return null;
+	}
+	
+	public List<TreeNode> getTreeNode(int productType) {
+		List<TreeNode> ret = new ArrayList<TreeNode>();
+		 List<Product> list = list(productType);
+		 for(Product product : list) {
+			 ret.add(new TreeNode(product.getId(), 3, product.getName()));
+		 }
+		 return ret;
 	}
 	
 	private static  Vector<String> columnNameV = new Vector<String>();

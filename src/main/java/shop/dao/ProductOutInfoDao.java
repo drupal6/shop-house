@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,6 +64,47 @@ public class ProductOutInfoDao extends BaseDao {
 		String sql = "select * from t_product_out_info where outId=?;";
 		Map<Integer, DbParameter> param = new HashMap<Integer, DbParameter>();
 		param.put(1, new DbParameter(Types.INTEGER, orderId));
+		PreparedStatement pstmt = execQuery(sql, param);
+		ResultSet rs = null;
+		List<ProductOutInfo> infos = null;
+		if (pstmt != null) {
+			infos = new ArrayList<ProductOutInfo>();
+			try {
+				rs = pstmt.executeQuery();
+				while (rs.next()) {
+					infos.add(resultToBean(rs));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				closeConn(pstmt, rs);
+			}
+		}
+		return infos;
+	}
+	
+	public List<ProductOutInfo> getProductOutInfoList(int typeId, int productId, Date startTime, Date endTime) {
+		String sql = "";
+		Map<Integer, DbParameter> param = new HashMap<Integer, DbParameter>();
+		if(productId > 0) {
+			sql = "select p.id,p.productId,p.userId,p.num,p.price,p.price1,p.opTime,p.state,p.returnNum,p.returnTime,p.returnMark,p.outId "
+					+ "from t_product_out_info p, t_out_order o where p.outId=o.id and o.opTime > ? and o.opTime < ? and p.productId=?;";
+			param.put(1, new DbParameter(Types.TIMESTAMP, startTime));
+			param.put(2, new DbParameter(Types.TIMESTAMP, endTime));
+			param.put(3, new DbParameter(Types.INTEGER, productId));
+		} else if(typeId > 0) {
+			sql = "select p.id,p.productId,p.userId,p.num,p.price,p.price1,p.opTime,p.state,p.returnNum,p.returnTime,p.returnMark,p.outId "
+					+ "from t_product_out_info p, t_out_order o, t_product t where p.outId=o.id and o.opTime > ? and o.opTime < ? and "
+					+ "p.productId = t.id and t.productType = ?;";
+			param.put(1, new DbParameter(Types.TIMESTAMP, startTime));
+			param.put(2, new DbParameter(Types.TIMESTAMP, endTime));
+			param.put(3, new DbParameter(Types.TIMESTAMP, typeId));
+		}else {
+			sql = "select p.id,p.productId,p.userId,p.num,p.price,p.price1,p.opTime,p.state,p.returnNum,p.returnTime,p.returnMark,p.outId "
+					+ "from t_product_out_info p, t_out_order o where p.outId=o.id and o.opTime > ? and o.opTime < ?;";
+			param.put(1, new DbParameter(Types.TIMESTAMP, startTime));
+			param.put(2, new DbParameter(Types.TIMESTAMP, endTime));
+		}
 		PreparedStatement pstmt = execQuery(sql, param);
 		ResultSet rs = null;
 		List<ProductOutInfo> infos = null;

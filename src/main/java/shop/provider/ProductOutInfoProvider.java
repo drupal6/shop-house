@@ -1,5 +1,6 @@
 package shop.provider;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 
@@ -56,6 +57,10 @@ public class ProductOutInfoProvider {
 	
 	public List<ProductOutInfo> queryByOrderId(int orderId) {
 		return DaoFactory.getInst().getProductOutInfoDao().getProductOutInfoList(orderId);
+	}
+	
+	public List<ProductOutInfo> queryByOrder(int typeId, int productId, Date startTime, Date endTime) {
+		return DaoFactory.getInst().getProductOutInfoDao().getProductOutInfoList(typeId, productId, startTime, endTime);
 	}
 	
 	public static Vector<String> getTitle() {

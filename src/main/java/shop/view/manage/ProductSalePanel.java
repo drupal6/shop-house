@@ -3,8 +3,8 @@ package shop.view.manage;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
@@ -23,8 +23,11 @@ import javax.swing.SwingConstants;
 import shop.Constance;
 import shop.DateChooser;
 import shop.beam.OutOrder;
+import shop.beam.ProductOutInfo;
 import shop.beam.TreeNode;
+import shop.provider.ProductOutInfoProvider;
 import shop.provider.ProductOutOrderProvider;
+import shop.provider.ProductProvider;
 import shop.provider.ProductTypeProvider;
 
 public class ProductSalePanel extends JPanel{
@@ -86,9 +89,15 @@ public class ProductSalePanel extends JPanel{
 		for(TreeNode tn : typeList) {
 			typeNode.addItem(tn);
 		}
+		typeNode.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				typeItemSelect();
+			}
+		});
 		productLabel = new JLabel("商品:");
 		productLabel.setFont(Constance.font21);
 		productNode = new JComboBox();
+		productNode.addItem(new TreeNode(0, 3, ""));
 		productNode.setFont(Constance.font21);
 		
 		queryButton = new JButton("查询");
@@ -154,7 +163,7 @@ public class ProductSalePanel extends JPanel{
 		bg.add(tomonthRadioButton);
 		bg.add(toyearRadioButton);
 		
-		orderNumNameLabel = new JLabel("单数:");
+		orderNumNameLabel = new JLabel("条数:");
 		orderNumNameLabel.setFont(Constance.font21);
 		orderNumLabel = new JLabel("0");
 		orderNumLabel.setFont(Constance.font21);
@@ -245,16 +254,8 @@ public class ProductSalePanel extends JPanel{
 	        );
 	        
         secondPanel = new JPanel();
-    	table = new MyTable(ProductOutOrderProvider.getTitle(), ProductOutOrderProvider.getListValue(null), 500, 300);
+    	table = new MyTable(ProductOutInfoProvider.getTitle(), ProductOutInfoProvider.getListValue(null), 500, 300);
 		table.getTable().setFont(Constance.font21);
-		table.getTable().addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				if(e.getClickCount() == 2){
-					tableSelectListener();
-				}
-			}
-		});
 		
 		GroupLayout tablePanelLayout = new GroupLayout(secondPanel);
 		secondPanel.setLayout(tablePanelLayout);
@@ -282,6 +283,8 @@ public class ProductSalePanel extends JPanel{
 	
 	public void reset() {
 		todayRadioButton.setSelected(true);
+		typeNode.setSelectedIndex(0);
+		productNode.setSelectedIndex(0);
 		radioButtonSelect();
 	}
 	
@@ -318,35 +321,33 @@ public class ProductSalePanel extends JPanel{
 		endTimeField.setText(endTime);
 	}
 	
-	private void tableSelectListener() {
-		int selectRow = table.getTable().getSelectedRow();
-		if(selectRow == -1) {
-			return;
+	private void typeItemSelect() {
+		TreeNode treeNode = (TreeNode) typeNode.getSelectedItem();
+		productNode.removeAllItems();
+		productNode.addItem(new TreeNode(0, 3, ""));
+		if(treeNode.getId() > 0) {
+			List<TreeNode> nodeList = ProductProvider.getInst().getTreeNode(treeNode.getId());
+			for(TreeNode node : nodeList) {
+				productNode.addItem(node);
+			}
 		}
-		int orderId = (Integer) table.getTable().getValueAt(selectRow, 0);
-		OutOrder outOrder = ProductOutOrderProvider.getInst().query(orderId);
-		if(outOrder != null) {
-			ProductOutInfoDialog dialog = new ProductOutInfoDialog(orderId, "销售单详细");
-			dialog.setVisible(true);
-		}
+		productNode.updateUI();
 	}
 	
 	private void queryButton() {
-		String ustr = "";
-//		String ustr = typeNode.getText().trim();
-		int uid = 0;
-		if(ustr != null && false == ustr.isEmpty()) {
-			uid = Integer.parseInt(ustr);
-		}
+		TreeNode treeNodeType = (TreeNode) typeNode.getSelectedItem();
+		TreeNode treeNodeProduct = (TreeNode) productNode.getSelectedItem();
+		int productTypeId = treeNodeType.getId();
+		int productId = treeNodeProduct.getId();
 		try {
 			Date startDate = Constance.dateFormt1.parse(startTimeField.getText().trim());
 			Date endDate = Constance.dateFormt1.parse(endTimeField.getText().trim());
-			List<OutOrder> list = ProductOutOrderProvider.getInst().query(startDate, endDate, uid);
-			table.replace(ProductOutOrderProvider.getTitle(), ProductOutOrderProvider.getListValue(list));
+			List<ProductOutInfo> list = ProductOutInfoProvider.getInst().queryByOrder(productTypeId, productId, startDate, endDate);
+			table.replace(ProductOutInfoProvider.getTitle(), ProductOutInfoProvider.getListValue(list));
 			orderNumLabel.setText(list.size()+"");
 			float cash = 0.0f;
-			for(OutOrder oo : list) {
-				cash += oo.getCash();
+			for(ProductOutInfo oo : list) {
+				cash += oo.getNum() * oo.getPrice1();
 			}
 			cashNumLabel.setText(cash+"");
 		} catch (ParseException e) {
