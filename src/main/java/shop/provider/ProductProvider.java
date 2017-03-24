@@ -47,6 +47,15 @@ public class ProductProvider {
 		});
 		return ret;
 	}
+	
+	public String getNameById(int id) {
+		Product product = get(id);
+		if(product == null) {
+			return "";
+		}
+		return product.getName();
+	}
+	
 	public List<Product> list(int productType) {
 		if(productType == 0) {
 			return list();
@@ -104,6 +113,15 @@ public class ProductProvider {
 			 }
 		 }
 		return null;
+	}
+	
+	public void productTotalChange(int id, float num) {
+		Product product = get(id);
+		if(product == null) {
+			return;
+		}
+		product.setStock(product.getStock() + num);
+		DaoFactory.getInst().getProductDao().updateProduct(product);
 	}
 	
 	public List<TreeNode> getTreeNode(int productType) {

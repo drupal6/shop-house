@@ -140,10 +140,10 @@ public class ProductOutInfoDao extends BaseDao {
 		productOption.setNum(rs.getFloat("num"));
 		productOption.setPrice(rs.getFloat("price"));
 		productOption.setPrice1(rs.getFloat("price1"));
-		productOption.setOpTime(rs.getDate("opTime"));
+		productOption.setOpTime(rs.getTimestamp("opTime"));
 		productOption.setState(rs.getInt("state"));
 		productOption.setReturnNum(rs.getFloat("returnNum"));
-		productOption.setReturnTime(rs.getDate("returnTime"));
+		productOption.setReturnTime(rs.getTimestamp("returnTime"));
 		productOption.setReturnMark(rs.getString("returnMark"));
 		productOption.setOutId(rs.getInt("outId"));
 		return productOption;

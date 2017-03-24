@@ -92,7 +92,7 @@ public class ProductInInfoDao extends BaseDao {
 		productOption.setNum(rs.getFloat("num"));
 		productOption.setNum1(rs.getFloat("num1"));
 		productOption.setPrice(rs.getFloat("price"));
-		productOption.setOpTime(rs.getDate("opTime"));
+		productOption.setOpTime(rs.getTimestamp("opTime"));
 		productOption.setState(rs.getInt("state"));
 		productOption.setRemark(rs.getString("remark"));
 		productOption.setInId(rs.getInt("inId"));

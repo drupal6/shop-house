@@ -23,6 +23,7 @@ import shop.beam.Product;
 import shop.beam.ProductOutInfo;
 import shop.provider.ProductOutInfoProvider;
 import shop.provider.ProductOutOrderProvider;
+import shop.provider.ProductProvider;
 
 public class SettlePanel extends JPanel{
 
@@ -314,6 +315,8 @@ public class SettlePanel extends JPanel{
 				outInfo.setOutId(order.getId());
 				outInfo.setState(ORDERSTATE.PAY.ordinal());
 				ProductOutInfoProvider.getInst().add(outInfo);
+				
+				ProductProvider.getInst().productTotalChange(product.getId(), -orderPanel.getNum());;
 			}
 		}
 		cannel();

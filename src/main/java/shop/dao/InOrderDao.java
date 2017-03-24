@@ -72,7 +72,7 @@ public class InOrderDao extends BaseDao {
 		InOrder inOrder = new InOrder();
 		inOrder.setId(rs.getInt("id"));
 		inOrder.setUserId(rs.getInt("userId"));
-		inOrder.setOpTime(rs.getDate("opTime"));
+		inOrder.setOpTime(rs.getTimestamp("opTime"));
 		inOrder.setCash(rs.getFloat("cash"));
 		inOrder.setMark(rs.getString("mark"));
 		inOrder.setState(rs.getInt("state"));

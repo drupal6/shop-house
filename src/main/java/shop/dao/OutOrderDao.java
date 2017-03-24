@@ -98,7 +98,7 @@ public class OutOrderDao extends BaseDao {
 		OutOrder outOrder = new OutOrder();
 		outOrder.setId(rs.getInt("id"));
 		outOrder.setUserId(rs.getInt("userId"));
-		outOrder.setOpTime(rs.getDate("opTime"));
+		outOrder.setOpTime(rs.getTimestamp("opTime"));
 		outOrder.setCash(rs.getFloat("cash"));
 		outOrder.setMark(rs.getString("mark"));
 		outOrder.setState(rs.getInt("state"));

@@ -86,7 +86,7 @@ public class ProductOutInfoProvider {
 		}
 		Vector rowV = new Vector();
 		rowV.add(outInfo.getId());
-		rowV.add(outInfo.getProductId());
+		rowV.add(ProductProvider.getInst().getNameById(outInfo.getProductId()));
 		rowV.add(outInfo.getNum());
 		rowV.add(outInfo.getPrice());
 		rowV.add(outInfo.getPrice1());
