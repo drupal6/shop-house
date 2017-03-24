@@ -55,6 +55,12 @@ public enum SaleOptionEnum {
 			SaleFrame.getInst().dialogPanelAddPanel(new ChannePanel(productOrderPanel.getOutPrice(), 2));
 		}
 	}, 	//改价
+	DISCARD("费单", Color.WHITE, Color.BLACK){
+		@Override
+		public void clickHandle() {
+			SaleFrame.getInst().getOrderPanel().clean();
+		}
+	},  //费单
 	;
 	
 	private String name;
