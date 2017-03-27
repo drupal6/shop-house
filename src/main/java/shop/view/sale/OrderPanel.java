@@ -23,7 +23,6 @@ public class OrderPanel extends JPanel {
 	private JScrollPane scrollPane;
 	
 	public OrderPanel() {
-		
 		searchPanel = new JPanel();
 		searchPanel.setBackground(new Color(47, 47, 47));
 		totalPanel = new TotalPanel("asdfa");

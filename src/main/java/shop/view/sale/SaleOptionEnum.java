@@ -8,9 +8,9 @@ public enum SaleOptionEnum {
 		@Override
 		public void clickHandle() {
 			float total = SaleFrame.getInst().getOrderPanel().getTotalPanel().getTotal();
-//			if(total == 0) {
-//				return;
-//			}
+			if(total == 0) {
+				return;
+			}
 			SaleFrame.getInst().setLayerPanel(200, 300);
 			SaleFrame.getInst().dialogPanelAddPanel(new SettlePanel(total));
 		}
@@ -55,12 +55,24 @@ public enum SaleOptionEnum {
 			SaleFrame.getInst().dialogPanelAddPanel(new ChannePanel(productOrderPanel.getOutPrice(), 2));
 		}
 	}, 	//改价
-	DISCARD("费单", Color.WHITE, Color.BLACK){
+	DISCARD("费单", Color.RED, Color.WHITE){
 		@Override
 		public void clickHandle() {
 			SaleFrame.getInst().getOrderPanel().clean();
 		}
 	},  //费单
+	QUERY("查单", Color.WHITE, Color.BLACK){
+		@Override
+		public void clickHandle() {
+			SaleFrame.getInst().setLayerPanel(200, 300);
+			SaleFrame.getInst().dialogPanelAddPanel(new QueryOrderPanel());
+		}
+	},  //查单
+	TAKEMONEY("取钱", Color.WHITE, Color.BLACK){
+		@Override
+		public void clickHandle() {
+		}
+	},  //取钱
 	;
 	
 	private String name;

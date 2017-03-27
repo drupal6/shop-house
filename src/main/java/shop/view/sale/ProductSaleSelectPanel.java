@@ -5,6 +5,8 @@ import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -45,6 +47,11 @@ public class ProductSaleSelectPanel extends JPanel {
 		titleScrollPane = new JScrollPane(titlePanel);
 		titleScrollPane.setBorder(null);
 		titleScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		titleScrollPane.addMouseWheelListener(new MouseWheelListener() {
+			public void mouseWheelMoved(MouseWheelEvent e) {
+				scrollPaneScroll(e.getWheelRotation() * 20);
+			}
+		});
 		
 		preButton = new JButton("<");
 		preButton.setFont(Constance.fontB35);
@@ -82,7 +89,6 @@ public class ProductSaleSelectPanel extends JPanel {
 		nextButton.setBorder(null);
 		nextButton.addMouseListener(new MouseListener() {
 			public void mouseReleased(MouseEvent e) {
-				System.out.println("mouseReleased");
 				if(timer != null) {
 					timer.cancel();
 					timer = null;
@@ -90,7 +96,6 @@ public class ProductSaleSelectPanel extends JPanel {
 			}
 			
 			public void mousePressed(MouseEvent e) {
-				System.out.println("mousePressed");
 				if(timer != null) {
 					timer.cancel();
 				}

@@ -140,10 +140,18 @@ public class ChannePanel extends JPanel{
         GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
         GroupLayout.SequentialGroup hGroup = layout.createSequentialGroup();
-        hGroup.addGroup(layout.createParallelGroup().addComponent(havePanel, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE));
+        hGroup.addGap(10);
+        hGroup.addGroup(layout.createParallelGroup()
+        		.addComponent(havePanel, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
+    		);
+        hGroup.addGap(10);
         layout.setHorizontalGroup(hGroup);
         GroupLayout.SequentialGroup vGroup = layout.createSequentialGroup();
-        vGroup.addGroup(layout.createParallelGroup().addComponent(havePanel, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE));
+        vGroup.addGap(10);
+        vGroup.addGroup(layout.createParallelGroup()
+        		.addComponent(havePanel, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
+    		);
+        vGroup.addGap(10);
         layout.setVerticalGroup(vGroup);
 	}
 	
