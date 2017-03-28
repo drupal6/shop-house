@@ -6,6 +6,8 @@ import java.util.Vector;
 
 import shop.Constance;
 import shop.beam.OutOrder;
+import shop.beam.Product;
+import shop.beam.ProductOutInfo;
 import shop.dao.DaoFactory;
 
 /**
@@ -56,6 +58,29 @@ public class ProductOutOrderProvider {
 	
 	public static Vector<String> getTitle() {
 		return columnNameV;
+	}
+	
+	public boolean delOrder(int orderId, int userId) {
+		OutOrder outOrder = query(orderId);
+		if(outOrder == null || outOrder.getState() == 2) {
+			return true;
+		}
+		outOrder.setState(2);
+		outOrder.setCash(0);
+		DaoFactory.getInst().getOutOrderDao().updateOutOrder(outOrder);
+		
+		Date now = new Date();
+		
+		List<ProductOutInfo> productOutInfoList = ProductOutInfoProvider.getInst().queryByOrderId(orderId);
+		for(ProductOutInfo productInfo : productOutInfoList) {
+			productInfo.setState(2);
+			productInfo.setUserId(userId);
+			productInfo.setOpTime(now);
+			productInfo.setReturnNum(productInfo.getNum());
+			ProductOutInfoProvider.getInst().update(productInfo);
+			ProductProvider.getInst().productTotalChange(productInfo.getProductId(), productInfo.getNum());
+		}
+		return true;
 	}
 	
 	public static Vector getListValue(List<OutOrder> list) {

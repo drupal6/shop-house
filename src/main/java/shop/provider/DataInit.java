@@ -14,7 +14,7 @@ public class DataInit {
 	
 	public boolean initConnect() {
 		dbpoolMgr = DBPoolMgr.getInst();
-		dbpoolMgr.init("192.168.2.120", 3306, "shop", "root", "123456", 3, 2);
+		dbpoolMgr.init("192.168.2.120", 3306, "shop", "root", "123456", 30, 10);
 		return true;
 	}
 	

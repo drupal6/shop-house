@@ -1,5 +1,6 @@
 package shop.view.sale;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
@@ -52,6 +53,7 @@ public class SaleFrame extends JFrame {
 		
 		mainPanel = new JPanel();
 		mainPanel.setSize(dimension);
+		mainPanel.setBackground(new Color(47, 47, 47));
 		
 		dialogPanel = new JPanel(); 
 		dialogPanel.setSize(dimension);
@@ -70,6 +72,7 @@ public class SaleFrame extends JFrame {
 		GroupLayout.SequentialGroup hGroup = layout.createSequentialGroup();
 		hGroup.addGroup(layout.createParallelGroup().addComponent(orderPanel, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE));
 		hGroup.addGroup(layout.createParallelGroup().addComponent(optionPanel, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE));
+		hGroup.addGap(10);
 		hGroup.addGroup(layout.createParallelGroup().addComponent(productSelectPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE));
 		layout.setHorizontalGroup(hGroup);
 		

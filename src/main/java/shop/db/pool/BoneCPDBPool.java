@@ -31,7 +31,7 @@ public class BoneCPDBPool implements IDBPool {
 		config.setUsername(dbUserName);
 		config.setPassword(dbPassWord);
 
-		int minConn = 5;
+		int minConn = 2;
 		// 分区数 ，默认值2，最小1，推荐3-4，视应用而定
 		config.setPartitionCount(fallow);
 		// 每个分区最小的连接数
@@ -43,7 +43,7 @@ public class BoneCPDBPool implements IDBPool {
 		// 每次去拿数据库连接的时候一次性要拿几个,默认值：2
 		config.setAcquireIncrement(5);
 		// 设置重新获取连接的次数间隔时间。这个参数默认为7000，单位：毫秒。如果小于等于0，BoneCP将设置为1000
-		config.setAcquireRetryDelayInMs(3000);
+		config.setAcquireRetryDelayInMs(1000);
 		// 设置重新获取连接的次数。这个参数默认为5
 		config.setAcquireRetryAttempts(5);
 		// 设置connection的空闲存活时间。这个参数默认为60，单位：分钟。设置为0该功能失效。通过ConnectionTesterThread观察每个分区中的connection，如果这个connection距离最后使用的时间大于这个参数就会被清除。

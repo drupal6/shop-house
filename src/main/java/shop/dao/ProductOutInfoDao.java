@@ -82,6 +82,26 @@ public class ProductOutInfoDao extends BaseDao {
 		}
 		return infos;
 	}
+	public ProductOutInfo getProductOutInfo(int id) {
+		String sql = "select * from t_product_out_info where id=?;";
+		Map<Integer, DbParameter> param = new HashMap<Integer, DbParameter>();
+		param.put(1, new DbParameter(Types.INTEGER, id));
+		PreparedStatement pstmt = execQuery(sql, param);
+		ResultSet rs = null;
+		if (pstmt != null) {
+			try {
+				rs = pstmt.executeQuery();
+				while (rs.next()) {
+					return resultToBean(rs);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				closeConn(pstmt, rs);
+			}
+		}
+		return null;
+	}
 	
 	public List<ProductOutInfo> getProductOutInfoList(int typeId, int productId, Date startTime, Date endTime) {
 		String sql = "";

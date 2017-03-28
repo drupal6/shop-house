@@ -84,3 +84,11 @@ CREATE TABLE `t_user` (
   `state` int(11) DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+CREATE TABLE `t_cash` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `opTime` datetime DEFAULT NULL,
+  `uid` int(11) DEFAULT NULL,
+  `cash` float(20) DEFAULT NULL,
+  `mark` varchar(1024) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;

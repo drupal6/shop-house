@@ -3,12 +3,16 @@ package shop.view.sale;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 
 import shop.Constance;
 import shop.beam.OutOrder;
@@ -18,6 +22,11 @@ import shop.view.manage.MyTable;
 
 public class QueryOrderPanel extends JPanel{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private JPanel titlePanel;
 	private JLabel titleLable;
 	private JButton backButton;
@@ -25,10 +34,8 @@ public class QueryOrderPanel extends JPanel{
 	private JPanel productListPnale;
 	private MyTable table1;
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	
+	private JPopupMenu jp;
 	
 	public QueryOrderPanel() {
 		this.setBackground(new Color(64, 64, 64));
@@ -66,13 +73,41 @@ public class QueryOrderPanel extends JPanel{
 	                )
 	        );
 				
-		
 		orderListPanel = new OrderListPanel(this);
 		
 		productListPnale = new JPanel();
 		
 		table1 = new MyTable(ProductOutInfoProvider.getTitle(), null, 800, 500);
 		productListPnale.add(table1);
+		table1.getTable().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(e.getButton() == MouseEvent.BUTTON1){
+					jp.show(table1.getTable(), e.getX(),e.getY());
+				}
+			}
+		});
+		jp = new JPopupMenu();
+		JMenuItem delMenuItem = new JMenuItem("退货");
+		delMenuItem.setFont(Constance.font22);
+		delMenuItem.setBackground(new Color(226, 158, 67));
+		delMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int selectRow = getMyTable().getTable().getSelectedRow();
+				if(selectRow == -1) {
+					return;
+				}
+				int id = (Integer) getMyTable().getTable().getValueAt(selectRow, 0);
+				ProductOutInfo productOutInfo = ProductOutInfoProvider.getInst().getProductOutInfo(id);
+				if(productOutInfo == null || productOutInfo.getNum() <= 0) {
+					return;
+				}
+				ReturnProductDialog ReturnProductDialog = new ReturnProductDialog("退货", productOutInfo, getMyTable());
+				ReturnProductDialog.setVisible(true);
+				
+			}
+		});
+		jp.add(delMenuItem);
 		
 		GroupLayout mainLayout = new GroupLayout(this);
         this.setLayout(mainLayout);
@@ -103,7 +138,15 @@ public class QueryOrderPanel extends JPanel{
 	}
 	
 	public void replaceProduct(OutOrder outOrder) {
-		List<ProductOutInfo> list = ProductOutInfoProvider.getInst().queryByOrderId(outOrder.getId());
-		table1.replace(ProductOutInfoProvider.getTitle(), ProductOutInfoProvider.getInst().getListValue(list));
+		if(outOrder != null) {
+			List<ProductOutInfo> list = ProductOutInfoProvider.getInst().queryByOrderId(outOrder.getId());
+			table1.replace(ProductOutInfoProvider.getTitle(), ProductOutInfoProvider.getInst().getListValue(list));
+		}else {
+			table1.replace(ProductOutInfoProvider.getTitle(), null);
+		}
+	}
+	
+	public MyTable getMyTable() {
+		return table1;
 	}
 }

@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 
@@ -38,6 +39,8 @@ public class OrderListPanel extends JPanel{
 	JSeparator s1 = new JSeparator();
     
 	private OrderInfoListPanel secondPanel;
+	private JScrollPane scrollPane;
+	
 	private QueryOrderPanel queryOrderPanel;
 	
 	public OrderListPanel(QueryOrderPanel queryOrderPanel) {
@@ -115,6 +118,8 @@ public class OrderListPanel extends JPanel{
         );
 		
 		secondPanel = new OrderInfoListPanel(queryOrderPanel);
+		scrollPane = new JScrollPane(secondPanel);
+		scrollPane.getVerticalScrollBar().setUnitIncrement(20);
 		
 		GroupLayout mainLayout = new GroupLayout(this);
 		this.setLayout(mainLayout);
@@ -122,7 +127,7 @@ public class OrderListPanel extends JPanel{
 		mainHgroup.addGroup(mainLayout.createParallelGroup()
 					.addComponent(queryPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
 					.addComponent(s1, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
-					.addComponent(secondPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
 				);
 		mainLayout.setHorizontalGroup(mainHgroup);
 		
@@ -134,7 +139,7 @@ public class OrderListPanel extends JPanel{
 				.addComponent(s1, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
 			);
 		mainVgroup.addGroup(mainLayout.createParallelGroup()
-				.addComponent(secondPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
+				.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 420, GroupLayout.PREFERRED_SIZE)
 			);
 		mainLayout.setVerticalGroup(mainVgroup);
 		
@@ -162,6 +167,9 @@ public class OrderListPanel extends JPanel{
 			List<OutOrder> list = ProductOutOrderProvider.getInst().query(startDate, endDate, 0);
 			secondPanel.clean();
 			for(OutOrder outOrder : list) {
+				if(outOrder.getState() == 2) {
+					continue;
+				}
 				secondPanel.addOutOrder(outOrder);
 			}
 		} catch (ParseException e) {

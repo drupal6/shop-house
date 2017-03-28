@@ -43,7 +43,7 @@ public class OutOrderDao extends BaseDao {
 		param.put(3, new DbParameter(Types.FLOAT, outOrder.getCash()));
 		param.put(4, new DbParameter(Types.VARCHAR, outOrder.getMark()));
 		param.put(5, new DbParameter(Types.INTEGER, outOrder.getState()));
-		param.put(8, new DbParameter(Types.INTEGER, outOrder.getId()));
+		param.put(6, new DbParameter(Types.INTEGER, outOrder.getId()));
 		boolean result = execNoneQuery(sql, param) > -1;
 		return result;
 	}

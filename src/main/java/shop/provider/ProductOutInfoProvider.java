@@ -63,6 +63,10 @@ public class ProductOutInfoProvider {
 		return DaoFactory.getInst().getProductOutInfoDao().getProductOutInfoList(typeId, productId, startTime, endTime);
 	}
 	
+	public ProductOutInfo getProductOutInfo(int id) {
+		return DaoFactory.getInst().getProductOutInfoDao().getProductOutInfo(id);
+	}
+	
 	public static Vector<String> getTitle() {
 		return columnNameV;
 	}
