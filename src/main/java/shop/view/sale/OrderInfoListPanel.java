@@ -112,7 +112,7 @@ public class OrderInfoListPanel extends JPanel {
 		if(delOrderInfo == null) {
 			return;
 		}
-		if(ProductOutOrderProvider.getInst().delOrder(delOrderInfo.getOutOrder().getId(), 0)) {
+		if(ProductOutOrderProvider.getInst().delOrder(delOrderInfo.getOutOrder().getId(), SaleFrame.getInst().getUser().getId())) {
 			map.remove(delOrderInfo.getOutOrder().getId());
 			remove(delOrderInfo);
 			if(delOrderInfo.getOutOrder().getId() == selectId) {

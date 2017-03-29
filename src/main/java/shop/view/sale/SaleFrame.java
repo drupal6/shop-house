@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
+import shop.beam.User;
 import shop.provider.DataInit;
 
 public class SaleFrame extends JFrame {
@@ -18,6 +19,8 @@ public class SaleFrame extends JFrame {
 	/**
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	private User user = new User();
 	
 	private JLayeredPane jlp;
 	
@@ -129,5 +132,9 @@ public class SaleFrame extends JFrame {
 		DataInit.getInst().initData();
 		SaleFrame.getInst().init();
 	}
-	
+
+
+	public User getUser() {
+		return user;
+	}
 }

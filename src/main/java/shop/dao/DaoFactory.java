@@ -19,6 +19,8 @@ public class DaoFactory {
 	private ProductInInfoDao productInInfoDao = new ProductInInfoDao();
 	
 	private UserDao userDao = new UserDao();
+	
+	private CashDao cashDao = new CashDao();
 
 	public static DaoFactory getInstance() {
 		return instance;
@@ -55,5 +57,8 @@ public class DaoFactory {
 	public UserDao getUserDao() {
 		return userDao;
 	}
-	
+
+	public CashDao getCashDao() {
+		return cashDao;
+	}
 }

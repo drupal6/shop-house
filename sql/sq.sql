@@ -87,8 +87,9 @@ CREATE TABLE `t_user` (
 CREATE TABLE `t_cash` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `opTime` datetime DEFAULT NULL,
+  `type` int(11) DEFAULT NULL,
   `uid` int(11) DEFAULT NULL,
-  `cash` float(20) DEFAULT NULL,
+  `num` float(20) DEFAULT NULL,
   `mark` varchar(1024) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;

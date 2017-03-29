@@ -60,14 +60,12 @@ public class ProductSaleSelectPanel extends JPanel {
 		preButton.setBorder(null);
 		preButton.addMouseListener(new MouseListener() {
 			public void mouseReleased(MouseEvent e) {
-				System.out.println("mouseReleased");
 				if(timer != null) {
 					timer.cancel();
 					timer = null;
 				}
 			}
 			public void mousePressed(MouseEvent e) {
-				System.out.println("mousePressed");
 				if(timer != null) {
 					timer.cancel();
 				}

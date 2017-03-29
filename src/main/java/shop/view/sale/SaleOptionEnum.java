@@ -68,9 +68,11 @@ public enum SaleOptionEnum {
 			SaleFrame.getInst().dialogPanelAddPanel(new QueryOrderPanel());
 		}
 	},  //查单
-	TAKEMONEY("取钱", Color.WHITE, Color.BLACK){
+	TAKEMONEY("零钱", Color.WHITE, Color.BLACK){
 		@Override
 		public void clickHandle() {
+			SaleFrame.getInst().setLayerPanel(200, 300);
+			SaleFrame.getInst().dialogPanelAddPanel(new CashPanel());
 		}
 	},  //取钱
 	;

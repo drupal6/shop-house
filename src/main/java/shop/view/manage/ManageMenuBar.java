@@ -22,6 +22,10 @@ public class ManageMenuBar extends JMenuBar {
 	private JMenuItem querySaleOrderMenuItem;
 	private JMenuItem queryPorductSaleMenuItem;
 	
+	private JMenu cashMenu;
+	private JMenuItem saveCashMenuItem;
+	private JMenuItem takeCashMenuItem;
+	
 	public ManageMenuBar() {
 		this.add(createBaseMenu());
 		this.add(createSaleMenu());

@@ -303,7 +303,7 @@ public class ReturnProductDialog extends JDialog {
 			if(num == productOutInfo.getNum()) {
 				productOutInfo.setState(2);
 			}
-			productOutInfo.setUserId(0);
+			productOutInfo.setUserId(SaleFrame.getInst().getUser().getId());
 			productOutInfo.setOpTime(new Date());
 			productOutInfo.setNum(productOutInfo.getNum() - num);
 			productOutInfo.setReturnNum(productOutInfo.getReturnNum() + num);

@@ -309,6 +309,7 @@ public class SettlePanel extends JPanel{
 				ProductOutInfo outInfo = new ProductOutInfo();
 				outInfo.setProductId(product.getId());
 				outInfo.setNum(orderPanel.getNum());
+				outInfo.setUserId(SaleFrame.getInst().getUser().getId());
 				outInfo.setPrice(product.getOutPrice());
 				outInfo.setPrice1(orderPanel.getOutPrice());
 				outInfo.setOpTime(now);
