@@ -1,4 +1,4 @@
-package shop.view.sale;
+package shop.view.into;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 import shop.beam.User;
 import shop.provider.DataInit;
 
-public class SaleFrame extends JFrame {
+public class IntoFrame extends JFrame {
 	
 	/**
 	 */
@@ -32,15 +32,15 @@ public class SaleFrame extends JFrame {
 	private OptionPanel optionPanel;
 	private ProductSaleSelectPanel productSelectPanel;
 	
-	private static SaleFrame instance = new SaleFrame();
+	private static IntoFrame instance = new IntoFrame();
 	
-	public static SaleFrame getInst() {
+	public static IntoFrame getInst() {
 		return instance;
 	}
 
 	
 	public void init() {
-		setTitle("销售");
+		setTitle("进货");
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		
@@ -134,7 +134,7 @@ public class SaleFrame extends JFrame {
 		//初始数据
 		DataInit.getInst().initConnect();
 		DataInit.getInst().initData();
-		SaleFrame.getInst().init();
+		IntoFrame.getInst().init();
 	}
 
 

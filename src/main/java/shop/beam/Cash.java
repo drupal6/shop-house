@@ -8,6 +8,7 @@ public class Cash {
 	private Date opTime;
 	private int type;
 	private int uid;
+	//1存进 2取出
 	private float num;
 	private String mark;
 	

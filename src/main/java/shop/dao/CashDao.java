@@ -49,7 +49,6 @@ public class CashDao extends BaseDao {
 	}
 	
 	public List<Cash> getCashList(Date startTime, Date endTime, int type, int uid) {
-		String sql = "select * from t_cash where opTime > ? and opTime < ? and type = ? and uid = ?;";
 		StringBuffer buff = new StringBuffer();
 		buff.append("select * from t_cash");
 		Map<Integer, DbParameter> param = new HashMap<Integer, DbParameter>();
@@ -98,7 +97,7 @@ public class CashDao extends BaseDao {
 			}
 		}
 		buff.append(";");
-		PreparedStatement pstmt = execQuery(sql, param);
+		PreparedStatement pstmt = execQuery(buff.toString(), param);
 		ResultSet rs = null;
 		List<Cash> infos = null;
 		if (pstmt != null) {

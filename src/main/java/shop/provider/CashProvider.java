@@ -2,8 +2,11 @@ package shop.provider;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Vector;
 
+import shop.Constance;
 import shop.beam.Cash;
+import shop.beam.OutOrder;
 import shop.dao.DaoFactory;
 
 /**
@@ -34,4 +37,46 @@ public class CashProvider {
 		return DaoFactory.getInst().getCashDao().getCashList(startTime, endTime, type, uid);
 	}
 	
+	private static  Vector<String> columnNameV = new Vector<String>();
+	static{
+		columnNameV.add("操作时间");
+		columnNameV.add("数量");
+		columnNameV.add("类型");
+		columnNameV.add("操作员");
+		columnNameV.add("备注");
+	}
+	
+	public static Vector<String> getTitle() {
+		return columnNameV;
+	}
+	
+	public static Vector getListValue(List<Cash> list) {
+		Vector vv = new Vector();
+		if(list != null) {
+			for(Cash type : list) {
+				Vector rv = getValue(type);
+				if(rv != null) {
+					vv.add(rv);
+				}
+			}
+		}
+		return vv;
+	}
+	
+	public static Vector getValue(Cash cash) {
+		if(cash == null) {
+			return null;
+		}
+		Vector rowV = new Vector();
+		rowV.add(Constance.dateFormt.format(cash.getOpTime()));
+		rowV.add(cash.getNum());
+		if(cash.getType() == 1) {
+			rowV.add("存");
+		}else {
+			rowV.add("取");
+		}
+		rowV.add(cash.getUid());
+		rowV.add(cash.getMark());
+		return rowV;
+	}
 }

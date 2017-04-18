@@ -22,13 +22,14 @@ public class ManageMenuBar extends JMenuBar {
 	private JMenuItem querySaleOrderMenuItem;
 	private JMenuItem queryPorductSaleMenuItem;
 	
+	
 	private JMenu cashMenu;
-	private JMenuItem saveCashMenuItem;
-	private JMenuItem takeCashMenuItem;
+	private JMenuItem queryCashMenuItem;
 	
 	public ManageMenuBar() {
 		this.add(createBaseMenu());
 		this.add(createSaleMenu());
+		this.add(createCashMenu());
 	}
 	
 	public String getDefaMenuText() {
@@ -109,5 +110,25 @@ public class ManageMenuBar extends JMenuBar {
 		return saleMenu;
 	}
 	
-	
+	/**
+	 * 创建零钱菜单
+	 * @return
+	 */
+	private JMenu createCashMenu() {
+		cashMenu = new JMenu();
+		cashMenu.setText("零钱");
+		cashMenu.setFont(Constance.font24);
+		
+		queryCashMenuItem = new JMenuItem();
+		queryCashMenuItem.setText("零钱查询");
+		queryCashMenuItem.setFont(Constance.font21);
+		queryCashMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ManageFrame.getInst().refreshPanel(queryCashMenuItem.getText(),  new CashQueryPanel(queryCashMenuItem.getText()));
+			}
+		});
+		cashMenu.add(queryCashMenuItem);
+		
+		return cashMenu;
+	}
 }
