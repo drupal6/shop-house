@@ -24,7 +24,7 @@ public class BarcodeSaveToFile implements BarcodeSaveService{
         try {
             if(writer==null){
                 System.out.println("打开文件");
-                writer=new OutputStreamWriter(new FileOutputStream("d:/barcode.txt",true));
+                writer=new OutputStreamWriter(new FileOutputStream("barcode.txt",true));
             }
             writer.write(barcode+"\n");
             writer.flush();

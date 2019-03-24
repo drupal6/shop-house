@@ -60,8 +60,7 @@ public class ScanBarcodeService {
                     }
                 }
                 //交个下一个钩子
-                return lib.CallNextHookEx(hhkKeyBoard, nCode, wParam,
-                        info.getPointer());
+                return lib.CallNextHookEx(hhkKeyBoard, nCode, wParam, info.getPointer());
             }
         };
          
