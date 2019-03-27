@@ -5,7 +5,7 @@ import java.awt.Color;
 import javax.swing.JTextPane;
 
 import shop.Constance;
-import shop.beam.ProductType;
+import shop.bean.ProductType;
 
 public class ProductTypeShowPanel extends JTextPane{
 

@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 
-import shop.beam.ProductOutInfo;
+import shop.bean.ProductOutInfo;
 import shop.dao.DaoFactory;
 
 /**

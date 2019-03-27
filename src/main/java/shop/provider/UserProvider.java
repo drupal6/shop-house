@@ -1,6 +1,6 @@
 package shop.provider;
 
-import shop.beam.User;
+import shop.bean.User;
 import shop.dao.DaoFactory;
 
 /**

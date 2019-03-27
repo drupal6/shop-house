@@ -15,7 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 import shop.Constance;
-import shop.beam.ProductType;
+import shop.bean.ProductType;
 import shop.provider.ProductTypeProvider;
 
 public class ProductTypeDialog extends JDialog{

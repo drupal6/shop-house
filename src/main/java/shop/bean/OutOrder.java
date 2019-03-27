@@ -1,8 +1,8 @@
-package shop.beam;
+package shop.bean;
 
 import java.util.Date;
 
-public class InOrder {
+public class OutOrder {
 	
 	private int id;
 	
@@ -10,10 +10,10 @@ public class InOrder {
 	
 	private Date opTime;  //操作时间
 	
-	private float cash;   //单价金额
+	private float cash;   //金额
 	
 	private String mark;  //订单备注
-	
+	//1结算 2推单
 	private int state;    //订单状体
 	
 	public int getId() {

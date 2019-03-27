@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Vector;
 
 import shop.Constance;
-import shop.beam.OutOrder;
-import shop.beam.Product;
-import shop.beam.ProductOutInfo;
+import shop.bean.OutOrder;
+import shop.bean.Product;
+import shop.bean.ProductOutInfo;
 import shop.dao.DaoFactory;
 
 /**

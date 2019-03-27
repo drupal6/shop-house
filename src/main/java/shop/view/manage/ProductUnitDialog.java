@@ -15,8 +15,8 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 import shop.Constance;
-import shop.beam.ProductType;
-import shop.beam.ProductUnit;
+import shop.bean.ProductType;
+import shop.bean.ProductUnit;
 import shop.provider.ProductTypeProvider;
 import shop.provider.ProductUnitProvider;
 

@@ -17,7 +17,7 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import shop.Constance;
-import shop.beam.TreeNode;
+import shop.bean.TreeNode;
 import shop.provider.ProductProvider;
 import shop.provider.ProductTypeProvider;
 

@@ -21,7 +21,7 @@ import javax.swing.SwingConstants;
 
 import shop.Constance;
 import shop.DateChooser;
-import shop.beam.OutOrder;
+import shop.bean.OutOrder;
 import shop.provider.ProductOutOrderProvider;
 
 public class ProductSaleOrderPanel extends JPanel{

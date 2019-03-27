@@ -1,4 +1,4 @@
-package shop.beam;
+package shop.bean;
 
 /**
  * 商品单位

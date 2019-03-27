@@ -1,6 +1,6 @@
 package shop.provider;
 
-import shop.beam.InOrder;
+import shop.bean.InOrder;
 import shop.dao.DaoFactory;
 
 /**

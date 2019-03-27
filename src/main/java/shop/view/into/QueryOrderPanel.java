@@ -15,8 +15,8 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 
 import shop.Constance;
-import shop.beam.OutOrder;
-import shop.beam.ProductOutInfo;
+import shop.bean.OutOrder;
+import shop.bean.ProductOutInfo;
 import shop.provider.ProductOutInfoProvider;
 import shop.view.manage.MyTable;
 

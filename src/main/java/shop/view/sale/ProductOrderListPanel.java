@@ -13,9 +13,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.ParallelGroup;
-import javax.swing.JPanel;
 
-import shop.beam.Product;
+import shop.bean.Product;
+
+import javax.swing.JPanel;
 
 
 public class ProductOrderListPanel extends JPanel {

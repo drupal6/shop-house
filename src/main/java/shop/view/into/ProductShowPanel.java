@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import shop.Constance;
-import shop.beam.Product;
+import shop.bean.Product;
 
 public class ProductShowPanel extends JPanel{
 	

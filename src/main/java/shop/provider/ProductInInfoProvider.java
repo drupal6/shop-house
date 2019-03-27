@@ -1,6 +1,6 @@
 package shop.provider;
 
-import shop.beam.ProductInInfo;
+import shop.bean.ProductInInfo;
 import shop.dao.DaoFactory;
 
 /**

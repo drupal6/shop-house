@@ -1,6 +1,6 @@
 package shop;
 
-import shop.beam.User;
+import shop.bean.User;
 import shop.view.Login;
 
 public class Main {

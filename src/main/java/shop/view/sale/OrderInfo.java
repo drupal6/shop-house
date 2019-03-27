@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import shop.Constance;
-import shop.beam.OutOrder;
+import shop.bean.OutOrder;
 
 public class OrderInfo extends JPanel{
 	

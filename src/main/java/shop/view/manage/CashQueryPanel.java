@@ -19,7 +19,7 @@ import javax.swing.SwingConstants;
 
 import shop.Constance;
 import shop.DateChooser;
-import shop.beam.Cash;
+import shop.bean.Cash;
 import shop.provider.CashProvider;
 import shop.provider.ProductOutOrderProvider;
 

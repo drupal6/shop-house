@@ -9,8 +9,8 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
-import shop.beam.Product;
-import shop.beam.ProductType;
+import shop.bean.Product;
+import shop.bean.ProductType;
 import shop.provider.ProductProvider;
 import shop.provider.ProductTypeProvider;
 

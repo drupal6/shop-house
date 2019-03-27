@@ -10,8 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
-import shop.beam.Product;
+import shop.bean.Product;
 import shop.db.BaseDao;
 import shop.db.DbParameter;
 import shop.db.pool.DBPoolMgr;

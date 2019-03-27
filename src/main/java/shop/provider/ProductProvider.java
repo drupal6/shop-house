@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
-import shop.beam.Product;
-import shop.beam.TreeNode;
+import shop.bean.Product;
+import shop.bean.TreeNode;
 import shop.dao.DaoFactory;
 
 /**

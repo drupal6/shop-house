@@ -17,10 +17,10 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 import shop.Constance;
-import shop.beam.Product;
-import shop.beam.ProductType;
-import shop.beam.ProductUnit;
-import shop.beam.TreeNode;
+import shop.bean.Product;
+import shop.bean.ProductType;
+import shop.bean.ProductUnit;
+import shop.bean.TreeNode;
 import shop.provider.ProductProvider;
 import shop.provider.ProductTypeProvider;
 import shop.provider.ProductUnitProvider;

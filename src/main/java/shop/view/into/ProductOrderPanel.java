@@ -9,7 +9,7 @@ import javax.swing.LayoutStyle;
 import javax.swing.SwingConstants;
 
 import shop.Constance;
-import shop.beam.Product;
+import shop.bean.Product;
 
 public class ProductOrderPanel extends JPanel{
 

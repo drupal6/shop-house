@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
-import shop.beam.User;
+import shop.bean.User;
 import shop.provider.DataInit;
 
 public class SaleFrame extends JFrame {

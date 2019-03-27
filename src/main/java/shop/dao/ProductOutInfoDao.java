@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import shop.beam.ProductOutInfo;
+import shop.bean.ProductOutInfo;
 import shop.db.BaseDao;
 import shop.db.DbParameter;
 import shop.db.pool.DBPoolMgr;

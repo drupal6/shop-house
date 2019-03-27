@@ -1,4 +1,4 @@
-package shop.beam;
+package shop.bean;
 
 import java.util.Date;
 
