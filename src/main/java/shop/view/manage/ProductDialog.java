@@ -39,6 +39,9 @@ public class ProductDialog extends JDialog{
 	private JPanel conentPanel;
 	private JPanel buttonPanel;
 	
+	private JLabel barcodeLabel;
+	private JTextField barcodeTextField;
+	
 	private JLabel nameLabel;
 	private JTextField nameTextField;
 	
@@ -66,7 +69,7 @@ public class ProductDialog extends JDialog{
 		this.table = table;
 		this.op = op;
 		this.setTitle(title);
-		this.setSize(330, 270);
+		this.setSize(330, 300);
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		this.setResizable(false);
 		Point topLeft = ManageFrame.getInst().getLocationOnScreen();
@@ -87,6 +90,11 @@ public class ProductDialog extends JDialog{
 		
 		conentPanel = new JPanel();
 		conentPanel.setBackground(Color.WHITE);
+		
+		barcodeLabel = new JLabel("标识");
+		barcodeLabel.setFont(Constance.font22);
+		barcodeTextField = new JTextField();
+		barcodeTextField.setFont(Constance.font22);
 		
 		nameLabel = new JLabel("名称");
 		nameLabel.setFont(Constance.font22);
@@ -133,14 +141,18 @@ public class ProductDialog extends JDialog{
 		conentPanel.setLayout(conentLayout);
 		GroupLayout.SequentialGroup cHGroup = conentLayout.createSequentialGroup();
 		cHGroup.addGap(20);
-		cHGroup.addGroup(conentLayout.createParallelGroup().addComponent(nameLabel)
+		cHGroup.addGroup(conentLayout.createParallelGroup()
+				.addComponent(barcodeLabel)
+				.addComponent(nameLabel)
 				.addComponent(unitLabel)
 				.addComponent(typeLabel)
 				.addComponent(outPriceLabel)
 				.addComponent(stockLabel)
 				);
 		cHGroup.addGap(10);
-		cHGroup.addGroup(conentLayout.createParallelGroup().addComponent(nameTextField, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
+		cHGroup.addGroup(conentLayout.createParallelGroup()
+				.addComponent(barcodeTextField, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
+				.addComponent(nameTextField, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
 				.addComponent(unitComboBox, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
 				.addComponent(typeComboBox, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
 				.addComponent(outPriceTextField, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
@@ -150,6 +162,9 @@ public class ProductDialog extends JDialog{
 		
 		GroupLayout.SequentialGroup cVGroup = conentLayout.createSequentialGroup();
 		cVGroup.addGap(20);
+		cVGroup.addGroup(conentLayout.createParallelGroup()
+				.addComponent(barcodeLabel)
+				.addComponent(barcodeTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE));
 		cVGroup.addGroup(conentLayout.createParallelGroup()
 				.addComponent(nameLabel)
 				.addComponent(nameTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE));
@@ -247,11 +262,15 @@ public class ProductDialog extends JDialog{
 	}
 	
 	private boolean save() {
+		String barcode = barcodeTextField.getText().trim();
 		String name = nameTextField.getText().trim();
 		TreeNode unitNode = (TreeNode) unitComboBox.getSelectedItem();
 		TreeNode typeNode = (TreeNode) typeComboBox.getSelectedItem();
 		String outPrice = outPriceTextField.getText().trim();
 		String stock = stockTextField.getText().trim();
+		if(barcode.isEmpty()) {
+			return false;
+		}
 		if(name.isEmpty()) {
 			return false;
 		}
@@ -277,6 +296,7 @@ public class ProductDialog extends JDialog{
 				return false;
 			}
 			product = new Product();
+			product.setBarCode(barcode);
 			product.setName(name);
 			product.setProductUnit(productUnit.getId());
 			product.setProductType(productType.getId());
@@ -293,6 +313,7 @@ public class ProductDialog extends JDialog{
 			if(product == null) {
 				return false;
 			}
+			product.setBarCode(barcode);
 			product.setName(name);
 			product.setProductUnit(productUnit.getId());
 			product.setProductType(productType.getId());
@@ -312,6 +333,7 @@ public class ProductDialog extends JDialog{
 	
 	private void saveAndAdd() {
 		if(save()) {
+			barcodeTextField.setText("");
 			nameTextField.setText("");
 		}
 	}

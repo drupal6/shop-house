@@ -11,6 +11,8 @@ import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
+import shop.barcode.BarcodeCallBack;
+import shop.barcode.BarcodeProvider;
 import shop.bean.User;
 import shop.provider.DataInit;
 
@@ -90,6 +92,20 @@ public class SaleFrame extends JFrame {
 		jlp.add(mainPanel, new Integer(300));
 		jlp.add(dialogPanel, new Integer(200));
 		this.setVisible(true);
+		
+		BarcodeProvider.getInst().start(new BarcodeCallBack() {
+			
+			@Override
+			public void scan(String barcode) {
+				orderPanel.getProductOrderListPanel().addProductOrder(barcode);
+			}
+			
+			@Override
+			public void finish() {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 	}
 	
 	public void setLayerPanel(int mainLayer, int dialogLayer) {

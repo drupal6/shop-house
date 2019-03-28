@@ -78,6 +78,15 @@ public class ProductProvider {
 		return map.get(id);
 	}
 	
+	public Product get(String barcode) {
+		for(Product product : map.values()) {
+			if(product.getBarCode().equals(barcode)) {
+				return product;
+			}
+		}
+		return null;
+	}
+	
 	public Product add(Product product) {
 		boolean ret = DaoFactory.getInst().getProductDao().createProduct(product);
 		if(ret) {
@@ -136,6 +145,7 @@ public class ProductProvider {
 	private static  Vector<String> columnNameV = new Vector<String>();
 	static{
 		columnNameV.add("编号");
+		columnNameV.add("条形码");
 		columnNameV.add("名称");
 		columnNameV.add("单位");
 		columnNameV.add("出售价");
@@ -165,6 +175,7 @@ public class ProductProvider {
 		}
 		Vector rowV = new Vector();
 		rowV.add(product.getId());
+		rowV.add(product.getBarCode());
 		rowV.add(product.getName());
 		rowV.add(product.getProductUnit());
 		rowV.add(product.getOutPrice());

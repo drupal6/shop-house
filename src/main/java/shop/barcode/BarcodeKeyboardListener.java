@@ -18,7 +18,7 @@ public class BarcodeKeyboardListener{
     //一次扫描的最长时间
     private static int maxScanTime=300;
     //条形码的最短长度
-    private static int barcodeMinLength=6;
+    private static int barcodeMinLength=13;
  
     /**
      * 初始键盘代码和字母的对于关系
@@ -61,22 +61,22 @@ public class BarcodeKeyboardListener{
             barcode.append(letter);
         }
         //回车键
-        if (keyCode == 13) {
+//        if (keyCode == 13) {
             //条形码扫描器在很短的时间内输入了至少 barcodeMinLength 个字符以上信息，并且以“回车”作为结束字符
  
             //进入这个方法表示是“回车”
             //那么判断回车之前输入的字符数，至少 barcodeMinLength 个字符
             //并且一次扫描要在 maxScanTime 毫秒内完成
-            if(barcode.length() >= barcodeMinLength && cost < maxScanTime){
+            if(barcode.length() >= barcodeMinLength){
                 cost=System.currentTimeMillis()-start;
                 System.out.println("耗时："+cost);
                 System.out.println(barcode.toString());
                 //将数据加入缓存阻塞队列
                 BarcodeBuffer.product(barcode.toString());
+                //清空原来的缓冲区
+                barcode=new StringBuilder();
             }
  
-            //清空原来的缓冲区
-            barcode=new StringBuilder();
-        }
+//        }
     }
 }

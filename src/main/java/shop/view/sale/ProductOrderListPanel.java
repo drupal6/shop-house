@@ -15,6 +15,7 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.ParallelGroup;
 
 import shop.bean.Product;
+import shop.provider.ProductProvider;
 
 import javax.swing.JPanel;
 
@@ -47,6 +48,13 @@ public class ProductOrderListPanel extends JPanel {
 		layout.setVerticalGroup(vGroup);
 	}
 	
+	public void addProductOrder(String barcode) {
+		Product product = ProductProvider.getInst().get(barcode);
+		if(product == null) {
+			return;
+		}
+		addProductOrder(product);
+	}
 	public void addProductOrder(Product product) {
 		int index = indexAtom.incrementAndGet();
 		ProductOrderPanel productPanel = new ProductOrderPanel(product, index);
