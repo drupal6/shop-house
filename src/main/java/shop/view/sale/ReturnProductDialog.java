@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 import shop.Constance;
+import shop.Shop;
 import shop.bean.OutOrder;
 import shop.bean.ProductOutInfo;
 import shop.provider.ProductOutInfoProvider;
@@ -61,8 +62,8 @@ public class ReturnProductDialog extends JDialog {
 		this.setSize(430, 310);
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		this.setResizable(false);
-		Point topLeft = SaleFrame.getInst().getLocationOnScreen();
-		Dimension parentSize = SaleFrame.getInst().getSize();
+		Point topLeft = SaleView.getInst().getLocationOnScreen();
+		Dimension parentSize = SaleView.getInst().getSize();
 		Dimension mySize = this.getSize();
 		int x, y;
 		if (parentSize.width > mySize.width) {
@@ -303,7 +304,7 @@ public class ReturnProductDialog extends JDialog {
 			if(num == productOutInfo.getNum()) {
 				productOutInfo.setState(2);
 			}
-			productOutInfo.setUserId(SaleFrame.getInst().getUser().getId());
+			productOutInfo.setUserId(Shop.getInst().getUser().getId());
 			productOutInfo.setOpTime(new Date());
 			productOutInfo.setNum(productOutInfo.getNum() - num);
 			productOutInfo.setReturnNum(productOutInfo.getReturnNum() + num);

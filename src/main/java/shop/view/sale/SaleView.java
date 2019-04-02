@@ -11,18 +11,17 @@ import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
+import shop.Setting;
 import shop.barcode.BarcodeCallBack;
 import shop.barcode.BarcodeProvider;
-import shop.bean.User;
+import shop.db.pool.DBPoolMgr;
 import shop.provider.DataInit;
 
-public class SaleFrame extends JFrame {
+public class SaleView extends JFrame {
 	
 	/**
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	private User user = new User();
 	
 	private JLayeredPane jlp;
 	
@@ -34,12 +33,11 @@ public class SaleFrame extends JFrame {
 	private OptionPanel optionPanel;
 	private ProductSaleSelectPanel productSelectPanel;
 	
-	private static SaleFrame instance = new SaleFrame();
+	private static SaleView instance = new SaleView();
 	
-	public static SaleFrame getInst() {
+	public static SaleView getInst() {
 		return instance;
 	}
-
 	
 	public void init() {
 		setTitle("销售");
@@ -148,13 +146,8 @@ public class SaleFrame extends JFrame {
 	
 	public static void main(String[] args) throws InterruptedException {
 		//初始数据
-		DataInit.getInst().initConnect();
+		DBPoolMgr.getInst().init(Setting.getInst(), 10, 1);
 		DataInit.getInst().initData();
-		SaleFrame.getInst().init();
-	}
-
-
-	public User getUser() {
-		return user;
+		SaleView.getInst().init();
 	}
 }

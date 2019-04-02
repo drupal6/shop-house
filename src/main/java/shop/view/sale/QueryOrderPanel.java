@@ -48,7 +48,7 @@ public class QueryOrderPanel extends JPanel{
 		backButton.setFont(Constance.font24);
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				SaleFrame.getInst().setLayerPanel(300, 200);
+				SaleView.getInst().setLayerPanel(300, 200);
 			}
 		});
 		

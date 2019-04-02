@@ -69,14 +69,18 @@ public class UserDao extends BaseDao {
 	}
 	
 	public User getUser(String userName) {
-		String sql = "select * from t_user where state=0;";
-		PreparedStatement pstmt = execQuery(sql, null);
+		String sql = "select * from t_user where name=? and state=0;";
+		Map<Integer, DbParameter> param = new HashMap<Integer, DbParameter>();
+		param.put(1, new DbParameter(Types.VARCHAR, userName));
+		PreparedStatement pstmt = execQuery(sql, param);
 		ResultSet rs = null;
 		User info = null;
 		if (pstmt != null) {
 			try {
 				rs = pstmt.executeQuery();
-				info = resultToBean(rs);
+				if(rs.next()) {
+					info = resultToBean(rs);
+				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} finally {

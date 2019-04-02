@@ -8,6 +8,8 @@ import javax.swing.GroupLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import shop.Setting;
+import shop.db.pool.DBPoolMgr;
 import shop.provider.DataInit;
 
 public class ManageFrame extends JFrame {
@@ -80,7 +82,8 @@ public class ManageFrame extends JFrame {
 
 	public static void main(String[] args) throws InterruptedException {
 		//初始数据
-		DataInit.getInst().initConnect();
+		Setting.getInst().init();
+		DBPoolMgr.getInst().init(Setting.getInst(), 10, 1);
 		DataInit.getInst().initData();
 		ManageFrame.getInst().init();
 	}

@@ -7,6 +7,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 
+import shop.Shop;
+
 public class OrderPanel extends JPanel {
 
 	/**
@@ -25,7 +27,7 @@ public class OrderPanel extends JPanel {
 	public OrderPanel() {
 		searchPanel = new JPanel();
 		searchPanel.setBackground(new Color(47, 47, 47));
-		totalPanel = new TotalPanel(SaleFrame.getInst().getUser().getName());
+		totalPanel = new TotalPanel(Shop.getInst().getUser().getName());
 		JSeparator s2 = new JSeparator();
 		productOrderListPanel = new ProductOrderListPanel();
 		

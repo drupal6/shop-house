@@ -23,6 +23,6 @@ public class Main {
 	}
 
 	private static void init() {
-		DBPoolMgr.getInst().init("127.0.0.1", 3306, "shop", "root", "12345", 30, 10);		
+//		DBPoolMgr.getInst().init("127.0.0.1", 3306, "shop", "root", "12345", 30, 10);		
 	}
 }

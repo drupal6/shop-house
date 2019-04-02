@@ -92,7 +92,7 @@ public class ChannePanel extends JPanel{
 		canBtn.setForeground(new Color(86, 185, 242));
 		canBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				SaleFrame.getInst().setLayerPanel(300, 200);
+				SaleView.getInst().setLayerPanel(300, 200);
 			}
 		});
 		okBtn = new JButton("确定");
@@ -157,19 +157,19 @@ public class ChannePanel extends JPanel{
 	
 	private void del() {
 		if(type == 1) {
-			SaleFrame.getInst().getOrderPanel().getProductOrderListPanel().remove();
+			SaleView.getInst().getOrderPanel().getProductOrderListPanel().remove();
 		}else {
-			SaleFrame.getInst().getOrderPanel().getProductOrderListPanel().resetPrice();
+			SaleView.getInst().getOrderPanel().getProductOrderListPanel().resetPrice();
 		}
-		SaleFrame.getInst().setLayerPanel(300, 200);
+		SaleView.getInst().setLayerPanel(300, 200);
 	}
 	private void ok() {
 		if(type == 1) {
-			SaleFrame.getInst().getOrderPanel().getProductOrderListPanel().alertNum(num);
+			SaleView.getInst().getOrderPanel().getProductOrderListPanel().alertNum(num);
 		}else {
-			SaleFrame.getInst().getOrderPanel().getProductOrderListPanel().alertPrice(num);
+			SaleView.getInst().getOrderPanel().getProductOrderListPanel().alertPrice(num);
 		}
-		SaleFrame.getInst().setLayerPanel(300, 200);
+		SaleView.getInst().setLayerPanel(300, 200);
 	}
 	
 	private void changeInputChange() {

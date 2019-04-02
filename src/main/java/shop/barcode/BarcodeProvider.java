@@ -23,5 +23,9 @@ public class BarcodeProvider {
 		barcodeProducter.stopProduct();
 		barcodeConsumer.stopConsume();
 	}
+	
+	public void updateScanState(boolean canScan) {
+		barcodeConsumer.updateCanScan(canScan);
+	}
 
 }

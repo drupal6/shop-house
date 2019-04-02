@@ -16,6 +16,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import shop.Constance;
+import shop.Shop;
 import shop.provider.CashProvider;
 
 public class CashPanel extends JPanel {
@@ -226,7 +227,7 @@ public class CashPanel extends JPanel {
 	}
 	
 	private void cannel() {
-		SaleFrame.getInst().setLayerPanel(300, 200);
+		SaleView.getInst().setLayerPanel(300, 200);
 	}
 	private void ok() {
 		int type = 2;
@@ -239,7 +240,7 @@ public class CashPanel extends JPanel {
 			num = Float.parseFloat(Constance.df.format(Float.parseFloat(str)));
 		}
 		String mark = markTextArea.getText().trim();
-		CashProvider.getInst().addCashLog(num, type, SaleFrame.getInst().getUser().getId(), mark);
+		CashProvider.getInst().addCashLog(num, type, Shop.getInst().getUser().getId(), mark);
 		cannel();
 	}
 }

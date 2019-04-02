@@ -76,8 +76,8 @@ public class ProductOrderListPanel extends JPanel {
 //		JScrollBar jScrollBar = SaleFrame.getInst().getOrderPanel().getScrollPane().getVerticalScrollBar();//获得垂直滚动条  
 //        jScrollBar.setValue(jScrollBar.getMaximum());//设置垂直滚动条位置  
 		Point p = new Point();
-		p.setLocation(0, SaleFrame.getInst().getOrderPanel().getProductOrderListPanel().getPreferredSize().getHeight());
-		SaleFrame.getInst().getOrderPanel().getScrollPane().getViewport().setViewPosition(p);
+		p.setLocation(0, SaleView.getInst().getOrderPanel().getProductOrderListPanel().getPreferredSize().getHeight());
+		SaleView.getInst().getOrderPanel().getScrollPane().getViewport().setViewPosition(p);
 	}
 	
 	public void add() {
@@ -190,7 +190,7 @@ public class ProductOrderListPanel extends JPanel {
 		for(ProductOrderPanel productOrderPanel : map.values()) {
 			text += productOrderPanel.getNum() * productOrderPanel.getOutPrice();
 		}
-		SaleFrame.getInst().getOrderPanel().getTotalPanel().setTotal(text);
+		SaleView.getInst().getOrderPanel().getTotalPanel().setTotal(text);
 	}
 	
 	public void clean() {

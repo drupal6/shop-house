@@ -11,7 +11,9 @@ import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
+import shop.Setting;
 import shop.bean.User;
+import shop.db.pool.DBPoolMgr;
 import shop.provider.DataInit;
 
 public class IntoFrame extends JFrame {
@@ -132,7 +134,7 @@ public class IntoFrame extends JFrame {
 	
 	public static void main(String[] args) throws InterruptedException {
 		//初始数据
-		DataInit.getInst().initConnect();
+		DBPoolMgr.getInst().init(Setting.getInst(), 10, 1);
 		DataInit.getInst().initData();
 		IntoFrame.getInst().init();
 	}

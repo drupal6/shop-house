@@ -71,7 +71,7 @@ public class ProductTypeSaleScorellPanel extends JPanel {
 						public void mouseEntered(MouseEvent e) { }
 						public void mouseClicked(MouseEvent e) {
 							ProductShowPanel psp = (ProductShowPanel) e.getSource();
-							SaleFrame.getInst().getOrderPanel().getProductOrderListPanel().addProductOrder(psp.getProduct());
+							SaleView.getInst().getOrderPanel().getProductOrderListPanel().addProductOrder(psp.getProduct());
 						}
 					});
 					contentPanel.add(productShowPanel);

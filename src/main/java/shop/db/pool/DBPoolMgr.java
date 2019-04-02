@@ -2,6 +2,8 @@ package shop.db.pool;
 
 import java.sql.Connection;
 
+import shop.Setting;
+
 /**
  * 数据库连接池管理类
  * 
@@ -17,35 +19,26 @@ public class DBPoolMgr {
 	
 	public static final String dbUrl = "jdbc:mysql://%s:%s/%s?characterEncoding=utf-8&autoReconnect=true";
 	
-	private String address; 
-	private int port; 
-	private String dbName; 
-	private String user; 
-	private String password;
+	private Setting setting;
 	private int DBMaxConn = 1;
 	private int DBFllow = 1;
 	
 	private IDBPool dbPool;
 	
 
-	public boolean init(String address, int port, String dbName, String user, 
-			String password, int DBMaxConn, int DBFllow) {
-		this.address = address;
-		this.port = port;
-		this.dbName = dbName;
-		this.user = user;
-		this.password = password;
+	public boolean init(Setting setting, int DBMaxConn, int DBFllow) {
+		this.setting = setting;
 		this.DBMaxConn = DBMaxConn;
 		this.DBFllow = DBFllow;
 		return initPool();
 	}
 
 	private String getDBUrl() {
-		return String.format(dbUrl, address, port, dbName);
+		return String.format(dbUrl, setting.getIp(), setting.getPort(), setting.getDbName());
 	}
 
 	public boolean initPool() {
-		dbPool = createPools(dbName, getDBUrl(), user, password);
+		dbPool = createPools(setting.getDbName(), getDBUrl(), setting.getUserName(), setting.getPassword());
 		if (dbPool == null) {
 			return false;
 		}
@@ -73,7 +66,7 @@ public class DBPoolMgr {
 	 */
 	private IDBPool createPools(String poolName, String url, String user, String password) {
 		try {
-			IDBPool pool = new BoneCPDBPool(dbName, getDBUrl(), user, password, DBMaxConn, DBFllow);
+			IDBPool pool = new BoneCPDBPool(poolName, url, user, password, DBMaxConn, DBFllow);
 			return pool;
 		} catch (Exception e) {
 			e.printStackTrace();

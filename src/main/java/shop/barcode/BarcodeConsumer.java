@@ -1,5 +1,7 @@
 package shop.barcode;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 /**
  *此消费者线程会从此缓冲区中获取数据并执行数据的保存操作
  * 数据的保存调用BarcodeSaveService接口定义的save方法
@@ -12,12 +14,15 @@ public class BarcodeConsumer {
     //数据保存服务（可有多个）
     private BarcodeCallBack callBack;
     private boolean quit;
+    
+    private AtomicBoolean canScan = new AtomicBoolean(false);
      
     /**
      * 停止消费者线程
      * 此方法在tomcat关闭的时候被调用
      */
     public void stopConsume(){
+    	canScan.set(false);
         if(thread!=null){
             thread.interrupt();
         	callBack.finish();
@@ -34,14 +39,17 @@ public class BarcodeConsumer {
         }
         this.callBack = callBack;
         System.out.println("条形码消费者线程启动");
+        canScan.set(true);
         thread=new Thread(){
             @Override
             public void run(){
                 while(!quit){
                     try{
                         //当缓冲区没有数据的时候，此方法会阻塞
-                        String barcode=BarcodeBuffer.consume();
-                        callBack.scan(barcode);
+                    	if(canScan.get()) {
+                    		String barcode=BarcodeBuffer.consume();
+                    		callBack.scan(barcode);
+                    	}
                     }catch(InterruptedException e){
                         quit=true;
                     }
@@ -51,5 +59,9 @@ public class BarcodeConsumer {
         };
         thread.setName("consumer");
         thread.start();
+    }
+    
+    public void updateCanScan(boolean canScan) {
+    	this.canScan.set(canScan);
     }
 }
