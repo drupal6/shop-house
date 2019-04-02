@@ -7,18 +7,20 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.GroupLayout;
-import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 import shop.Setting;
+import shop.Shop;
 import shop.barcode.BarcodeCallBack;
 import shop.barcode.BarcodeProvider;
+import shop.dao.DaoFactory;
 import shop.db.pool.DBPoolMgr;
 import shop.provider.DataInit;
+import shop.view.BaseView;
 
-public class SaleView extends JFrame {
-	
+public class SaleView extends BaseView {
+
 	/**
 	 */
 	private static final long serialVersionUID = 1L;
@@ -33,26 +35,18 @@ public class SaleView extends JFrame {
 	private OptionPanel optionPanel;
 	private ProductSaleSelectPanel productSelectPanel;
 	
-	private static SaleView instance = new SaleView();
+	private Shop shop;
 	
-	public static SaleView getInst() {
-		return instance;
-	}
-	
-	public void init() {
-		setTitle("销售");
-		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+	public void init(Shop shop) {
+		this.shop = shop;
+		this.mainPanel = shop.getMainPanel();
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		
 		Dimension dimension = new Dimension((int)(screenSize.width * 0.8),(int)(screenSize.height*0.8));
-		//适应屏幕大小
-		setSize(dimension);
-		//不能改变大小
-		setResizable(false);
 		
-		orderPanel = new OrderPanel();
-		optionPanel = new OptionPanel();
-		productSelectPanel = new ProductSaleSelectPanel();
+		orderPanel = new OrderPanel(this);
+		optionPanel = new OptionPanel(this);
+		productSelectPanel = new ProductSaleSelectPanel(this);
 		
 		
 		mainPanel = new JPanel();
@@ -86,10 +80,10 @@ public class SaleView extends JFrame {
 				.addComponent(productSelectPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE));
 		layout.setVerticalGroup(vGroup);
 		
-		jlp = getLayeredPane();
+		jlp = shop.getLayeredPane();
 		jlp.add(mainPanel, new Integer(300));
 		jlp.add(dialogPanel, new Integer(200));
-		this.setVisible(true);
+		shop.setVisible(true);
 		
 		BarcodeProvider.getInst().start(new BarcodeCallBack() {
 			
@@ -106,6 +100,10 @@ public class SaleView extends JFrame {
 		});
 	}
 	
+	public void stop() {
+		BarcodeProvider.getInst().stop();
+	}
+	
 	public void setLayerPanel(int mainLayer, int dialogLayer) {
 		jlp.setLayer(mainPanel, new Integer(mainLayer)); // 重新设置组件层数
 		jlp.setLayer(dialogPanel, new Integer(dialogLayer));
@@ -118,6 +116,7 @@ public class SaleView extends JFrame {
 		return orderPanel;
 	}
 
+	@Override
 	public JPanel getMainPanel() {
 		return mainPanel;
 	}
@@ -146,8 +145,15 @@ public class SaleView extends JFrame {
 	
 	public static void main(String[] args) throws InterruptedException {
 		//初始数据
-		DBPoolMgr.getInst().init(Setting.getInst(), 10, 1);
+		Setting.getInst().init();
+		DBPoolMgr.getInst().init(Setting.getInst(), 1, 1);
 		DataInit.getInst().initData();
-		SaleView.getInst().init();
+		Shop.getInst().loginSuccess(DaoFactory.getInst().getUserDao().getUser("admin"));
+//		SaleView.getInst().init();
+	}
+
+	@Override
+	public String getTitle() {
+		return "销售";
 	}
 }

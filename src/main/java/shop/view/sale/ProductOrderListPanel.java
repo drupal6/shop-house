@@ -33,8 +33,10 @@ public class ProductOrderListPanel extends JPanel {
 	private GroupLayout.SequentialGroup vGroup;
 	
 	private int select = 0;
+	private SaleView saleView;
 	
-	public ProductOrderListPanel() {
+	public ProductOrderListPanel(SaleView saleView) {
+		this.saleView = saleView;
 		setBackground(new Color(240, 240, 240));
 		layout = new GroupLayout(this);
 		this.setLayout(layout);
@@ -76,8 +78,8 @@ public class ProductOrderListPanel extends JPanel {
 //		JScrollBar jScrollBar = SaleFrame.getInst().getOrderPanel().getScrollPane().getVerticalScrollBar();//获得垂直滚动条  
 //        jScrollBar.setValue(jScrollBar.getMaximum());//设置垂直滚动条位置  
 		Point p = new Point();
-		p.setLocation(0, SaleView.getInst().getOrderPanel().getProductOrderListPanel().getPreferredSize().getHeight());
-		SaleView.getInst().getOrderPanel().getScrollPane().getViewport().setViewPosition(p);
+		p.setLocation(0, saleView.getOrderPanel().getProductOrderListPanel().getPreferredSize().getHeight());
+		saleView.getOrderPanel().getScrollPane().getViewport().setViewPosition(p);
 	}
 	
 	public void add() {
@@ -190,7 +192,7 @@ public class ProductOrderListPanel extends JPanel {
 		for(ProductOrderPanel productOrderPanel : map.values()) {
 			text += productOrderPanel.getNum() * productOrderPanel.getOutPrice();
 		}
-		SaleView.getInst().getOrderPanel().getTotalPanel().setTotal(text);
+		saleView.getOrderPanel().getTotalPanel().setTotal(text);
 	}
 	
 	public void clean() {

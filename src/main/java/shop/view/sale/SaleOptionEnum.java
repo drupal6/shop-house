@@ -6,73 +6,73 @@ public enum SaleOptionEnum {
 
 	SETTLE("结算", new Color(107, 137, 213), Color.WHITE){
 		@Override
-		public void clickHandle() {
-			float total = SaleView.getInst().getOrderPanel().getTotalPanel().getTotal();
+		public void clickHandle(SaleView saleView) {
+			float total = saleView.getOrderPanel().getTotalPanel().getTotal();
 			if(total == 0) {
 				return;
 			}
-			SaleView.getInst().setLayerPanel(200, 300);
-			SaleView.getInst().dialogPanelAddPanel(new SettlePanel(total));
+			saleView.setLayerPanel(200, 300);
+			saleView.dialogPanelAddPanel(new SettlePanel(saleView, total));
 		}
 	}, 	//结算
 	ADD("+", new Color(117, 181, 84), Color.WHITE){
 		@Override
-		public void clickHandle() {
-			SaleView.getInst().getOrderPanel().getProductOrderListPanel().add();
+		public void clickHandle(SaleView saleView) {
+			saleView.getOrderPanel().getProductOrderListPanel().add();
 		}
 	},    		//+
 	RED("-", new Color(226, 158, 67), Color.WHITE){
 		@Override
-		public void clickHandle() {
-			SaleView.getInst().getOrderPanel().getProductOrderListPanel().del();
+		public void clickHandle(SaleView saleView) {
+			saleView.getOrderPanel().getProductOrderListPanel().del();
 		}
 	},    	//-
 	NUM("数量", Color.WHITE, Color.BLACK){
 		@Override
-		public void clickHandle() {
-			ProductOrderPanel productOrderPanel = SaleView.getInst().getOrderPanel().getProductOrderListPanel().getSelectProductOrderPanel();
+		public void clickHandle(SaleView saleView) {
+			ProductOrderPanel productOrderPanel = saleView.getOrderPanel().getProductOrderListPanel().getSelectProductOrderPanel();
 			if(productOrderPanel == null) {
 				return;
 			}
-			SaleView.getInst().setLayerPanel(200, 300);
-			SaleView.getInst().dialogPanelAddPanel(new ChannePanel(productOrderPanel.getNum(), 1));
+			saleView.setLayerPanel(200, 300);
+			saleView.dialogPanelAddPanel(new ChannePanel(saleView, productOrderPanel.getNum(), 1));
 		}
 	},   	//数量
 	DEL("删除", Color.WHITE, Color.BLACK){
 		@Override
-		public void clickHandle() {
-			SaleView.getInst().getOrderPanel().getProductOrderListPanel().remove();
+		public void clickHandle(SaleView saleView) {
+			saleView.getOrderPanel().getProductOrderListPanel().remove();
 		}
 	},   	//数量
 	ALERT("改价", Color.WHITE, Color.BLACK){
 		@Override
-		public void clickHandle() {
-			ProductOrderPanel productOrderPanel = SaleView.getInst().getOrderPanel().getProductOrderListPanel().getSelectProductOrderPanel();
+		public void clickHandle(SaleView saleView) {
+			ProductOrderPanel productOrderPanel = saleView.getOrderPanel().getProductOrderListPanel().getSelectProductOrderPanel();
 			if(productOrderPanel == null) {
 				return;
 			}
-			SaleView.getInst().setLayerPanel(200, 300);
-			SaleView.getInst().dialogPanelAddPanel(new ChannePanel(productOrderPanel.getOutPrice(), 2));
+			saleView.setLayerPanel(200, 300);
+			saleView.dialogPanelAddPanel(new ChannePanel(saleView, productOrderPanel.getOutPrice(), 2));
 		}
 	}, 	//改价
 	DISCARD("费单", Color.RED, Color.WHITE){
 		@Override
-		public void clickHandle() {
-			SaleView.getInst().getOrderPanel().clean();
+		public void clickHandle(SaleView saleView) {
+			saleView.getOrderPanel().clean();
 		}
 	},  //费单
 	QUERY("查单", Color.WHITE, Color.BLACK){
 		@Override
-		public void clickHandle() {
-			SaleView.getInst().setLayerPanel(200, 300);
-			SaleView.getInst().dialogPanelAddPanel(new QueryOrderPanel());
+		public void clickHandle(SaleView saleView) {
+			saleView.setLayerPanel(200, 300);
+			saleView.dialogPanelAddPanel(new QueryOrderPanel(saleView));
 		}
 	},  //查单
 	TAKEMONEY("零钱", Color.WHITE, Color.BLACK){
 		@Override
-		public void clickHandle() {
-			SaleView.getInst().setLayerPanel(200, 300);
-			SaleView.getInst().dialogPanelAddPanel(new CashPanel());
+		public void clickHandle(SaleView saleView) {
+			saleView.setLayerPanel(200, 300);
+			saleView.dialogPanelAddPanel(new CashPanel(saleView));
 		}
 	},  //取钱
 	;
@@ -87,7 +87,7 @@ public enum SaleOptionEnum {
 		this.fontColor = fontColor;
 	}
 	
-	public void clickHandle() {
+	public void clickHandle(SaleView saleView) {
 		
 	}
 

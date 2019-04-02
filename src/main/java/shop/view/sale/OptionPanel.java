@@ -16,7 +16,7 @@ public class OptionPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
 
-	public OptionPanel() {
+	public OptionPanel(SaleView saleView) {
 		setBackground(new Color(47, 47, 47));
 		GroupLayout layout = new GroupLayout(this);
 		this.setLayout(layout);
@@ -42,7 +42,7 @@ public class OptionPanel extends JPanel {
 				public void mouseClicked(MouseEvent e) {
 					SaleButtonPanel sbp1 = (SaleButtonPanel) e.getSource();
 					SaleOptionEnum soe = sbp1.getSaleEnum();
-					soe.clickHandle();
+					soe.clickHandle(saleView);
 				}
 			});
 			pg.addComponent(sbp, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE);

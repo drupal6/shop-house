@@ -32,7 +32,7 @@ public class ProductSaleSelectPanel extends JPanel {
 	private JButton nextButton;
 	private Timer timer;
 	
-	public ProductSaleSelectPanel() {
+	public ProductSaleSelectPanel(SaleView saleView) {
 		setBackground(new Color(47, 47, 47));
 		contentPanel = new JPanel();
 		contentPanel.setBackground(new Color(47, 47, 47));
@@ -41,7 +41,7 @@ public class ProductSaleSelectPanel extends JPanel {
 		glayout.setVgap(5);
 		contentPanel.setLayout(glayout);
 		
-		titlePanel = new ProductTypeSaleScorellPanel(contentPanel);
+		titlePanel = new ProductTypeSaleScorellPanel(saleView, contentPanel);
 		titlePanel.setBackground(new Color(47, 47, 47));
 		
 		titleScrollPane = new JScrollPane(titlePanel);

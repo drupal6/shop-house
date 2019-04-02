@@ -54,8 +54,11 @@ public class SettlePanel extends JPanel{
 	private float souldTotal = 0.0f;
 	private float haveTotal = 0.0f;
 	private float backTotal = 0.0f;
+	
+	private SaleView saleView;
 
-	public SettlePanel(float total) {
+	public SettlePanel(SaleView saleView, float total) {
+		this.saleView = saleView;
 		this.souldTotal = total;
 		this.backTotal = haveTotal - souldTotal;
 		this.setBackground(new Color(64, 64, 64));
@@ -195,7 +198,7 @@ public class SettlePanel extends JPanel{
 		backBt.setBackground(new Color(244, 194, 69));
 		backBt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SaleView.getInst().setLayerPanel(300, 200);
+				saleView.setLayerPanel(300, 200);
 			}
 		});
 		okBt = new JButton("结算");
@@ -287,8 +290,8 @@ public class SettlePanel extends JPanel{
 	}
 	
 	private void cannel() {
-		SaleView.getInst().getOrderPanel().clean();
-		SaleView.getInst().setLayerPanel(300, 200);
+		saleView.getOrderPanel().clean();
+		saleView.setLayerPanel(300, 200);
 	}
 	
 	private void settle() {
@@ -301,7 +304,7 @@ public class SettlePanel extends JPanel{
 			if(null == ProductOutOrderProvider.getInst().add(order)) {
 				return;
 			}
-			Map<Integer, ProductOrderPanel> map = SaleView.getInst().getOrderPanel().getProductOrderListPanel().map();
+			Map<Integer, ProductOrderPanel> map = saleView.getOrderPanel().getProductOrderListPanel().map();
 			for(ProductOrderPanel orderPanel : map.values()) {
 				Product product = orderPanel.getProduct();
 				if(orderPanel.getNum() <= 0) {

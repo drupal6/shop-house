@@ -12,6 +12,8 @@ import shop.db.pool.DBPoolMgr;
 import shop.provider.DataInit;
 import shop.view.BaseView;
 import shop.view.LoginView;
+import shop.view.manage.ManageFrame;
+import shop.view.sale.SaleView;
 
 public class Shop extends JFrame{
 
@@ -59,18 +61,24 @@ public class Shop extends JFrame{
 
 	public void loginSuccess(User user) {
 		this.user = user;
+		changeView(new SaleView());
+//		changeView(ManageFrame.getInst());
 	}
 	
 	public void changeView(BaseView baseView) {
 		mainPanel.removeAll();
+		if(baseView.getMainPanel() != null) {
+			this.mainPanel = baseView.getMainPanel();
+		}
 		setTitle(baseView.getTitle());
 		baseView.init(this);
 		this.mainPanel.validate();
+//		this.mainPanel.repaint();
 	}
 
 	public static void main(String[] args) {
 		Shop.getInst().initConfig();
 		Shop.getInst().initView();
-		Shop.getInst().changeView(new LoginView("登录"));
+		Shop.getInst().changeView(new LoginView());
 	}
 }

@@ -33,7 +33,10 @@ public class ChannePanel extends JPanel{
 	//1数量 2价格
 	private int type;
 	
-	public ChannePanel(float num, int type) {
+	private SaleView saleView;
+	
+	public ChannePanel(SaleView saleView, float num, int type) {
+		this.saleView = saleView;
 		this.type = type;
 		this.setBackground(new Color(64, 64, 64));
 		this.num = num;
@@ -92,7 +95,7 @@ public class ChannePanel extends JPanel{
 		canBtn.setForeground(new Color(86, 185, 242));
 		canBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				SaleView.getInst().setLayerPanel(300, 200);
+				saleView.setLayerPanel(300, 200);
 			}
 		});
 		okBtn = new JButton("确定");
@@ -157,19 +160,19 @@ public class ChannePanel extends JPanel{
 	
 	private void del() {
 		if(type == 1) {
-			SaleView.getInst().getOrderPanel().getProductOrderListPanel().remove();
+			saleView.getOrderPanel().getProductOrderListPanel().remove();
 		}else {
-			SaleView.getInst().getOrderPanel().getProductOrderListPanel().resetPrice();
+			saleView.getOrderPanel().getProductOrderListPanel().resetPrice();
 		}
-		SaleView.getInst().setLayerPanel(300, 200);
+		saleView.setLayerPanel(300, 200);
 	}
 	private void ok() {
 		if(type == 1) {
-			SaleView.getInst().getOrderPanel().getProductOrderListPanel().alertNum(num);
+			saleView.getOrderPanel().getProductOrderListPanel().alertNum(num);
 		}else {
-			SaleView.getInst().getOrderPanel().getProductOrderListPanel().alertPrice(num);
+			saleView.getOrderPanel().getProductOrderListPanel().alertPrice(num);
 		}
-		SaleView.getInst().setLayerPanel(300, 200);
+		saleView.setLayerPanel(300, 200);
 	}
 	
 	private void changeInputChange() {

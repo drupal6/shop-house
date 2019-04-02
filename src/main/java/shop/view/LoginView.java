@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -24,19 +25,19 @@ public class LoginView extends BaseView{
 	private JLabel passwordAlertLabel;
 	
 	private JButton jButton;
-	
-	public LoginView(String title) {
-		super(title);
-	}
+	private Shop shop;
 	
 	@Override
 	public void init(Shop shop) {
+		this.shop = shop;
 		usernameLabel = new JLabel("用户:");
 		usernameText = new JTextField();
+		usernameText.setText("admin");
 		namealertAlertLabel = new JLabel();
 		
 		passwordLabel = new JLabel("密码:");
 		passwordText = new JPasswordField();
+		passwordText.setText("admin");
 		passwordAlertLabel = new JLabel();
 		
 		jButton = new JButton("登录");
@@ -111,5 +112,16 @@ public class LoginView extends BaseView{
 		}
 		shop.loginSuccess(user);
 		return user;
+	}
+
+
+	@Override
+	public String getTitle() {
+		return "登录";
+	}
+	
+	@Override
+	public JPanel getMainPanel() {
+		return null;
 	}
 }

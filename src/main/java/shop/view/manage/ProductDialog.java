@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 import shop.Constance;
+import shop.Shop;
 import shop.bean.Product;
 import shop.bean.ProductType;
 import shop.bean.ProductUnit;
@@ -72,8 +73,8 @@ public class ProductDialog extends JDialog{
 		this.setSize(330, 300);
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		this.setResizable(false);
-		Point topLeft = ManageFrame.getInst().getLocationOnScreen();
-		Dimension parentSize = ManageFrame.getInst().getSize();
+		Point topLeft = Shop.getInst().getLocationOnScreen();
+		Dimension parentSize = Shop.getInst().getSize();
 		Dimension mySize = this.getSize();
 		int x, y;
 		if (parentSize.width > mySize.width) {

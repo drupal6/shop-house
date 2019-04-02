@@ -43,7 +43,10 @@ public class CashPanel extends JPanel {
 	private JButton okButton;
 	ButtonGroup bg = new ButtonGroup();
 	
-	public CashPanel() {
+	private SaleView saleView;
+	
+	public CashPanel(SaleView saleView) {
+		this.saleView = saleView;
 		this.setBackground(new Color(64, 64, 64));
 
 		optationLable = new javax.swing.JLabel();
@@ -227,7 +230,7 @@ public class CashPanel extends JPanel {
 	}
 	
 	private void cannel() {
-		SaleView.getInst().setLayerPanel(300, 200);
+		saleView.setLayerPanel(300, 200);
 	}
 	private void ok() {
 		int type = 2;

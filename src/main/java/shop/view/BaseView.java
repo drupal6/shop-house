@@ -12,15 +12,9 @@ import shop.Shop;
  */
 public abstract class BaseView {
 
-	private String title;
-	
-	public BaseView(String title) {
-		this.title = title;
-	}
-	
-	public String getTitle() {
-		return title;
-	}
-
 	public abstract void init(Shop shop);
+	
+	public abstract String getTitle();
+	
+	public abstract JPanel getMainPanel();
 }

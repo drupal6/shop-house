@@ -62,8 +62,8 @@ public class ReturnProductDialog extends JDialog {
 		this.setSize(430, 310);
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		this.setResizable(false);
-		Point topLeft = SaleView.getInst().getLocationOnScreen();
-		Dimension parentSize = SaleView.getInst().getSize();
+		Point topLeft = Shop.getInst().getLocationOnScreen();
+		Dimension parentSize = Shop.getInst().getSize();
 		Dimension mySize = this.getSize();
 		int x, y;
 		if (parentSize.width > mySize.width) {

@@ -37,7 +37,7 @@ public class QueryOrderPanel extends JPanel{
 	
 	private JPopupMenu jp;
 	
-	public QueryOrderPanel() {
+	public QueryOrderPanel(SaleView saleView) {
 		this.setBackground(new Color(64, 64, 64));
 		
 		titlePanel = new JPanel();
@@ -48,7 +48,7 @@ public class QueryOrderPanel extends JPanel{
 		backButton.setFont(Constance.font24);
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				SaleView.getInst().setLayerPanel(300, 200);
+				saleView.setLayerPanel(300, 200);
 			}
 		});
 		

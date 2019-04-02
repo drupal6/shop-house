@@ -22,8 +22,10 @@ public class ProductTypeSaleScorellPanel extends JPanel {
 	
 	private JPanel contentPanel;
 	
+	private SaleView saleView;
 	
-	public ProductTypeSaleScorellPanel(JPanel contentPanel) {
+	public ProductTypeSaleScorellPanel(SaleView saleView, JPanel contentPanel) {
+		this.saleView = saleView;
 		this.contentPanel = contentPanel;
 		FlowLayout titlePanelLayout = new FlowLayout();
 		setLayout(titlePanelLayout);
@@ -71,7 +73,7 @@ public class ProductTypeSaleScorellPanel extends JPanel {
 						public void mouseEntered(MouseEvent e) { }
 						public void mouseClicked(MouseEvent e) {
 							ProductShowPanel psp = (ProductShowPanel) e.getSource();
-							SaleView.getInst().getOrderPanel().getProductOrderListPanel().addProductOrder(psp.getProduct());
+							saleView.getOrderPanel().getProductOrderListPanel().addProductOrder(psp.getProduct());
 						}
 					});
 					contentPanel.add(productShowPanel);

@@ -6,6 +6,7 @@ import java.awt.Point;
 import javax.swing.JDialog;
 import javax.swing.WindowConstants;
 
+import shop.Shop;
 import shop.provider.ProductOutInfoProvider;
 
 public class ProductOutInfoDialog extends JDialog{
@@ -22,8 +23,8 @@ public class ProductOutInfoDialog extends JDialog{
 		this.setTitle(title);
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		this.setResizable(false);
-		Point topLeft = ManageFrame.getInst().getLocationOnScreen();
-		Dimension parentSize = ManageFrame.getInst().getSize();
+		Point topLeft = Shop.getInst().getLocationOnScreen();
+		Dimension parentSize = Shop.getInst().getSize();
 		Dimension mySize = this.getSize();
 		int x, y;
 		if (parentSize.width > mySize.width) {
