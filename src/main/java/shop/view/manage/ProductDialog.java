@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.List;
 
 import javax.swing.GroupLayout;
@@ -18,6 +20,7 @@ import javax.swing.WindowConstants;
 
 import shop.Constance;
 import shop.Shop;
+import shop.barcode.BarcodeProvider;
 import shop.bean.Product;
 import shop.bean.ProductType;
 import shop.bean.ProductUnit;
@@ -66,7 +69,7 @@ public class ProductDialog extends JDialog{
 	private List<TreeNode> unitNodes;
 	private List<TreeNode> typeNodes;
 	
-	public ProductDialog(MyTable table, int op, String title, int productType) { 
+	public ProductDialog(MyTable table, int op, String title, int productType, String barcode) { 
 		this.table = table;
 		this.op = op;
 		this.setTitle(title);
@@ -238,12 +241,15 @@ public class ProductDialog extends JDialog{
 		fVGroup.addGroup(framLayout.createParallelGroup().addComponent(buttonPanel,GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE));
 		framLayout.setVerticalGroup(fVGroup);
 		
-		if(op == 2) {
+		if(barcode != null) {
+			barcodeTextField.setText(barcode);
+		} else if(op == 2) {
 			saveAndAddButton.setEnabled(false);
 			selectIndex = table.getTable().getSelectedRow();
 			id = (Integer) table.getTable().getValueAt(selectIndex, 0);
 			Product product = ProductProvider.getInst().get(id);
 			if(product != null) {
+				barcodeTextField.setText(product.getBarCode());
 				nameTextField.setText(product.getName());
 				unitComboBox.setSelectedItem(getNode(unitNodes, product.getProductUnit()));
 				typeComboBox.setSelectedItem(getNode(typeNodes, product.getProductType()));
@@ -251,6 +257,32 @@ public class ProductDialog extends JDialog{
 				stockTextField.setText(product.getStock()+"");
 			}
 		}
+		
+		addWindowListener(new WindowListener() {
+			@Override
+			public void windowOpened(WindowEvent e) {
+			}
+			
+			@Override
+			public void windowIconified(WindowEvent e) {
+			}
+			@Override
+			public void windowDeiconified(WindowEvent e) {
+			}
+			@Override
+			public void windowDeactivated(WindowEvent e) {
+			}
+			@Override
+			public void windowClosing(WindowEvent e) {
+			}
+			@Override
+			public void windowClosed(WindowEvent e) {
+				BarcodeProvider.getInst().updateScanState(true);
+			}
+			@Override
+			public void windowActivated(WindowEvent e) {
+			}
+		});
 	}
 	
 	private TreeNode getNode(List<TreeNode> nodes, int id) {
@@ -308,6 +340,7 @@ public class ProductDialog extends JDialog{
 				return false;
 			}
 			table.getTableModel().addRow(ProductProvider.getValue(product));
+			BarcodeProvider.getInst().updateScanState(true);
 			return true;
 		}else {
 			Product product = ProductProvider.getInst().get(id);
@@ -328,6 +361,7 @@ public class ProductDialog extends JDialog{
 			table.getTable().setValueAt(product.getOutPrice(), selectIndex, 3);
 			table.getTable().setValueAt(product.getStock(), selectIndex, 4);
 			dispose();
+			BarcodeProvider.getInst().updateScanState(true);
 			return true;
 		}
 	}
@@ -337,9 +371,11 @@ public class ProductDialog extends JDialog{
 			barcodeTextField.setText("");
 			nameTextField.setText("");
 		}
+		BarcodeProvider.getInst().updateScanState(true);
 	}
 	
 	private void cannel() {
 		this.dispose();
+		BarcodeProvider.getInst().updateScanState(true);
 	}
 }

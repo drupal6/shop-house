@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JTree;
@@ -17,6 +18,9 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import shop.Constance;
+import shop.barcode.BarcodeCallBack;
+import shop.barcode.BarcodeProvider;
+import shop.bean.Product;
 import shop.bean.TreeNode;
 import shop.provider.ProductProvider;
 import shop.provider.ProductTypeProvider;
@@ -45,8 +49,8 @@ public class ProductPanel extends JPanel{
 	
 	private int productType = 0;
 	
-	public ProductPanel(String title) {
-		this.title = title;
+	public ProductPanel(JMenuItem productInfoMenuItem) {
+		this.title = productInfoMenuItem.getText();
 		
 		bttonPanel = new JPanel();
 		bttonPanel.setBackground(Color.WHITE);
@@ -56,7 +60,7 @@ public class ProductPanel extends JPanel{
 		addButton.setText("新增");
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				addButtonListener();
+				addButtonListener(null);
 			}
 		});
 		
@@ -187,10 +191,36 @@ public class ProductPanel extends JPanel{
 		mainVGroup.addGroup(mainLayout.createParallelGroup().addComponent(treePanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 				.addComponent(contentPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
 		mainLayout.setVerticalGroup(mainVGroup);
+		
+		BarcodeProvider.getInst().setCallBack(new BarcodeCallBack() {
+			@Override
+			public void scan(String barcode) {
+				Product product = ProductProvider.getInst().get(barcode);
+				if(product == null) {
+					addButtonListener(barcode);
+				} else {
+					for(int i = 0; i <= table.getTable().getRowCount(); i++) {
+						int id = (Integer)table.getTable().getValueAt(i, 0);
+						if(id == product.getId()) {
+							table.getTable().setRowSelectionInterval(i, i);
+							break;
+						}
+					}
+					alertButtonListener();
+				}
+				BarcodeProvider.getInst().updateScanState(false);
+			}
+			
+			@Override
+			public void finish() {
+				
+			}
+		});
+		BarcodeProvider.getInst().updateScanState(true);
 	}
 	
-	private void addButtonListener() {
-		ProductDialog dialog = new ProductDialog(table, 1, title + "-" + addButton.getText(), productType);
+	private void addButtonListener(String barcode) {
+		ProductDialog dialog = new ProductDialog(table, 1, title + "-" + addButton.getText(), productType, barcode);
 		dialog.setVisible(true);
 	}
 	private void alertButtonListener() {
@@ -198,7 +228,7 @@ public class ProductPanel extends JPanel{
 		if(selectRow == -1) {
 			return;
 		}
-		ProductDialog dialog = new ProductDialog(table, 2, title + "-" + alertButton.getText(), productType);
+		ProductDialog dialog = new ProductDialog(table, 2, title + "-" + alertButton.getText(), productType, null);
 		dialog.setVisible(true);
 	}
 	private void delButtonListener() {

@@ -7,12 +7,13 @@ import javax.swing.GroupLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import shop.barcode.BarcodeProvider;
 import shop.bean.User;
 import shop.db.pool.DBPoolMgr;
 import shop.provider.DataInit;
 import shop.view.BaseView;
 import shop.view.LoginView;
-import shop.view.manage.ManageView;
+import shop.view.sale.SaleView;
 
 public class Shop extends JFrame{
 
@@ -67,8 +68,8 @@ public class Shop extends JFrame{
 
 	public void loginSuccess(User user) {
 		this.user = user;
-//		changeView(new SaleView());
-		changeView(new ManageView());
+		BarcodeProvider.getInst().start();
+		changeView(new SaleView());
 	}
 	
 	public void changeView(BaseView baseView) {

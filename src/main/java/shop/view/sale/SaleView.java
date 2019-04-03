@@ -71,9 +71,7 @@ public class SaleView extends BaseView {
 		jlp.add(mainPanel, new Integer(300));
 		jlp.add(dialogPanel, new Integer(200));
 		shop.setVisible(true);
-		
-		BarcodeProvider.getInst().start(new BarcodeCallBack() {
-			
+		BarcodeProvider.getInst().setCallBack(new BarcodeCallBack() {
 			@Override
 			public void scan(String barcode) {
 				orderPanel.getProductOrderListPanel().addProductOrder(barcode);
@@ -81,14 +79,16 @@ public class SaleView extends BaseView {
 			
 			@Override
 			public void finish() {
-				// TODO Auto-generated method stub
 				
 			}
 		});
+		BarcodeProvider.getInst().updateScanState(true);
+		
 	}
 	
 	@Override
 	public void remove() {
+		BarcodeProvider.getInst().updateScanState(false);
 		this.mainPanel.remove(orderPanel);
 		this.mainPanel.remove(optionPanel);
 		this.mainPanel.remove(productSelectPanel);

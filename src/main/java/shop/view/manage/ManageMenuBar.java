@@ -9,6 +9,7 @@ import javax.swing.JMenuItem;
 
 import shop.Constance;
 import shop.Shop;
+import shop.barcode.BarcodeProvider;
 import shop.view.sale.SaleView;
 
 public class ManageMenuBar extends JMenuBar {
@@ -60,6 +61,7 @@ public class ManageMenuBar extends JMenuBar {
 		productTypeMenuItem.setFont(Constance.font21);
 		productTypeMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				BarcodeProvider.getInst().updateScanState(false);
 				manageView.refreshPanel(productTypeMenuItem.getText(),  new ProductTypePanel(productTypeMenuItem.getText()));
 			}
 		});
@@ -70,6 +72,7 @@ public class ManageMenuBar extends JMenuBar {
 		productUnitMenuItem.setFont(Constance.font21);
 		productUnitMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				BarcodeProvider.getInst().updateScanState(false);
 				manageView.refreshPanel(productUnitMenuItem.getText(),  new ProductUnitPanel(productUnitMenuItem.getText()));
 			}
 		});
@@ -80,7 +83,7 @@ public class ManageMenuBar extends JMenuBar {
 		productInfoMenuItem.setFont(Constance.font21);
 		productInfoMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				manageView.refreshPanel(productInfoMenuItem.getText(),  new ProductPanel(productInfoMenuItem.getText()));
+				manageView.refreshPanel(productInfoMenuItem.getText(),  new ProductPanel(productInfoMenuItem));
 			}
 		});
 		baseDataMenu.add(productInfoMenuItem);
@@ -102,6 +105,7 @@ public class ManageMenuBar extends JMenuBar {
 		querySaleOrderMenuItem.setFont(Constance.font21);
 		querySaleOrderMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				BarcodeProvider.getInst().updateScanState(false);
 				manageView.refreshPanel(querySaleOrderMenuItem.getText(),  new ProductSaleOrderPanel(querySaleOrderMenuItem.getText()));
 			}
 		});
@@ -112,6 +116,7 @@ public class ManageMenuBar extends JMenuBar {
 		queryPorductSaleMenuItem.setFont(Constance.font21);
 		queryPorductSaleMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				BarcodeProvider.getInst().updateScanState(false);
 				manageView.refreshPanel(queryPorductSaleMenuItem.getText(),  new ProductSalePanel(queryPorductSaleMenuItem.getText()));
 			}
 		});
@@ -125,6 +130,7 @@ public class ManageMenuBar extends JMenuBar {
 	 * @return
 	 */
 	private JMenu createCashMenu() {
+		BarcodeProvider.getInst().updateScanState(false);
 		cashMenu = new JMenu();
 		cashMenu.setText("零钱");
 		cashMenu.setFont(Constance.font24);
@@ -134,6 +140,7 @@ public class ManageMenuBar extends JMenuBar {
 		queryCashMenuItem.setFont(Constance.font21);
 		queryCashMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				BarcodeProvider.getInst().updateScanState(false);
 				manageView.refreshPanel(queryCashMenuItem.getText(),  new CashQueryPanel(queryCashMenuItem.getText()));
 			}
 		});
@@ -143,6 +150,7 @@ public class ManageMenuBar extends JMenuBar {
 	}
 	
 	private JMenu createUserMenu() {
+		BarcodeProvider.getInst().updateScanState(false);
 		userMenu = new JMenu();
 		userMenu.setText("用户");
 		userMenu.setFont(Constance.font24);
@@ -152,6 +160,7 @@ public class ManageMenuBar extends JMenuBar {
 		userMenuItem.setFont(Constance.font21);
 		userMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				BarcodeProvider.getInst().updateScanState(false);
 				manageView.refreshPanel(userMenuItem.getText(),  new UserPanel(userMenuItem.getText()));
 			}
 		});
@@ -161,6 +170,7 @@ public class ManageMenuBar extends JMenuBar {
 		backSaleMenuItem.setFont(Constance.font21);
 		backSaleMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				BarcodeProvider.getInst().updateScanState(false);
 				Shop.getInst().changeView(new SaleView());
 			}
 		});

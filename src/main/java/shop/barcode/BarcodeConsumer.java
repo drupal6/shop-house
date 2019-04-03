@@ -1,7 +1,5 @@
 package shop.barcode;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-
 /**
  *此消费者线程会从此缓冲区中获取数据并执行数据的保存操作
  * 数据的保存调用BarcodeSaveService接口定义的save方法
@@ -15,40 +13,46 @@ public class BarcodeConsumer {
     private BarcodeCallBack callBack;
     private boolean quit;
     
-    private AtomicBoolean canScan = new AtomicBoolean(false);
+    private volatile boolean canScan = false;
      
     /**
      * 停止消费者线程
      * 此方法在tomcat关闭的时候被调用
      */
     public void stopConsume(){
-    	canScan.set(false);
+    	canScan = false;
         if(thread!=null){
             thread.interrupt();
         	callBack.finish();
         }
     }
+    
+    public void setCallBack(BarcodeCallBack callBack) {
+    	this.callBack = callBack;
+    }
     /**
      * 启动消费者线程
      * 此方法在tomcat启动的时候被调用
      */
-    public void startConsume(BarcodeCallBack callBack){
+    public void startConsume(){
         //防止重复启动
         if(thread!=null && thread.isAlive()){
             return;
         }
-        this.callBack = callBack;
         System.out.println("条形码消费者线程启动");
-        canScan.set(true);
         thread=new Thread(){
             @Override
             public void run(){
                 while(!quit){
                     try{
                         //当缓冲区没有数据的时候，此方法会阻塞
-                    	if(canScan.get()) {
                     		String barcode=BarcodeBuffer.consume();
-                    		callBack.scan(barcode);
+                    		if(barcode != null) {
+                    			if(canScan) {
+                    			if(callBack != null) {
+                    				callBack.scan(barcode);
+                    			}
+                			}
                     	}
                     }catch(InterruptedException e){
                         quit=true;
@@ -62,6 +66,11 @@ public class BarcodeConsumer {
     }
     
     public void updateCanScan(boolean canScan) {
-    	this.canScan.set(canScan);
+//    	try {
+//			throw new Exception(canScan +"");
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+    	this.canScan = canScan;
     }
 }
