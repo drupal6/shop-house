@@ -25,8 +25,10 @@ public class ManageMenuBar extends JMenuBar {
 	
 	private JMenu cashMenu;
 	private JMenuItem queryCashMenuItem;
+	private ManageView manageView;
 	
-	public ManageMenuBar() {
+	public ManageMenuBar(ManageView manageView) {
+		this.manageView = manageView;
 		this.add(createBaseMenu());
 		this.add(createSaleMenu());
 		this.add(createCashMenu());
@@ -50,7 +52,7 @@ public class ManageMenuBar extends JMenuBar {
 		productTypeMenuItem.setFont(Constance.font21);
 		productTypeMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ManageFrame.getInst().refreshPanel(productTypeMenuItem.getText(),  new ProductTypePanel(productTypeMenuItem.getText()));
+				manageView.refreshPanel(productTypeMenuItem.getText(),  new ProductTypePanel(productTypeMenuItem.getText()));
 			}
 		});
 		baseDataMenu.add(productTypeMenuItem);
@@ -60,7 +62,7 @@ public class ManageMenuBar extends JMenuBar {
 		productUnitMenuItem.setFont(Constance.font21);
 		productUnitMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ManageFrame.getInst().refreshPanel(productUnitMenuItem.getText(),  new ProductUnitPanel(productUnitMenuItem.getText()));
+				manageView.refreshPanel(productUnitMenuItem.getText(),  new ProductUnitPanel(productUnitMenuItem.getText()));
 			}
 		});
 		baseDataMenu.add(productUnitMenuItem);
@@ -70,7 +72,7 @@ public class ManageMenuBar extends JMenuBar {
 		productInfoMenuItem.setFont(Constance.font21);
 		productInfoMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ManageFrame.getInst().refreshPanel(productInfoMenuItem.getText(),  new ProductPanel(productInfoMenuItem.getText()));
+				manageView.refreshPanel(productInfoMenuItem.getText(),  new ProductPanel(productInfoMenuItem.getText()));
 			}
 		});
 		baseDataMenu.add(productInfoMenuItem);
@@ -92,7 +94,7 @@ public class ManageMenuBar extends JMenuBar {
 		querySaleOrderMenuItem.setFont(Constance.font21);
 		querySaleOrderMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ManageFrame.getInst().refreshPanel(querySaleOrderMenuItem.getText(),  new ProductSaleOrderPanel(querySaleOrderMenuItem.getText()));
+				manageView.refreshPanel(querySaleOrderMenuItem.getText(),  new ProductSaleOrderPanel(querySaleOrderMenuItem.getText()));
 			}
 		});
 		saleMenu.add(querySaleOrderMenuItem);
@@ -102,7 +104,7 @@ public class ManageMenuBar extends JMenuBar {
 		queryPorductSaleMenuItem.setFont(Constance.font21);
 		queryPorductSaleMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ManageFrame.getInst().refreshPanel(queryPorductSaleMenuItem.getText(),  new ProductSalePanel(queryPorductSaleMenuItem.getText()));
+				manageView.refreshPanel(queryPorductSaleMenuItem.getText(),  new ProductSalePanel(queryPorductSaleMenuItem.getText()));
 			}
 		});
 		saleMenu.add(queryPorductSaleMenuItem);
@@ -124,7 +126,7 @@ public class ManageMenuBar extends JMenuBar {
 		queryCashMenuItem.setFont(Constance.font21);
 		queryCashMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ManageFrame.getInst().refreshPanel(queryCashMenuItem.getText(),  new CashQueryPanel(queryCashMenuItem.getText()));
+				manageView.refreshPanel(queryCashMenuItem.getText(),  new CashQueryPanel(queryCashMenuItem.getText()));
 			}
 		});
 		cashMenu.add(queryCashMenuItem);

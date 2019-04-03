@@ -17,4 +17,6 @@ public abstract class BaseView {
 	public abstract String getTitle();
 	
 	public abstract JPanel getMainPanel();
+	
+	public abstract void remove();
 }

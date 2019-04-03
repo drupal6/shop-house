@@ -12,7 +12,6 @@ import shop.db.pool.DBPoolMgr;
 import shop.provider.DataInit;
 import shop.view.BaseView;
 import shop.view.LoginView;
-import shop.view.manage.ManageFrame;
 import shop.view.sale.SaleView;
 
 public class Shop extends JFrame{
@@ -29,6 +28,10 @@ public class Shop extends JFrame{
 	
 	private JPanel mainPanel;
 	
+	private Dimension dimension;
+	
+	private BaseView curView;
+	
 	private void initConfig() {
 		if(false == Setting.getInst().init()) {
 			System.exit(0);
@@ -38,17 +41,16 @@ public class Shop extends JFrame{
 	}
 	
 	private void initView() {
-		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		//适应屏幕大小
-		setSize(new Dimension((int)(screenSize.width * 0.8),(int)(screenSize.height * 0.8)));
+		dimension = new Dimension((int)(screenSize.width * 0.8),(int)(screenSize.height * 0.8));
+		this.setSize(dimension);
 		//不能改变大小
-		setResizable(false);
+		this.setResizable(false);
 		mainPanel = new JPanel();
-		setContentPane(mainPanel);
 		GroupLayout layout = new GroupLayout(mainPanel);
 		mainPanel.setLayout(layout);
-		this.setVisible(true);
 	}
 	
 	public User getUser() {
@@ -59,21 +61,25 @@ public class Shop extends JFrame{
 		return mainPanel;
 	}
 
+	public Dimension getDimension() {
+		return dimension;
+	}
+
 	public void loginSuccess(User user) {
 		this.user = user;
 		changeView(new SaleView());
-//		changeView(ManageFrame.getInst());
 	}
 	
 	public void changeView(BaseView baseView) {
-		mainPanel.removeAll();
-		if(baseView.getMainPanel() != null) {
-			this.mainPanel = baseView.getMainPanel();
+		if(this.curView != null) {
+			this.curView.remove();
 		}
 		setTitle(baseView.getTitle());
 		baseView.init(this);
 		this.mainPanel.validate();
-//		this.mainPanel.repaint();
+		this.setContentPane(mainPanel);
+		this.setVisible(true);
+		this.curView = baseView;
 	}
 
 	public static void main(String[] args) {

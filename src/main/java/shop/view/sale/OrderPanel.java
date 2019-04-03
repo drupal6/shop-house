@@ -5,7 +5,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.GroupLayout;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -13,7 +12,7 @@ import javax.swing.JSeparator;
 
 import shop.Constance;
 import shop.Shop;
-import shop.view.manage.ManageFrame;
+import shop.view.manage.ManageView;
 
 public class OrderPanel extends JPanel {
 
@@ -33,22 +32,23 @@ public class OrderPanel extends JPanel {
 	public OrderPanel(SaleView saleView) {
 		searchPanel = new JPanel();
 		searchPanel.setBackground(new Color(47, 47, 47));
-		JLabel manageLable = new JLabel("管理");
-		manageLable.setFont(Constance.fontB35);
-		manageLable.setForeground(new Color(226, 158, 67));
-		searchPanel.add(manageLable);
-		searchPanel.addMouseListener(new MouseListener() {
-			public void mouseReleased(MouseEvent e) {
-			}
-			public void mousePressed(MouseEvent e) { 
-			}
-			public void mouseExited(MouseEvent e) { }
-			public void mouseEntered(MouseEvent e) { }
-			public void mouseClicked(MouseEvent e) {
-				System.out.println(">>>>>>>>>>");
-				Shop.getInst().changeView(ManageFrame.getInst());
-			}
-		});
+		if(Shop.getInst().getUser().getAdmin() == 1) {
+			JLabel manageLable = new JLabel("管理");
+			manageLable.setFont(Constance.fontB35);
+			manageLable.setForeground(new Color(226, 158, 67));
+			searchPanel.add(manageLable);
+			searchPanel.addMouseListener(new MouseListener() {
+				public void mouseReleased(MouseEvent e) {
+				}
+				public void mousePressed(MouseEvent e) { 
+				}
+				public void mouseExited(MouseEvent e) { }
+				public void mouseEntered(MouseEvent e) { }
+				public void mouseClicked(MouseEvent e) {
+					Shop.getInst().changeView(new ManageView());
+				}
+			});
+		}
 		
 		totalPanel = new TotalPanel(Shop.getInst().getUser().getName());
 		JSeparator s2 = new JSeparator();

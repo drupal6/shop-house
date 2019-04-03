@@ -25,11 +25,9 @@ public class LoginView extends BaseView{
 	private JLabel passwordAlertLabel;
 	
 	private JButton jButton;
-	private Shop shop;
 	
 	@Override
 	public void init(Shop shop) {
-		this.shop = shop;
 		usernameLabel = new JLabel("用户:");
 		usernameText = new JTextField();
 		usernameText.setText("admin");
@@ -123,5 +121,11 @@ public class LoginView extends BaseView{
 	@Override
 	public JPanel getMainPanel() {
 		return null;
+	}
+
+
+	@Override
+	public void remove() {
+		
 	}
 }

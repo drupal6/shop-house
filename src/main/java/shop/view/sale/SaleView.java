@@ -1,8 +1,6 @@
 package shop.view.sale;
 
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -10,20 +8,13 @@ import javax.swing.GroupLayout;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
-import shop.Setting;
 import shop.Shop;
 import shop.barcode.BarcodeCallBack;
 import shop.barcode.BarcodeProvider;
-import shop.dao.DaoFactory;
-import shop.db.pool.DBPoolMgr;
-import shop.provider.DataInit;
 import shop.view.BaseView;
 
 public class SaleView extends BaseView {
 
-	/**
-	 */
-	private static final long serialVersionUID = 1L;
 	
 	private JLayeredPane jlp;
 	
@@ -34,15 +25,11 @@ public class SaleView extends BaseView {
 	private OrderPanel orderPanel;
 	private OptionPanel optionPanel;
 	private ProductSaleSelectPanel productSelectPanel;
-	
 	private Shop shop;
 	
 	public void init(Shop shop) {
 		this.shop = shop;
 		this.mainPanel = shop.getMainPanel();
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		
-		Dimension dimension = new Dimension((int)(screenSize.width * 0.8),(int)(screenSize.height*0.8));
 		
 		orderPanel = new OrderPanel(this);
 		optionPanel = new OptionPanel(this);
@@ -50,11 +37,11 @@ public class SaleView extends BaseView {
 		
 		
 		mainPanel = new JPanel();
-		mainPanel.setSize(dimension);
+		mainPanel.setSize(shop.getDimension());
 		mainPanel.setBackground(new Color(47, 47, 47));
 		
 		dialogPanel = new JPanel(); 
-		dialogPanel.setSize(dimension);
+		dialogPanel.setSize(shop.getDimension());
 		dialogPanel.setOpaque(false);
 		dialogPanel.addMouseListener(new MouseListener() {
 			public void mouseReleased(MouseEvent e) { }
@@ -100,6 +87,15 @@ public class SaleView extends BaseView {
 		});
 	}
 	
+	@Override
+	public void remove() {
+		this.mainPanel.remove(orderPanel);
+		this.mainPanel.remove(optionPanel);
+		this.mainPanel.remove(productSelectPanel);
+		this.shop.getLayeredPane().remove(mainPanel);
+		this.shop.getLayeredPane().remove(dialogPanel);
+	}
+	
 	public void stop() {
 		BarcodeProvider.getInst().stop();
 	}
@@ -141,15 +137,6 @@ public class SaleView extends BaseView {
 				.addComponent(panel, GroupLayout.PREFERRED_SIZE,  GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE));
 		layout.setVerticalGroup(vGroup);
 		dialogPanel.updateUI();
-	}
-	
-	public static void main(String[] args) throws InterruptedException {
-		//初始数据
-		Setting.getInst().init();
-		DBPoolMgr.getInst().init(Setting.getInst(), 1, 1);
-		DataInit.getInst().initData();
-		Shop.getInst().loginSuccess(DaoFactory.getInst().getUserDao().getUser("admin"));
-//		SaleView.getInst().init();
 	}
 
 	@Override
