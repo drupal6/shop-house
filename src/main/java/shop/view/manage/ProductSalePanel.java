@@ -22,11 +22,9 @@ import javax.swing.SwingConstants;
 
 import shop.Constance;
 import shop.DateChooser;
-import shop.bean.OutOrder;
 import shop.bean.ProductOutInfo;
 import shop.bean.TreeNode;
 import shop.provider.ProductOutInfoProvider;
-import shop.provider.ProductOutOrderProvider;
 import shop.provider.ProductProvider;
 import shop.provider.ProductTypeProvider;
 

@@ -50,7 +50,7 @@ public class OrderPanel extends JPanel {
 			});
 		}
 		
-		totalPanel = new TotalPanel(Shop.getInst().getUser().getName());
+		totalPanel = new TotalPanel(Shop.getInst().getUser().getNickName());
 		JSeparator s2 = new JSeparator();
 		productOrderListPanel = new ProductOrderListPanel(saleView);
 		

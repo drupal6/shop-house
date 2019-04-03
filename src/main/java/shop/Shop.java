@@ -12,7 +12,7 @@ import shop.db.pool.DBPoolMgr;
 import shop.provider.DataInit;
 import shop.view.BaseView;
 import shop.view.LoginView;
-import shop.view.sale.SaleView;
+import shop.view.manage.ManageView;
 
 public class Shop extends JFrame{
 
@@ -67,7 +67,8 @@ public class Shop extends JFrame{
 
 	public void loginSuccess(User user) {
 		this.user = user;
-		changeView(new SaleView());
+//		changeView(new SaleView());
+		changeView(new ManageView());
 	}
 	
 	public void changeView(BaseView baseView) {

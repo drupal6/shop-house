@@ -48,7 +48,7 @@ public class UserDao extends BaseDao {
 	}
 	
 	public List<User> getUserList() {
-		String sql = "select * from t_user where state=0;";
+		String sql = "select * from t_user;";
 		PreparedStatement pstmt = execQuery(sql, null);
 		ResultSet rs = null;
 		List<User> infos = null;
@@ -68,8 +68,30 @@ public class UserDao extends BaseDao {
 		return infos;
 	}
 	
+	public User getUser(int id) {
+		String sql = "select * from t_user where id=?;";
+		Map<Integer, DbParameter> param = new HashMap<Integer, DbParameter>();
+		param.put(1, new DbParameter(Types.INTEGER, id));
+		PreparedStatement pstmt = execQuery(sql, param);
+		ResultSet rs = null;
+		User info = null;
+		if (pstmt != null) {
+			try {
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					info = resultToBean(rs);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				closeConn(pstmt, rs);
+			}
+		}
+		return info;
+	}
+	
 	public User getUser(String userName) {
-		String sql = "select * from t_user where name=? and state=0;";
+		String sql = "select * from t_user where name=?;";
 		Map<Integer, DbParameter> param = new HashMap<Integer, DbParameter>();
 		param.put(1, new DbParameter(Types.VARCHAR, userName));
 		PreparedStatement pstmt = execQuery(sql, param);
@@ -88,6 +110,14 @@ public class UserDao extends BaseDao {
 			}
 		}
 		return info;
+	}
+	
+	public boolean del(User user) {
+		String sql = "delete from t_user where id=?;";
+		Map<Integer, DbParameter> param = new HashMap<Integer, DbParameter>();
+		param.put(1, new DbParameter(Types.INTEGER, user.getId()));
+		int result  = execNoneQuery(sql, param);
+		return result > 0;
 	}
 	
 	public User resultToBean(ResultSet rs) throws SQLException {

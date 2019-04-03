@@ -25,7 +25,7 @@ public class OrderPanel extends JPanel {
 	public OrderPanel() {
 		searchPanel = new JPanel();
 		searchPanel.setBackground(new Color(47, 47, 47));
-		totalPanel = new TotalPanel(IntoFrame.getInst().getUser().getName());
+		totalPanel = new TotalPanel(IntoFrame.getInst().getUser().getNickName());
 		JSeparator s2 = new JSeparator();
 		productOrderListPanel = new ProductOrderListPanel();
 		

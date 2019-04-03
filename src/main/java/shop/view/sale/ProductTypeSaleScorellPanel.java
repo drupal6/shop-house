@@ -28,6 +28,7 @@ public class ProductTypeSaleScorellPanel extends JPanel {
 		this.saleView = saleView;
 		this.contentPanel = contentPanel;
 		FlowLayout titlePanelLayout = new FlowLayout();
+		titlePanelLayout.setAlignment(FlowLayout.LEFT);
 		setLayout(titlePanelLayout);
 		List<ProductType> list = ProductTypeProvider.getInst().list();
 		int index = 0;

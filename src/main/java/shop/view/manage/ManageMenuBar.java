@@ -8,6 +8,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 import shop.Constance;
+import shop.Shop;
+import shop.view.sale.SaleView;
 
 public class ManageMenuBar extends JMenuBar {
 	
@@ -25,6 +27,11 @@ public class ManageMenuBar extends JMenuBar {
 	
 	private JMenu cashMenu;
 	private JMenuItem queryCashMenuItem;
+	
+	private JMenu userMenu;
+	private JMenuItem userMenuItem;
+	private JMenuItem backSaleMenuItem;
+	
 	private ManageView manageView;
 	
 	public ManageMenuBar(ManageView manageView) {
@@ -32,6 +39,7 @@ public class ManageMenuBar extends JMenuBar {
 		this.add(createBaseMenu());
 		this.add(createSaleMenu());
 		this.add(createCashMenu());
+		this.add(createUserMenu());
 	}
 	
 	public String getDefaMenuText() {
@@ -132,5 +140,31 @@ public class ManageMenuBar extends JMenuBar {
 		cashMenu.add(queryCashMenuItem);
 		
 		return cashMenu;
+	}
+	
+	private JMenu createUserMenu() {
+		userMenu = new JMenu();
+		userMenu.setText("用户");
+		userMenu.setFont(Constance.font24);
+		
+		userMenuItem = new JMenuItem();
+		userMenuItem.setText("用户管理");
+		userMenuItem.setFont(Constance.font21);
+		userMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				manageView.refreshPanel(userMenuItem.getText(),  new UserPanel(userMenuItem.getText()));
+			}
+		});
+		userMenu.add(userMenuItem);
+		backSaleMenuItem = new JMenuItem();
+		backSaleMenuItem.setText("返回销售");
+		backSaleMenuItem.setFont(Constance.font21);
+		backSaleMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Shop.getInst().changeView(new SaleView());
+			}
+		});
+		userMenu.add(backSaleMenuItem);
+		return userMenu;
 	}
 }

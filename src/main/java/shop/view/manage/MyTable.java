@@ -29,7 +29,7 @@ public class MyTable extends JPanel {
         DefaultTableCellRenderer cr =(DefaultTableCellRenderer)table.getDefaultRenderer(String.class);  //获得表格头的单元格对象
         cr.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
         
-        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);  //关闭表格列的自动调整功能。
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);  //关闭表格列的自动调整功能。
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);   //单选
         table.setSelectionBackground(Color.YELLOW);
         table.setSelectionForeground(Color.RED);

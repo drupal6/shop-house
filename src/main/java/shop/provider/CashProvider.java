@@ -6,7 +6,6 @@ import java.util.Vector;
 
 import shop.Constance;
 import shop.bean.Cash;
-import shop.bean.OutOrder;
 import shop.dao.DaoFactory;
 
 /**

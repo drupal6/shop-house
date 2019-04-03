@@ -41,10 +41,7 @@ public class OrderListPanel extends JPanel{
 	private OrderInfoListPanel secondPanel;
 	private JScrollPane scrollPane;
 	
-	private QueryOrderPanel queryOrderPanel;
-	
 	public OrderListPanel(QueryOrderPanel queryOrderPanel) {
-		this.queryOrderPanel = queryOrderPanel;
 		
 		queryPanel = new JPanel();
 		queryPanel.setBackground(Color.WHITE);
